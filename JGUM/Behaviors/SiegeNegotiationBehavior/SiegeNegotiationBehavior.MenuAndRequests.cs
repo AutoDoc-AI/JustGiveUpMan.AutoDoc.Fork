@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using JGUM.Calculators;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
@@ -19,7 +19,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             starter.AddGameMenuOption(
                 SiegeStrategiesMenuId,
                 OptionId,
-                StringCalculator.GetString("jgum_siege_negotiation_menu_option", "Offer a Negotiation Meeting"),
+                "{=jgum_siege_negotiation_menu_option}Offer a Negotiation Meeting",
                 OfferNegotiationOptionCondition,
                 OfferNegotiationOptionConsequence,
                 false,
@@ -54,7 +54,8 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 return true;
             }
 
-            if (FailedRetryCooldownBySettlement.TryGetValue(key, out CampaignTime retryAt) && CampaignTime.Now.ToHours < retryAt.ToHours)
+            if (FailedRetryCooldownBySettlement.TryGetValue(key, out CampaignTime retryAt) &&
+                CampaignTime.Now.ToHours < retryAt.ToHours)
             {
                 args.IsEnabled = false;
                 args.Tooltip = new TextObject(StringCalculator.GetString(
@@ -63,7 +64,8 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 return true;
             }
 
-            if (RequestCooldownBySettlement.TryGetValue(key, out CampaignTime cooldownAt) && CampaignTime.Now.ToHours < cooldownAt.ToHours)
+            if (RequestCooldownBySettlement.TryGetValue(key, out CampaignTime cooldownAt) &&
+                CampaignTime.Now.ToHours < cooldownAt.ToHours)
             {
                 args.IsEnabled = false;
                 args.Tooltip = new TextObject(StringCalculator.GetString(
@@ -93,7 +95,8 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             });
 
             InformationManager.DisplayMessage(new InformationMessage(
-                StringCalculator.GetString("jgum_siege_negotiation_request_sent", "Your messenger has been sent. You will receive a response soon."),
+                StringCalculator.GetString("jgum_siege_negotiation_request_sent",
+                    "Your messenger has been sent. You will receive a response soon."),
                 Colors.White));
 
             GameMenu.SwitchToMenu(SiegeStrategiesMenuId);
@@ -135,14 +138,14 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                     "Your proposal was rejected. The defenders do not believe your position is strong enough.");
 
                 InformationManager.ShowInquiry(new InquiryData(
-                    title,
-                    rejectedBody,
-                    true,
-                    false,
-                    StringCalculator.GetString("jgum_siege_negotiation_inquiry_ok", "OK"),
-                    string.Empty,
-                    () => { },
-                    null),
+                        title,
+                        rejectedBody,
+                        true,
+                        false,
+                        StringCalculator.GetString("jgum_siege_negotiation_inquiry_ok", "OK"),
+                        string.Empty,
+                        () => { },
+                        null),
                     true);
 
                 return;
@@ -153,14 +156,14 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 "Your proposal was accepted. A representative is ready to meet you.");
 
             InformationManager.ShowInquiry(new InquiryData(
-                title,
-                acceptedBody,
-                true,
-                false,
-                StringCalculator.GetString("jgum_siege_negotiation_inquiry_go", "Go to meeting"),
-                string.Empty,
-                () => StartNegotiationConversation(settlement, powerRatio),
-                null),
+                    title,
+                    acceptedBody,
+                    true,
+                    false,
+                    StringCalculator.GetString("jgum_siege_negotiation_inquiry_go", "Go to meeting"),
+                    string.Empty,
+                    () => StartNegotiationConversation(settlement, powerRatio),
+                    null),
                 true);
         }
 
@@ -203,7 +206,8 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
         private static bool IsPlayerBesieger(Settlement settlement)
         {
             PartyBase? playerParty = MobileParty.MainParty?.Party;
-            return playerParty != null && settlement.SiegeEvent?.BesiegerCamp.HasInvolvedPartyForEventType(playerParty) == true;
+            return playerParty != null &&
+                   settlement.SiegeEvent?.BesiegerCamp.HasInvolvedPartyForEventType(playerParty) == true;
         }
 
         private bool TryGetPendingRequest(Settlement settlement, out PendingNegotiationRequest? request)

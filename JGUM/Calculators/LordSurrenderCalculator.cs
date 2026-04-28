@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
@@ -50,9 +50,59 @@ namespace JGUM.Calculators
             traitEffect += (player.GetTraitLevel(DefaultTraits.Mercy) / 10f) * (JgumSettingsManager.PlayerMercyMultiplier / 100f);
 
             float totalRatio = powerRatio + traitEffect;
-            float threshold = JgumSettingsManager.BaseSurrenderThreshold / JgumSettingsManager.SurrenderTendencyMultiplier;
+            float baseThreshold = JgumSettingsManager.BaseSurrenderThreshold / JgumSettingsManager.SurrenderTendencyMultiplier;
+            float guaranteedThreshold = JgumSettingsManager.GuaranteedSurrenderThreshold / JgumSettingsManager.SurrenderTendencyMultiplier;
+            
+            if (guaranteedThreshold < baseThreshold)
+                guaranteedThreshold = baseThreshold;
 
-            return totalRatio > threshold;
+            int mode = JgumSettingsManager.SurrenderRandomnessMode;
+
+            if (mode == 0) // Off
+            {
+                return totalRatio >= baseThreshold;
+            }
+            else if (mode == 1) // Thresholded
+            {
+                if (totalRatio >= guaranteedThreshold)
+                    return true;
+                if (totalRatio < baseThreshold)
+                    return false;
+
+                float range = guaranteedThreshold - baseThreshold;
+                if (range <= 0.001f)
+                    return true;
+
+                float chance = (totalRatio - baseThreshold) / range;
+                return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+            }
+            else // Unbound
+            {
+                if (totalRatio >= guaranteedThreshold)
+                {
+                    float extra = totalRatio - guaranteedThreshold;
+                    float chance = 0.95f + (extra * 0.01f);
+                    if (chance > 1f) chance = 1f;
+                    return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+                }
+                else if (totalRatio < baseThreshold)
+                {
+                    float deficit = baseThreshold - totalRatio;
+                    float chance = 0.05f - (deficit * 0.01f);
+                    if (chance < 0f) chance = 0f;
+                    return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+                }
+                else
+                {
+                    float range = guaranteedThreshold - baseThreshold;
+                    if (range <= 0.001f)
+                        return TaleWorlds.Core.MBRandom.RandomFloat <= 0.5f;
+
+                    float normalized = (totalRatio - baseThreshold) / range;
+                    float chance = 0.05f + (normalized * 0.90f);
+                    return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+                }
+            }
         }
 
         // Get the best defender character for dialog

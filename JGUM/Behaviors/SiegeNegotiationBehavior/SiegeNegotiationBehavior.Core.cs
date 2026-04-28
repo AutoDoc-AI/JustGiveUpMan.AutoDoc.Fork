@@ -1,8 +1,5 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JGUM.Actions;
-using JGUM.Calculators;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Conversation.Persuasion;
@@ -10,8 +7,6 @@ using TaleWorlds.CampaignSystem.MapEvents;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
-using TaleWorlds.Localization;
 
 namespace JGUM.Behaviors.SiegeNegotiationBehavior
 {
@@ -36,7 +31,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             },
             new List<PersuasionLineTemplate>
             {
-                new PersuasionLineTemplate("jgum_proactive_option_t2_1", "Your walls are breaking. Prolonging this only wastes lives.", NegotiationSkill.Engineering, NegotiationTrait.Calculating, TraitEffect.Positive, -1, false),
+                new PersuasionLineTemplate("jgum_proactive_option_t2_1", "Your walls are breaking. Prolonging this only wastes lives.", NegotiationSkill.Engineering, NegotiationTrait.Calculating, TraitEffect.Positive, -1, false, true, "jgum_proactive_option_locked_walls"),
                 new PersuasionLineTemplate("jgum_proactive_option_t2_2", "If this turns into an assault, you lose all leverage.", NegotiationSkill.Tactics, NegotiationTrait.Calculating, TraitEffect.Positive, 0, true),
                 new PersuasionLineTemplate("jgum_proactive_option_t2_3", "Open the gates and I will keep order over your civilians.", NegotiationSkill.Leadership, NegotiationTrait.Mercy, TraitEffect.Positive, 1, true)
             },
@@ -130,43 +125,64 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
 
         private static CharacterObject? FindSettlementRepresentative(Settlement settlement)
         {
-            var garrisonParty = settlement.Town?.GarrisonParty;
-            CharacterObject? governor = settlement.Town?.Governor?.CharacterObject;
+            if (settlement.Town?.Governor != null)
+                return settlement.Town.Governor.CharacterObject;
 
             Hero? defenderLeader = settlement.SiegeEvent != null
                 ? Campaign.Current.Models.EncounterModel.GetLeaderOfSiegeEvent(settlement.SiegeEvent, BattleSideEnum.Defender)
                 : null;
+            if (defenderLeader != null && defenderLeader.CurrentSettlement == settlement)
+                return defenderLeader.CharacterObject;
 
-            CharacterObject? randomGarrisonTroop = GetRandomGarrisonTroopRepresentative(garrisonParty);
+            var lordInSettlement = settlement.Parties.FirstOrDefault(p => p.LeaderHero != null && p.LeaderHero.IsLord)?.LeaderHero
+                                   ?? settlement.Town?.GetDefenderParties(MapEvent.BattleTypes.None).FirstOrDefault(p => p.LeaderHero != null && p.LeaderHero.IsLord)?.LeaderHero;
+            if (lordInSettlement != null)
+                return lordInSettlement.CharacterObject;
 
-            return governor
-                   ?? defenderLeader?.CharacterObject
-                   ?? settlement.Parties.FirstOrDefault(p => p.LeaderHero != null && p.LeaderHero.IsLord)?.LeaderHero?.CharacterObject
-                   ?? settlement.Town?.GetDefenderParties(MapEvent.BattleTypes.None).FirstOrDefault(p => p.LeaderHero != null && p.LeaderHero.IsLord)?.LeaderHero?.CharacterObject
-                   ?? randomGarrisonTroop
-                   ?? settlement.Notables.FirstOrDefault()?.CharacterObject;
+            CharacterObject? troop = GetRandomTroopFromParty(settlement.Town?.GarrisonParty)
+                                     ?? GetRandomTroopFromParty(settlement.MilitiaPartyComponent?.MobileParty);
+
+            if (troop != null)
+                return troop;
+
+            return settlement.Notables.FirstOrDefault()?.CharacterObject;
         }
 
-        private static CharacterObject? GetRandomGarrisonTroopRepresentative(MobileParty? garrisonParty)
+        private static CharacterObject? GetRandomTroopFromParty(MobileParty? party)
         {
-            var garrisonRoster = garrisonParty?.MemberRoster;
-            if (garrisonRoster == null)
+            var roster = party?.MemberRoster;
+            if (roster == null)
                 return null;
 
             var troopPool = new List<CharacterObject>();
-            for (int i = 0; i < garrisonRoster.Count; i++)
+            for (int i = 0; i < roster.Count; i++)
             {
-                var element = garrisonRoster.GetElementCopyAtIndex(i);
-                if (element.Number <= 0 || element.Character == null || element.Character.IsHero)
-                    continue;
-
-                troopPool.Add(element.Character);
+                var element = roster.GetElementCopyAtIndex(i);
+                if (element.Number > 0 && element.Character != null && !element.Character.IsHero)
+                {
+                    troopPool.Add(element.Character);
+                }
             }
 
             if (troopPool.Count == 0)
                 return null;
 
             return troopPool[MBRandom.RandomInt(troopPool.Count)];
+        }
+
+        private bool HasAtLeastOneDamagedWallSectionAtOrBelowHalfHealth()
+        {
+            var wallRatios = _activeSettlement?.SettlementWallSectionHitPointsRatioList;
+            if (wallRatios == null)
+                return false;
+
+            foreach (float ratio in wallRatios)
+            {
+                if (ratio <= 0.5f)
+                    return true;
+            }
+
+            return false;
         }
 
         private sealed class PendingNegotiationRequest
@@ -184,7 +200,9 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 NegotiationTrait trait,
                 TraitEffect traitEffect,
                 int strengthOffset,
-                bool canMoveToTheNextReservation)
+                bool canMoveToTheNextReservation,
+                bool requiresDamagedWallCondition = false,
+                string? lockedHintId = null)
             {
                 Id = id;
                 Fallback = fallback;
@@ -193,6 +211,8 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 TraitEffect = traitEffect;
                 StrengthOffset = strengthOffset;
                 CanMoveToTheNextReservation = canMoveToTheNextReservation;
+                RequiresDamagedWallCondition = requiresDamagedWallCondition;
+                LockedHintId = lockedHintId;
             }
 
             public string Id { get; }
@@ -202,6 +222,8 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             public TraitEffect TraitEffect { get; }
             public int StrengthOffset { get; }
             public bool CanMoveToTheNextReservation { get; }
+            public bool RequiresDamagedWallCondition { get; }
+            public string? LockedHintId { get; }
         }
 
         private enum NegotiationSkill

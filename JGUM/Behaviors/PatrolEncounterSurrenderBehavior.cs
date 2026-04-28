@@ -1,4 +1,4 @@
-﻿using JGUM.Calculators;
+using JGUM.Calculators;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
@@ -46,8 +46,12 @@ namespace JGUM.Behaviors
                 "jgum_patrol_surrender_offer",
                 "patrol_talk_start_attack",
                 "jgum_patrol_player_response",
-                StringCalculator.GetString("jgum_field_surrender_offer", "STOP, We cannot fight you. We surrender!"),
-                CheckPatrolEncounterSurrender,
+                "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
+                () => {
+                    if (!CheckPatrolEncounterSurrender()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    return true;
+                },
                 null,
                 priority);
             
@@ -55,8 +59,12 @@ namespace JGUM.Behaviors
                 "jgum_patrol_surrender_offer_attack_final",
                 "patrol_talk_start_attack_final",
                 "jgum_patrol_player_response",
-                StringCalculator.GetString("jgum_field_surrender_offer", "STOP, We cannot fight you. We surrender!"),
-                CheckPatrolEncounterSurrender,
+                "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
+                () => {
+                    if (!CheckPatrolEncounterSurrender()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    return true;
+                },
                 null,
                 priority);
 
@@ -64,16 +72,24 @@ namespace JGUM.Behaviors
                 "jgum_patrol_surrender_accept",
                 "jgum_patrol_player_response",
                 "close_window",
-                StringCalculator.GetString("jgum_field_surrender_accept", "We accept your surrender. Lay down your arms!"),
-                PatrolSurrenderCondition,
+                "{=!}{JGUM_FIELD_SURRENDER_ACCEPT}",
+                () => {
+                    if (!PatrolSurrenderCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_accept");
+                    return true;
+                },
                 AcceptPatrolSurrenderConsequence);
 
             starter.AddPlayerLine(
                 "jgum_patrol_surrender_reject",
                 "jgum_patrol_player_response",
                 "close_window",
-                StringCalculator.GetString("jgum_field_surrender_reject", "No, you all will be death. Prepare!"),
-                PatrolSurrenderCondition,
+                "{=!}{JGUM_FIELD_SURRENDER_REJECT}",
+                () => {
+                    if (!PatrolSurrenderCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_reject");
+                    return true;
+                },
                 RejectPatrolSurrender);
         }
 

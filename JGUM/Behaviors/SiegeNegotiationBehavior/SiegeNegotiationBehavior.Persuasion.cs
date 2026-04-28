@@ -1,4 +1,4 @@
-﻿using Helpers;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,6 @@ using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Conversation.Persuasion;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace JGUM.Behaviors.SiegeNegotiationBehavior
@@ -133,6 +132,9 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                         "This argument is no longer available."));
                     return false;
                 }
+
+                if (TryGetAvailabilityLockHint(option, out hintText))
+                    return false;
 
                 hintText = TextObject.GetEmpty();
                 return true;
@@ -262,7 +264,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             PersuasionArgumentStrength roundBaseStrength = NegotiationCalculator.ShiftStrength(_activeBaseStrength, -reservationIndex);
             PersuasionTask task = new PersuasionTask(reservationIndex)
             {
-                SpokenLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_line", "Convince me.")),
+                SpokenLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_line", "The fate of these walls rests on your words.")),
                 ImmediateFailLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_fail_immediate", "That is not convincing.")),
                 FinalFailLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_fail_final", "Your words are not enough. We refuse."))
             };
@@ -444,6 +446,26 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                     "You need a more calculating approach to make this argument."));
             }
 
+            return true;
+        }
+
+        private bool TryGetAvailabilityLockHint(PersuasionOptionArgs option, out TextObject hintText)
+        {
+            if (!_templateByResolvedText.TryGetValue(option.Line.ToString(), out PersuasionLineTemplate optionTemplate))
+            {
+                hintText = TextObject.GetEmpty();
+                return false;
+            }
+
+            if (!optionTemplate.RequiresDamagedWallCondition || HasAtLeastOneDamagedWallSectionAtOrBelowHalfHealth())
+            {
+                hintText = TextObject.GetEmpty();
+                return false;
+            }
+
+            hintText = new TextObject(StringCalculator.GetString(
+                optionTemplate.LockedHintId ?? "jgum_proactive_option_locked_walls",
+                "At least one wall section must be at half health or lower to use this argument."));
             return true;
         }
 

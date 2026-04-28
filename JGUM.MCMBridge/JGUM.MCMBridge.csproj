@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
@@ -8,6 +8,7 @@
     <GameFolder>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</GameFolder>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Release</Configurations>
+    <SubModuleTemplatePath>$(ProjectDir)..\JGUM\SubModule.xml</SubModuleTemplatePath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +38,11 @@
     </Reference>
   </ItemGroup>
 
+  <Target Name="UpdateVersion" BeforeTargets="PostBuildEvent">
+    <!-- Versiyon numarasını güncelle -->
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)..\JGUM\Build\UpdateVersion.ps1&quot; -SubModulePath &quot;$(SubModuleTemplatePath)&quot; -Configuration &quot;$(Configuration)&quot;" />
+  </Target>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <PropertyGroup>
       <ModuleFolder>$(GameFolder)\Modules\JGUM</ModuleFolder>
@@ -45,6 +51,7 @@
       <BridgeBin Include="$(TargetDir)$(ProjectName).dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BridgeBin)" DestinationFolder="$(ModuleFolder)\bin\Win64_Shipping_Client" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;$DesktopPath = [Environment]::GetFolderPath('Desktop'); Compress-Archive -Path '$(ModuleFolder)' -DestinationPath ($DesktopPath + '\JGUM.zip') -Force&quot;" />
   </Target>
 
 </Project>

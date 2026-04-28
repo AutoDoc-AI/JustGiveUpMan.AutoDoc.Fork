@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "buildConfiguration",
+            "type": "pickString",
+            "description": "Hangi konfigürasyon ile build almak istersiniz?",
+            "options": [
+                "Debug",
+                "Release"
+            ],
+            "default": "Debug"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "Build Projesi",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/JustGiveUpMan.sln",
+                "-c",
+                "${input:buildConfiguration}",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}

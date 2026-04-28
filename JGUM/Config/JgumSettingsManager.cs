@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -15,6 +15,8 @@ namespace JGUM.Config
 
         public static float SurrenderTendencyMultiplier => SettingsOrDefault().SurrenderTendencyMultiplier;
         public static float BaseSurrenderThreshold => SettingsOrDefault().BaseSurrenderThreshold;
+        public static int SurrenderRandomnessMode => SettingsOrDefault().SurrenderRandomnessMode;
+        public static float GuaranteedSurrenderThreshold => SettingsOrDefault().GuaranteedSurrenderThreshold;
         public static float PlayerMercyMultiplier => SettingsOrDefault().PlayerMercyMultiplier;
         public static float LordCalculatingMultiplier => SettingsOrDefault().LordCalculatingMultiplier;
         public static float LordValorMultiplier => SettingsOrDefault().LordValorMultiplier;
@@ -24,13 +26,21 @@ namespace JGUM.Config
         public static float SiegeNegotiationEasyThreshold => SettingsOrDefault().SiegeNegotiationEasyThreshold;
         public static float SiegeNegotiationNormalThreshold => SettingsOrDefault().SiegeNegotiationNormalThreshold;
         public static float SiegeNegotiationHardThreshold => SettingsOrDefault().SiegeNegotiationHardThreshold;
-        public static int SiegeNegotiationRngPreset => SettingsOrDefault().SiegeNegotiationRngPreset;
+        public static int SiegeNegotiationDifficultyPreset => SettingsOrDefault().SiegeNegotiationDifficultyPreset;
         public static int RequiredSurrenderCount => SettingsOrDefault().RequiredSurrenderCount;
         public static bool EnableSiegeSurrender => SettingsOrDefault().EnableSiegeSurrender;
         public static bool EnableSiegeStarvationSallyOut => SettingsOrDefault().EnableSiegeStarvationSallyOut;
         public static bool EnableLordSurrender => SettingsOrDefault().EnableLordSurrender;
         public static bool EnablePatrolSurrender => SettingsOrDefault().EnablePatrolSurrender;
         public static float NearbyEnemyLordDetectionRange => SettingsOrDefault().NearbyEnemyLordDetectionRange;
+        public static float SiegeTowerEnginePressureMultiplier => SettingsOrDefault().SiegeTowerEnginePressureMultiplier;
+        public static float SiegeRamEnginePressureMultiplier => SettingsOrDefault().SiegeRamEnginePressureMultiplier;
+        public static float SiegeCatapultEnginePressureMultiplier => SettingsOrDefault().SiegeCatapultEnginePressureMultiplier;
+        public static float SiegeTrebuchetEnginePressureMultiplier => SettingsOrDefault().SiegeTrebuchetEnginePressureMultiplier;
+        public static float SiegeEnginePowerRatioMultiplier => SettingsOrDefault().SiegeEnginePowerRatioMultiplier;
+        public static float SiegeWallDamagePressureMultiplier => SettingsOrDefault().SiegeWallDamagePressureMultiplier;
+        public static float SiegeWallDestroyedBonus => SettingsOrDefault().SiegeWallDestroyedBonus;
+        public static float SiegeWallDamageCurveExponent => SettingsOrDefault().SiegeWallDamageCurveExponent;
         public static int LordDialogPriority => SettingsOrDefault().LordDialogPriority;
         public static int PatrolDialogPriority => SettingsOrDefault().PatrolDialogPriority;
 

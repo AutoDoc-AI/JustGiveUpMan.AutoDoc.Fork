@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using JGUM.Calculators;
 using JGUM.Config;
@@ -52,39 +52,59 @@ namespace JGUM.Behaviors
             // Intercept native dialog outputs to inject surrender option with high priority
             // Input from: lord_attack_verify_commit or player_threatens_enemy_lord tokens
             starter.AddDialogLine("jgum_lord_surrender_offer", "lord_attack_verify_commit", "jgum_lord_player_response",
-                StringCalculator.GetString("jgum_field_surrender_offer", "STOP, We cannot fight you. We surrender!"),
-                CheckLordEncounterSurrender,
+                "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
+                () => {
+                    if (!CheckLordEncounterSurrender()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    return true;
+                },
                 null,
                 priority
             );
 //party_encounter_lord_hostile_attacker_3
             // Alternative input token for different dialog paths
             starter.AddDialogLine("jgum_lord_surrender_offer_alt1", "player_threatens_enemy_lord", "jgum_lord_player_response",
-                StringCalculator.GetString("jgum_field_surrender_offer", "STOP, We cannot fight you. We surrender!"),
-                CheckLordEncounterSurrender,
+                "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
+                () => {
+                    if (!CheckLordEncounterSurrender()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    return true;
+                },
                 null,
                 priority
             );
 
             
             starter.AddDialogLine("jgum_lord_surrender_offer_alt2", "party_encounter_lord_hostile_attacker_3", "jgum_lord_player_response",
-                StringCalculator.GetString("jgum_field_surrender_offer", "STOP, We cannot fight you. We surrender!"),
-                CheckLordEncounterSurrender,
+                "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
+                () => {
+                    if (!CheckLordEncounterSurrender()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    return true;
+                },
                 null,
                 priority
             );
 
             // Player accepts surrender
             starter.AddPlayerLine("jgum_lord_surrender_accept", "jgum_lord_player_response", "close_window",
-                StringCalculator.GetString("jgum_field_surrender_accept", "We accept your surrender. Lay down your arms!"),
-                LordSurrenderCondition,
+                "{=!}{JGUM_FIELD_SURRENDER_ACCEPT}",
+                () => {
+                    if (!LordSurrenderCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_accept");
+                    return true;
+                },
                 AcceptSurrenderConsequence
             );
 
             // Player rejects and continues confrontation
             starter.AddPlayerLine("jgum_lord_surrender_reject", "jgum_lord_player_response", "close_window",
-                StringCalculator.GetString("jgum_field_surrender_reject", "No, you all will be death. Prepare!"),
-                LordSurrenderCondition,
+                "{=!}{JGUM_FIELD_SURRENDER_REJECT}",
+                () => {
+                    if (!LordSurrenderCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_reject");
+                    return true;
+                },
                 RejectLordSurrender
             );
         }

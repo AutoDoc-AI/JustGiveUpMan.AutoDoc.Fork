@@ -1,10 +1,13 @@
-﻿using TaleWorlds.Core;
+using System.Collections.Generic;
+using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
 namespace JGUM.Calculators
 {
     public static class StringCalculator
     {
+        private static Dictionary<string, string> _rolledVariants = new Dictionary<string, string>();
+
         private static int GetVariantCount(string baseId)
         {
             string countText = new TextObject("{=" + baseId + "_count}0").ToString();
@@ -19,6 +22,25 @@ namespace JGUM.Calculators
                 : "{=" + baseId + "}";
 
             return new TextObject(id + fallbackString).ToString();
+        }
+
+        public static void SetDialogVariable(string baseId)
+        {
+            if (!_rolledVariants.TryGetValue(baseId, out string id))
+            {
+                int variantCount = GetVariantCount(baseId);
+                id = variantCount > 0
+                    ? "{=" + baseId + "_" + MBRandom.RandomInt(1, variantCount + 1) + "}"
+                    : "{=" + baseId + "}";
+                _rolledVariants[baseId] = id;
+            }
+
+            MBTextManager.SetTextVariable(baseId.ToUpper(), new TextObject(id));
+        }
+
+        public static void ClearDialogVariables()
+        {
+            _rolledVariants.Clear();
         }
     }
 }

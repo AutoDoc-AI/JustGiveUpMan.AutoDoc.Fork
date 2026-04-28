@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">  <tags>
     <tag language="Türkçe" />
   </tags>
@@ -84,6 +84,7 @@
     <string id="jgum_proactive_option_locked_mercy" text="Bu argümanı kurmak için Merhamet özelliğin çok düşük." />
     <string id="jgum_proactive_option_locked_honor" text="Bu argümanı kurmak için Onur özelliğin çok düşük." />
     <string id="jgum_proactive_option_locked_calculating" text="Bu argüman için daha hesapçı bir yaklaşım gerekir." />
+    <string id="jgum_proactive_option_locked_walls" text="Bu argümanı kullanmak için surlardan en az birinin yarı canın altına inmiş olması gerekir." />
     <string id="jgum_proactive_success" text="Haklısın, daha fazla kan dökülmesine gerek yok." />
     <string id="jgum_proactive_fail" text="Hayır. Teslim olmayacağız." />
     <string id="jgum_proactive_continue" text="Daha fazlasını duymam gerekiyor." />
@@ -95,68 +96,102 @@
     <string id="JGUM.Settings.Group.Siege" text="Kuşatma" />
     <string id="JGUM.Settings.Group.Lord" text="Lord" />
     <string id="JGUM.Settings.Group.Patrol" text="Devriye" />
+    <string id="JGUM.Settings.Group.Advanced" text="Gelişmiş" />
 
     <string id="JGUM.Settings.SurrenderTendencyMultiplier.Name" text="Genel Teslim Eğilimi" />
-    <string id="JGUM.Settings.SurrenderTendencyMultiplier.Hint" text="Tüm teslimiyet kontrollerine uygulanan genel çarpan." />
+    <string id="JGUM.Settings.SurrenderTendencyMultiplier.Hint" text="Düşmanların genel olarak ne kadar kolay teslim olacağını belirler. Yüksek değerler teslimiyeti kolaylaştırır, düşük değerler direnci artırır. Varsayılan: 1.0" />
 
     <string id="JGUM.Settings.BaseSurrenderThreshold.Name" text="Temel Teslimiyet Eşiği" />
-    <string id="JGUM.Settings.BaseSurrenderThreshold.Hint" text="Değer arttıkça teslim olmak zorlaşır." />
+    <string id="JGUM.Settings.BaseSurrenderThreshold.Hint" text="Düşmanların teslim olmayı düşünmesi için gereken minimum güç üstünlüğü. Değer arttıkça teslim almak için çok daha güçlü olmanız gerekir. Varsayılan: 3.5" />
+
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Name" text="Teslimiyet Rastgelelik Modu" />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Hint" text="Teslimiyet hesaplamalarında şansın (RNG) nasıl uygulanacağını belirler. Kapalı: Sadece eşiklere bakar. Eşikli: Temel ve Kesin eşikler arasında şans çalışır. Sınırsız: Çok düşük/yüksek olsa bile her zaman ufak bir şans faktörü devrededir." />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Off" text="Kapalı" />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Thresholded" text="Eşikli" />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Unbound" text="Sınırsız" />
+
+    <string id="JGUM.Settings.GuaranteedSurrenderThreshold.Name" text="Kesin Teslimiyet Eşiği" />
+    <string id="JGUM.Settings.GuaranteedSurrenderThreshold.Hint" text="Düşmanın şans faktörü olmaksızın (%100 ihtimalle) kesin olarak teslim olacağı güç üstünlüğü seviyesi. Varsayılan: 5.0" />
 
     <string id="JGUM.Settings.PlayerMercyMultiplier.Name" text="Oyuncu Merhamet Çarpanı" />
-    <string id="JGUM.Settings.PlayerMercyMultiplier.Hint" text="Oyuncunun Merhamet/Zalimlik özelliklerinin etkisini ölçekler." />
+    <string id="JGUM.Settings.PlayerMercyMultiplier.Hint" text="Karakterinizin Merhamet özelliğinin teslimiyet şansını ne kadar etkilediğini belirler. Merhametli bir itibar düşmanları teslim olmaya teşvik eder; zalim bir itibar savaşmaya zorlar. Varsayılan: 100" />
 
     <string id="JGUM.Settings.RequiredSurrenderCount.Name" text="Gerekli Teslim Sayısı" />
-    <string id="JGUM.Settings.RequiredSurrenderCount.Hint" text="Merhamet özelliği kazanımı için gereken kabul edilmiş teslim sayısı." />
+    <string id="JGUM.Settings.RequiredSurrenderCount.Hint" text="Yapay zeka lordların Merhamet özellik puanı kazanması için arka arkaya kaç kere teslim olmuş olmaları gerektiğini belirler. Varsayılan: 3" />
 
     <string id="JGUM.Settings.EnableSiegeSurrender.Name" text="Kuşatma Teslimiyetini Etkinleştir" />
-    <string id="JGUM.Settings.EnableSiegeSurrender.Hint" text="Kuşatma sırasında yerleşimlerin teslim olma kontrolünü açar." />
+    <string id="JGUM.Settings.EnableSiegeSurrender.Hint" text="Açıkken, kuşatma altındaki yerleşimler koşullar yeterince kötüyse teslim teklif edebilir. Kapatırsanız hiçbir kuşatma teslimiyeti gerçekleşmez." />
 
     <string id="JGUM.Settings.EnableSiegeStarvationSallyOut.Name" text="Açlık Huruçunu Etkinleştir" />
-    <string id="JGUM.Settings.EnableSiegeStarvationSallyOut.Hint" text="Teslim olmazlarsa aç savunmacıların huruç yapmasını sağlar." />
+    <string id="JGUM.Settings.EnableSiegeStarvationSallyOut.Hint" text="Açıkken, teslim olmayı reddeden aç savunmacılar surlardan çıkıp umutsuz bir saldırıya geçebilir." />
 
     <string id="JGUM.Settings.NearbyEnemyLordStrengthPercentage.Name" text="Yakındaki Düşman Lord Gücü (%)" />
-    <string id="JGUM.Settings.NearbyEnemyLordStrengthPercentage.Hint" text="Yakındaki düşman lordların gücünden eklenecek yüzde değer." />
+    <string id="JGUM.Settings.NearbyEnemyLordStrengthPercentage.Hint" text="Kuşatma altındaki yerleşim yakınında düşman lordlar varsa, güçlerinin bu yüzdesi savunmacıların özgüvenini artırır ve teslim olma olasılığını düşürür. Varsayılan: 50" />
 
     <string id="JGUM.Settings.NearbyEnemyLordDetectionRange.Name" text="Yakın Lord Algılama Menzili" />
-    <string id="JGUM.Settings.NearbyEnemyLordDetectionRange.Hint" text="Yerleşim çevresinde yakın lord kontrolü için kullanılacak harita mesafesi." />
+    <string id="JGUM.Settings.NearbyEnemyLordDetectionRange.Hint" text="Yerleşimin haritada ne kadar uzaktaki lordları dikkate alacağını belirler. Daha geniş menzil, daha fazla lordun hesaba katılması demektir. Varsayılan: 7" />
+
+    <string id="JGUM.Settings.SiegeTowerEnginePressureMultiplier.Name" text="Kuşatma Kulesi Baskı Çarpanı" />
+    <string id="JGUM.Settings.SiegeTowerEnginePressureMultiplier.Hint" text="Kuşatma kulelerinin savunmacılar üzerindeki baskısını belirler. Yüksek değerler kuleleri daha korkutucu yapar. Varsayılan: 70" />
+
+    <string id="JGUM.Settings.SiegeRamEnginePressureMultiplier.Name" text="Koçbaşı Baskı Çarpanı" />
+    <string id="JGUM.Settings.SiegeRamEnginePressureMultiplier.Hint" text="Koçbaşlarının savunmacılar üzerindeki baskısını belirler. Yüksek değerler koçbaşlarını daha korkutucu yapar. Varsayılan: 70" />
+
+    <string id="JGUM.Settings.SiegeCatapultEnginePressureMultiplier.Name" text="Mancınık Baskı Çarpanı" />
+    <string id="JGUM.Settings.SiegeCatapultEnginePressureMultiplier.Hint" text="Mancınıkların savunmacılar üzerindeki baskısını belirler. Yüksek değerler savunmacıları teslimiyete daha çok yaklaştırır. Varsayılan: 65" />
+
+    <string id="JGUM.Settings.SiegeTrebuchetEnginePressureMultiplier.Name" text="Trebuşet Baskı Çarpanı" />
+    <string id="JGUM.Settings.SiegeTrebuchetEnginePressureMultiplier.Hint" text="Trebuşetlerin savunmacılar üzerindeki baskısını belirler. Yüksek değerler savunmacıları teslimiyete daha çok yaklaştırır. Varsayılan: 65" />
+
+    <string id="JGUM.Settings.SiegeEnginePowerRatioMultiplier.Name" text="Kuşatma Makinesi Güç Oranı Çarpanı" />
+    <string id="JGUM.Settings.SiegeEnginePowerRatioMultiplier.Hint" text="Savunandan daha fazla kuşatma makinesine sahip olmanın teslim baskısına etkisini belirler. Yüksek değerler makine üstünlüğünün avantajını artırır. Varsayılan: 35" />
+
+    <string id="JGUM.Settings.SiegeWallDamagePressureMultiplier.Name" text="Surlar Hasar Baskı Çarpanı" />
+    <string id="JGUM.Settings.SiegeWallDamagePressureMultiplier.Hint" text="Hasar görmüş surların teslim baskısını ne kadar artırdığını belirler. Yıkılmakta olan surlar savunmacıları teslimiyete yaklaştırır. Varsayılan: 75" />
+
+    <string id="JGUM.Settings.SiegeWallDestroyedBonus.Name" text="Yıkılmış Surlar Ek Baskısı" />
+    <string id="JGUM.Settings.SiegeWallDestroyedBonus.Hint" text="Tamamen yıkılmış her sur bölümü için ek teslim baskısı. Daha fazla gedik, daha büyük baskı demektir. Varsayılan: 0.2" />
+
+    <string id="JGUM.Settings.SiegeWallDamageCurveExponent.Name" text="Surlar Hasar Eğri Üssü" />
+    <string id="JGUM.Settings.SiegeWallDamageCurveExponent.Hint" text="Sur hasarının nasıl ölçeklendiğini kontrol eder. Yüksek değerlerde küçük çatlaklar önemsiz kalır, ancak ciddi gedikler teslim baskısında büyük sıçramaya neden olur. Varsayılan: 1.5" />
 
     <string id="JGUM.Settings.SiegeNegotiationEasyThreshold.Name" text="Müzakere Kolay Eşiği" />
-    <string id="JGUM.Settings.SiegeNegotiationEasyThreshold.Hint" text="Kolay ikna gücüne geçmek için gereken güç oranı." />
+    <string id="JGUM.Settings.SiegeNegotiationEasyThreshold.Hint" text="İknanın kolay olması için gereken güç oranı. Ordunuz bu kadar güçlüyse savunmacıları ikna etmek kolaydır. Varsayılan: 3.0" />
 
     <string id="JGUM.Settings.SiegeNegotiationNormalThreshold.Name" text="Müzakere Normal Eşiği" />
-    <string id="JGUM.Settings.SiegeNegotiationNormalThreshold.Hint" text="Normal ikna gücüne geçmek için gereken güç oranı." />
+    <string id="JGUM.Settings.SiegeNegotiationNormalThreshold.Hint" text="Normal zorlukta ikna için gereken güç oranı. Belirgin bir avantajınız var ama yine de iyi argümanlar gerekiyor. Varsayılan: 2.2" />
 
     <string id="JGUM.Settings.SiegeNegotiationHardThreshold.Name" text="Müzakere Zor Eşiği" />
-    <string id="JGUM.Settings.SiegeNegotiationHardThreshold.Hint" text="Zor ikna gücüne geçmek için gereken güç oranı." />
+    <string id="JGUM.Settings.SiegeNegotiationHardThreshold.Hint" text="Zor ikna için gereken güç oranı. Bunun altında savunmacılar müzakere etmek için çok az neden görür. Varsayılan: 1.6" />
 
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Name" text="İkna RNG Ön Ayarı" />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Hint" text="İkna seçeneklerinin şanslarında rastgele dalgalanmayı belirler." />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Off" text="Kapalı" />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Medium" text="Orta (+/-2)" />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.High" text="Yüksek (+/-3)" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Name" text="İkna Zorluğu" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Hint" text="Savunmacıları teslim olmaya ikna etmenin ne kadar zor olduğunu belirler." />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Easy" text="Kolay" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Normal" text="Orta" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Hard" text="Zor" />
 
     <string id="JGUM.Settings.EnableLordSurrender.Name" text="Lord Teslimiyetini Etkinleştir" />
-    <string id="JGUM.Settings.EnableLordSurrender.Hint" text="Düşman lord karşılaşmalarında teslimiyet diyaloglarını açar." />
+    <string id="JGUM.Settings.EnableLordSurrender.Hint" text="Açıkken, haritada karşılaştığınız düşman lordlar çok daha güçlüyseniz teslim olabilir. Kapatırsanız her zaman savaş başlar." />
 
     <string id="JGUM.Settings.LordDialogPriority.Name" text="Lord Diyalog Önceliği" />
-    <string id="JGUM.Settings.LordDialogPriority.Hint" text="Lord teslimiyet satırları için diyalog öncelik değeri." />
+    <string id="JGUM.Settings.LordDialogPriority.Hint" text="Teknik: Lord teslimiyet diyalogları için öncelik değeri. Yüksek değerler JGUM'un diğer modlardan önce gelmesini sağlar. Sadece mod çakışması varsa değiştirin. Varsayılan: 10000" />
 
     <string id="JGUM.Settings.LordCalculatingMultiplier.Name" text="Hesapçı Özellik Çarpanı" />
-    <string id="JGUM.Settings.LordCalculatingMultiplier.Hint" text="Teslimiyet formülünde Hesapçı özelliğinin etkisini çarpar." />
+    <string id="JGUM.Settings.LordCalculatingMultiplier.Hint" text="Savunmacı lordun Hesapçı özelliğinin teslimiyete etkisini belirler. Hesapçı lordlar daha pragmatiktir ve güç dengesizliğinde teslim olmaya daha yatkındır. Varsayılan: 100" />
 
     <string id="JGUM.Settings.LordValorMultiplier.Name" text="Cesaret Özellik Çarpanı" />
-    <string id="JGUM.Settings.LordValorMultiplier.Hint" text="Teslimiyet formülünde Cesaret özelliğinin etkisini çarpar." />
+    <string id="JGUM.Settings.LordValorMultiplier.Hint" text="Savunmacı lordun Cesaret özelliğinin teslimiyete etkisini belirler. Cesur lordlar savaşmayı tercih eder ve teslim olmaya daha az isteklidir. Varsayılan: 100" />
 
     <string id="JGUM.Settings.LordMercyMultiplier.Name" text="Merhamet Özellik Çarpanı" />
-    <string id="JGUM.Settings.LordMercyMultiplier.Hint" text="Teslimiyet formülünde Merhamet özelliğinin etkisini çarpar." />
+    <string id="JGUM.Settings.LordMercyMultiplier.Hint" text="Savunmacı lordun Merhamet özelliğinin teslimiyete etkisini belirler. Merhametli lordlar can kaybını önlemek ister ve teslim olmaya daha açıktır. Varsayılan: 100" />
 
     <string id="JGUM.Settings.LordHonorMultiplier.Name" text="Onur Özellik Çarpanı" />
-    <string id="JGUM.Settings.LordHonorMultiplier.Hint" text="Teslimiyet formülünde Onur özelliğinin etkisini çarpar." />
+    <string id="JGUM.Settings.LordHonorMultiplier.Hint" text="Savunmacı lordun Onur özelliğinin teslimiyete etkisini belirler. Onurlu lordlar teslim olmayı utanç verici bulur ve daha uzun süre direnir. Varsayılan: 100" />
 
     <string id="JGUM.Settings.EnablePatrolSurrender.Name" text="Devriye Teslimiyetini Etkinleştir" />
-    <string id="JGUM.Settings.EnablePatrolSurrender.Hint" text="Devriye veya lord olmayan düşman karşılaşmalarında teslimiyet diyaloglarını açar." />
+    <string id="JGUM.Settings.EnablePatrolSurrender.Hint" text="Açıkken, lord olmayan düşman birlikleri (devriyeler, kervanlar vb.) çok güçsüz kaldığında teslim olabilir. Kapatırsanız her zaman savaş başlar." />
 
     <string id="JGUM.Settings.PatrolDialogPriority.Name" text="Devriye Diyalog Önceliği" />
-    <string id="JGUM.Settings.PatrolDialogPriority.Hint" text="Devriye teslimiyet satırları için diyalog öncelik değeri." />
+    <string id="JGUM.Settings.PatrolDialogPriority.Hint" text="Teknik: Devriye teslimiyet diyalogları için öncelik değeri. Yüksek değerler JGUM'un diğer modlardan önce gelmesini sağlar. Sadece mod çakışması varsa değiştirin. Varsayılan: 10000" />
   </strings>
 </base>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">  <tags>
     <tag language="English" />
   </tags>
@@ -34,7 +34,7 @@
     <!-- Field Surrender Dialogs -->
     <string id="jgum_field_surrender_offer_1" text="STOP, We cannot fight you. We surrender!" />
     <string id="jgum_field_surrender_accept_1" text="We accept your surrender. Lay down your arms!" />
-    <string id="jgum_field_surrender_reject_1" text="No, you all will be death. Prepare!" />
+    <string id="jgum_field_surrender_reject_1" text="No, you all will be dead. Prepare!" />
     <string id="jgum_field_surrender_end" text="A wise choice. You shall be spared." />
     <string id="jgum_field_surrender_success" text="Enemy forces have surrendered!" />
     <string id="jgum_field_surrender_rejected" text="The battle continues!" />
@@ -84,6 +84,7 @@
     <string id="jgum_proactive_option_locked_mercy" text="Your Mercy is too low to make this argument." />
     <string id="jgum_proactive_option_locked_honor" text="Your Honor is too low to make this argument." />
     <string id="jgum_proactive_option_locked_calculating" text="You need a more calculating approach to make this argument." />
+    <string id="jgum_proactive_option_locked_walls" text="At least one wall section must be at half health or lower to use this argument." />
     <string id="jgum_proactive_success" text="You are right, there's no need for blood to spill." />
     <string id="jgum_proactive_fail" text="No. We will not yield." />
     <string id="jgum_proactive_continue" text="I need to hear more." />
@@ -95,68 +96,102 @@
     <string id="JGUM.Settings.Group.Siege" text="Siege" />
     <string id="JGUM.Settings.Group.Lord" text="Lord" />
     <string id="JGUM.Settings.Group.Patrol" text="Patrol" />
+    <string id="JGUM.Settings.Group.Advanced" text="Advanced" />
 
     <string id="JGUM.Settings.SurrenderTendencyMultiplier.Name" text="General Surrender Tendency" />
-    <string id="JGUM.Settings.SurrenderTendencyMultiplier.Hint" text="Overall multiplier for surrender checks." />
+    <string id="JGUM.Settings.SurrenderTendencyMultiplier.Hint" text="Controls how willing enemies are to surrender overall. Higher values make surrenders happen more easily; lower values make them resist longer. Default: 1.0" />
 
     <string id="JGUM.Settings.BaseSurrenderThreshold.Name" text="Base Surrender Threshold" />
-    <string id="JGUM.Settings.BaseSurrenderThreshold.Hint" text="Higher values make surrender harder." />
+    <string id="JGUM.Settings.BaseSurrenderThreshold.Hint" text="The minimum power advantage you need before enemies consider surrendering. Higher values mean you need to be much stronger. Default: 3.5" />
+
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Name" text="Surrender Randomness Mode" />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Hint" text="Determines how RNG is applied to surrender calculations. Off: purely based on thresholds. Thresholded: RNG applies between Base and Guaranteed thresholds. Unbound: slight RNG always applies." />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Off" text="Off" />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Thresholded" text="Thresholded" />
+    <string id="JGUM.Settings.SurrenderRandomnessMode.Unbound" text="Unbound" />
+
+    <string id="JGUM.Settings.GuaranteedSurrenderThreshold.Name" text="Guaranteed Surrender Threshold" />
+    <string id="JGUM.Settings.GuaranteedSurrenderThreshold.Hint" text="Power advantage required for guaranteed surrender without RNG (used in Thresholded and Unbound modes). Default: 5.0" />
 
     <string id="JGUM.Settings.PlayerMercyMultiplier.Name" text="Player Mercy Multiplier" />
-    <string id="JGUM.Settings.PlayerMercyMultiplier.Hint" text="Scales player Mercy/Cruelty effect." />
+    <string id="JGUM.Settings.PlayerMercyMultiplier.Hint" text="How much your character's Mercy trait influences surrender chances. A merciful reputation makes enemies more willing to surrender; a cruel one makes them fight harder. Default: 100" />
 
     <string id="JGUM.Settings.RequiredSurrenderCount.Name" text="Required Surrender Count" />
-    <string id="JGUM.Settings.RequiredSurrenderCount.Hint" text="Accepted surrender count before mercy trait gain." />
+    <string id="JGUM.Settings.RequiredSurrenderCount.Hint" text="How many times an AI lord must surrender before they gain a Mercy trait point. Default: 3" />
 
     <string id="JGUM.Settings.EnableSiegeSurrender.Name" text="Enable Siege Surrender" />
-    <string id="JGUM.Settings.EnableSiegeSurrender.Hint" text="Enable settlement surrender checks during sieges." />
+    <string id="JGUM.Settings.EnableSiegeSurrender.Hint" text="When enabled, besieged settlements can offer to surrender if conditions are dire enough. Disable to prevent any siege surrenders." />
 
     <string id="JGUM.Settings.EnableSiegeStarvationSallyOut.Name" text="Enable Starvation Sally Out" />
-    <string id="JGUM.Settings.EnableSiegeStarvationSallyOut.Hint" text="If no surrender, starving defenders can sally out." />
+    <string id="JGUM.Settings.EnableSiegeStarvationSallyOut.Hint" text="When enabled, starving defenders who refuse to surrender may charge out of the walls in a desperate attack instead of waiting to die." />
 
     <string id="JGUM.Settings.NearbyEnemyLordStrengthPercentage.Name" text="Nearby Enemy Lord Strength (%)" />
-    <string id="JGUM.Settings.NearbyEnemyLordStrengthPercentage.Hint" text="Added percentage from nearby hostile lords." />
+    <string id="JGUM.Settings.NearbyEnemyLordStrengthPercentage.Hint" text="When hostile lords are near a besieged settlement, this percentage of their strength boosts the defenders' confidence, making them less likely to surrender. Default: 50" />
 
     <string id="JGUM.Settings.NearbyEnemyLordDetectionRange.Name" text="Nearby Lord Detection Range" />
-    <string id="JGUM.Settings.NearbyEnemyLordDetectionRange.Hint" text="Map distance used for nearby lord checks around settlement." />
+    <string id="JGUM.Settings.NearbyEnemyLordDetectionRange.Hint" text="How far the settlement looks for nearby lords on the map. A larger range means more lords are considered in surrender calculations. Default: 7" />
+
+    <string id="JGUM.Settings.SiegeTowerEnginePressureMultiplier.Name" text="Siege Tower Pressure Multiplier" />
+    <string id="JGUM.Settings.SiegeTowerEnginePressureMultiplier.Hint" text="How much siege towers pressure defenders toward surrendering. Higher values make siege towers more intimidating. Default: 70" />
+
+    <string id="JGUM.Settings.SiegeRamEnginePressureMultiplier.Name" text="Ram Pressure Multiplier" />
+    <string id="JGUM.Settings.SiegeRamEnginePressureMultiplier.Hint" text="How much battering rams pressure defenders toward surrendering. Higher values make rams more intimidating. Default: 70" />
+
+    <string id="JGUM.Settings.SiegeCatapultEnginePressureMultiplier.Name" text="Catapult Pressure Multiplier" />
+    <string id="JGUM.Settings.SiegeCatapultEnginePressureMultiplier.Hint" text="How much catapults pressure defenders toward surrendering. Higher values push defenders closer to giving up. Default: 65" />
+
+    <string id="JGUM.Settings.SiegeTrebuchetEnginePressureMultiplier.Name" text="Trebuchet Pressure Multiplier" />
+    <string id="JGUM.Settings.SiegeTrebuchetEnginePressureMultiplier.Hint" text="How much trebuchets pressure defenders toward surrendering. Higher values push defenders closer to giving up. Default: 65" />
+
+    <string id="JGUM.Settings.SiegeEnginePowerRatioMultiplier.Name" text="Siege Engine Power Ratio Multiplier" />
+    <string id="JGUM.Settings.SiegeEnginePowerRatioMultiplier.Hint" text="How much having more siege engines than the defender affects surrender pressure. Higher values amplify the advantage of engine superiority. Default: 35" />
+
+    <string id="JGUM.Settings.SiegeWallDamagePressureMultiplier.Name" text="Wall Damage Pressure Multiplier" />
+    <string id="JGUM.Settings.SiegeWallDamagePressureMultiplier.Hint" text="How much damaged walls increase surrender pressure. Crumbling walls make defenders feel exposed and more likely to give up. Default: 75" />
+
+    <string id="JGUM.Settings.SiegeWallDestroyedBonus.Name" text="Destroyed Wall Bonus" />
+    <string id="JGUM.Settings.SiegeWallDestroyedBonus.Hint" text="Extra surrender pressure for each fully breached wall. More breaches mean greater pressure to surrender. Default: 0.2" />
+
+    <string id="JGUM.Settings.SiegeWallDamageCurveExponent.Name" text="Wall Damage Curve Exponent" />
+    <string id="JGUM.Settings.SiegeWallDamageCurveExponent.Hint" text="Controls how wall damage scales. Higher values mean small cracks have little effect, but severe breaches cause a big jump in surrender pressure. Default: 1.5" />
 
     <string id="JGUM.Settings.SiegeNegotiationEasyThreshold.Name" text="Negotiation Easy Threshold" />
-    <string id="JGUM.Settings.SiegeNegotiationEasyThreshold.Hint" text="Power ratio needed for Easy persuasion strength." />
+    <string id="JGUM.Settings.SiegeNegotiationEasyThreshold.Hint" text="The power ratio at which persuasion becomes easy. When your army is this much stronger, convincing defenders is straightforward. Default: 3.0" />
 
     <string id="JGUM.Settings.SiegeNegotiationNormalThreshold.Name" text="Negotiation Normal Threshold" />
-    <string id="JGUM.Settings.SiegeNegotiationNormalThreshold.Hint" text="Power ratio needed for Normal persuasion strength." />
+    <string id="JGUM.Settings.SiegeNegotiationNormalThreshold.Hint" text="The power ratio for normal difficulty persuasion. You have a clear advantage but still need good arguments. Default: 2.2" />
 
     <string id="JGUM.Settings.SiegeNegotiationHardThreshold.Name" text="Negotiation Hard Threshold" />
-    <string id="JGUM.Settings.SiegeNegotiationHardThreshold.Hint" text="Power ratio needed for Hard persuasion strength." />
+    <string id="JGUM.Settings.SiegeNegotiationHardThreshold.Hint" text="The power ratio for hard persuasion. Below this, defenders see little reason to negotiate. Default: 1.6" />
 
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Name" text="Persuasion RNG Preset" />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Hint" text="Controls random variation in persuasion option chances." />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Off" text="Off" />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.Medium" text="Medium (+/-2)" />
-    <string id="JGUM.Settings.SiegeNegotiationRngPreset.High" text="High (+/-3)" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Name" text="Persuasion Difficulty" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Hint" text="Controls how hard it is to persuade defenders to surrender." />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Easy" text="Easy" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Normal" text="Normal" />
+    <string id="JGUM.Settings.SiegeNegotiationDifficultyPreset.Hard" text="Hard" />
 
     <string id="JGUM.Settings.EnableLordSurrender.Name" text="Enable Lord Surrender" />
-    <string id="JGUM.Settings.EnableLordSurrender.Hint" text="Enable surrender dialogs in hostile lord encounters." />
+    <string id="JGUM.Settings.EnableLordSurrender.Hint" text="When enabled, enemy lords you encounter on the map may surrender if you are much stronger. Disable to always force a battle." />
 
     <string id="JGUM.Settings.LordDialogPriority.Name" text="Lord Dialog Priority" />
-    <string id="JGUM.Settings.LordDialogPriority.Hint" text="Conversation override priority for lord surrender lines." />
+    <string id="JGUM.Settings.LordDialogPriority.Hint" text="Technical: dialog priority for lord surrender lines. Higher values ensure JGUM takes precedence over other mods. Only change if you have mod conflicts. Default: 10000" />
 
     <string id="JGUM.Settings.LordCalculatingMultiplier.Name" text="Calculating Trait Multiplier" />
-    <string id="JGUM.Settings.LordCalculatingMultiplier.Hint" text="Multiplier for Calculating trait impact in surrender formula." />
+    <string id="JGUM.Settings.LordCalculatingMultiplier.Hint" text="How much the defending lord's Calculating trait affects surrender. Calculating lords are more pragmatic and surrender more readily when outmatched. Default: 100" />
 
     <string id="JGUM.Settings.LordValorMultiplier.Name" text="Valor Trait Multiplier" />
-    <string id="JGUM.Settings.LordValorMultiplier.Hint" text="Multiplier for Valor trait impact in surrender formula." />
+    <string id="JGUM.Settings.LordValorMultiplier.Hint" text="How much the defending lord's Valor trait affects surrender. Brave lords prefer to fight and are less willing to give up. Default: 100" />
 
     <string id="JGUM.Settings.LordMercyMultiplier.Name" text="Mercy Trait Multiplier" />
-    <string id="JGUM.Settings.LordMercyMultiplier.Hint" text="Multiplier for Mercy trait impact in surrender formula." />
+    <string id="JGUM.Settings.LordMercyMultiplier.Hint" text="How much the defending lord's Mercy trait affects surrender. Merciful lords prefer to spare lives and surrender more willingly. Default: 100" />
 
     <string id="JGUM.Settings.LordHonorMultiplier.Name" text="Honor Trait Multiplier" />
-    <string id="JGUM.Settings.LordHonorMultiplier.Hint" text="Multiplier for Honor trait impact in surrender formula." />
+    <string id="JGUM.Settings.LordHonorMultiplier.Hint" text="How much the defending lord's Honor trait affects surrender. Honorable lords see surrender as shameful and resist longer. Default: 100" />
 
     <string id="JGUM.Settings.EnablePatrolSurrender.Name" text="Enable Patrol Surrender" />
-    <string id="JGUM.Settings.EnablePatrolSurrender.Hint" text="Enable surrender dialogs for patrol/non-lord hostile encounters." />
+    <string id="JGUM.Settings.EnablePatrolSurrender.Hint" text="When enabled, non-lord enemy parties (patrols, caravans, etc.) may surrender when heavily outmatched. Disable to always force a battle." />
 
     <string id="JGUM.Settings.PatrolDialogPriority.Name" text="Patrol Dialog Priority" />
-    <string id="JGUM.Settings.PatrolDialogPriority.Hint" text="Conversation override priority for patrol surrender lines." />
+    <string id="JGUM.Settings.PatrolDialogPriority.Hint" text="Technical: dialog priority for patrol surrender lines. Higher values ensure JGUM takes precedence over other mods. Only change if you have mod conflicts. Default: 10000" />
   </strings>
 </base>

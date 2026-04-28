@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JGUM.Config;
@@ -33,9 +33,16 @@ namespace JGUM.Calculators
 
         public static PersuasionArgumentStrength GetBaseStrengthFromPowerRatio(float powerRatio)
         {
+#if !DEBUG
+            int preset = JgumSettingsManager.SiegeNegotiationDifficultyPreset;
+            float easyThreshold = preset == 0 ? 2.0f : preset == 1 ? 3.0f : 4.0f;
+            float normalThreshold = preset == 0 ? 1.5f : preset == 1 ? 2.2f : 3.0f;
+            float hardThreshold = preset == 0 ? 1.0f : preset == 1 ? 1.6f : 2.2f;
+#else
             float easyThreshold = Math.Max(0f, JgumSettingsManager.SiegeNegotiationEasyThreshold);
             float normalThreshold = Math.Min(easyThreshold, Math.Max(0f, JgumSettingsManager.SiegeNegotiationNormalThreshold));
             float hardThreshold = Math.Min(normalThreshold, Math.Max(0f, JgumSettingsManager.SiegeNegotiationHardThreshold));
+#endif
 
             if (powerRatio >= easyThreshold)
                 return PersuasionArgumentStrength.Easy;
@@ -64,45 +71,8 @@ namespace JGUM.Calculators
         public static List<int> BuildRoundRandomBiases(int optionCount)
         {
             List<int> biases = new List<int>();
-            if (optionCount <= 0)
-                return biases;
-
-            int rngRange = GetRngPresetRange();
-            if (rngRange <= 0)
-            {
-                for (int i = 0; i < optionCount; i++)
-                    biases.Add(0);
-                return biases;
-            }
-
-            if (optionCount == 1)
-            {
+            for (int i = 0; i < optionCount; i++)
                 biases.Add(0);
-                return biases;
-            }
-
-            if (optionCount == 2)
-            {
-                biases.Add(-rngRange);
-                biases.Add(rngRange);
-            }
-            else
-            {
-                biases.Add(-rngRange);
-                biases.Add(0);
-                biases.Add(rngRange);
-                while (biases.Count < optionCount)
-                    biases.Add(MBRandom.RandomInt(-rngRange, rngRange + 1));
-            }
-
-            for (int i = biases.Count - 1; i > 0; i--)
-            {
-                int swapIndex = MBRandom.RandomInt(i + 1);
-                int tmp = biases[i];
-                biases[i] = biases[swapIndex];
-                biases[swapIndex] = tmp;
-            }
-
             return biases;
         }
 
@@ -117,16 +87,6 @@ namespace JGUM.Calculators
                 return -1;
 
             return 0;
-        }
-
-        private static int GetRngPresetRange()
-        {
-            // 0 = Off, 1 = Medium (+/-2), 2 = High (+/-3)
-            int preset = JgumSettingsManager.SiegeNegotiationRngPreset;
-            if (preset <= 0)
-                return 0;
-
-            return preset == 1 ? 2 : 3;
         }
     }
 }

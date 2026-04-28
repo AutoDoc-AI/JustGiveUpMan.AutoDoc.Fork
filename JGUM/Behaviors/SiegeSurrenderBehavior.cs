@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using JGUM.Calculators;
 using JGUM.Config;
@@ -48,59 +48,92 @@ namespace JGUM.Behaviors
             if (JgumSettingsManager.EnableSiegeSurrender)
                 AddDialogs(campaignGameStarter);
         }
+
         private void AddDialogs(CampaignGameStarter starter)
         {
-
             starter.AddDialogLine("jgum_siege_defender_start", "start", "jgum_player_start",
-                StringCalculator.GetString("jgum_siege_defender_greeting","Thank you for coming, my {?PLAYER.GENDER}madame{?}sir{\\?}."),
-                SurrenderCondition,
+                "{=!}{JGUM_SIEGE_DEFENDER_GREETING}",
+                () => {
+                    if (!SurrenderCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_siege_defender_greeting");
+                    return true;
+                },
                 OnConversationRelationshipChanges(2),
                 9999
             );
+
             // Player initiates surrender negotiation
-            starter.AddPlayerLine("jgum_siege_player_surrender_start", "jgum_player_start", "jgum_siege_defender_surrenders",
-                StringCalculator.GetString("jgum_siege_player_siege_surrender_offer","I see your situation is dire. Do you want to surrender and spare your people from further suffering?"),
-                SurrenderCondition,
+            starter.AddPlayerLine("jgum_siege_player_surrender_start", "jgum_player_start",
+                "jgum_siege_defender_surrenders",
+                "{=!}{JGUM_SIEGE_PLAYER_SIEGE_SURRENDER_OFFER}",
+                () => {
+                    if (!SurrenderCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_siege_player_siege_surrender_offer");
+                    return true;
+                },
                 null
             );
-            
+
             // Defender responds with surrender plea
-            starter.AddDialogLine("jgum_siege_defender_surrenders", "jgum_siege_defender_surrenders", "jgum_siege_player_surrender_response",
-                StringCalculator.GetString("jgum_siege_surrender_offer","We are starving to death. The city is yours."),
-                SurrenderCondition,
+            starter.AddDialogLine("jgum_siege_defender_surrenders", "jgum_siege_defender_surrenders",
+                "jgum_siege_player_surrender_response",
+                "{=!}{JGUM_SIEGE_SURRENDER_OFFER}",
+                () => {
+                    if (!SurrenderCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_siege_surrender_offer");
+                    return true;
+                },
                 null
             );
-            
+
 
             // Player accepts surrender
-            starter.AddPlayerLine("jgum_siege_player_accepts_surrender", "jgum_siege_player_surrender_response", "jgum_siege_merciful",
-                StringCalculator.GetString("jgum_siege_surrender_accept","You made a wise choice. Lay down your arms, I spare your lives."), 
-                PlayerResponseCondition,
+            starter.AddPlayerLine("jgum_siege_player_accepts_surrender", "jgum_siege_player_surrender_response",
+                "jgum_siege_merciful",
+                "{=!}{JGUM_SIEGE_SURRENDER_ACCEPT}",
+                () => {
+                    if (!PlayerResponseCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_siege_surrender_accept");
+                    return true;
+                },
                 AcceptSurrender
             );
 
             // Player rejects surrender
-            starter.AddPlayerLine("jgum_siege_player_rejects_surrender", "jgum_siege_player_surrender_response", "jgum_siege_cruel",
-                StringCalculator.GetString("jgum_siege_surrender_reject", "It is too late to beg for mercy. I am coming to crush you."),
-                PlayerResponseCondition,
+            starter.AddPlayerLine("jgum_siege_player_rejects_surrender", "jgum_siege_player_surrender_response",
+                "jgum_siege_cruel",
+                "{=!}{JGUM_SIEGE_SURRENDER_REJECT}",
+                () => {
+                    if (!PlayerResponseCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_siege_surrender_reject");
+                    return true;
+                },
                 RejectSurrender
             );
-            
+
             // Merciful ending response
             starter.AddDialogLine("jgum_siege_merciful", "jgum_siege_merciful", "close_window",
-                StringCalculator.GetString("jgum_siege_defender_accepted", "We are grateful for your mercy!"),
-                PlayerResponseCondition,
+                "{=!}{JGUM_SIEGE_DEFENDER_ACCEPTED}",
+                () => {
+                    if (!PlayerResponseCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_siege_defender_accepted");
+                    return true;
+                },
                 null
             );
-            
+
             // Cruel ending response
             starter.AddDialogLine("jgum_siege_cruel", "jgum_siege_cruel", "close_window",
-                StringCalculator.GetString("jgum_siege_defender_rejected", "Kalradia will remember this cruelty!"),
-                PlayerResponseCondition,
+                "{=!}{JGUM_SIEGE_DEFENDER_REJECTED}",
+                () => {
+                    if (!PlayerResponseCondition()) return false;
+                    StringCalculator.SetDialogVariable("jgum_siege_defender_rejected");
+                    return true;
+                },
                 null
             );
         }
-        
+
         private bool SurrenderCondition()
         {
             if (!JgumSettingsManager.EnableSiegeSurrender)
@@ -117,6 +150,7 @@ namespace JGUM.Behaviors
             {
                 conversationHero.SetHasMet();
             }
+
             return true;
         }
 
@@ -151,7 +185,8 @@ namespace JGUM.Behaviors
                     }
                 }
             }
-            else if (JgumSettingsManager.EnableSiegeStarvationSallyOut && settlement.IsStarving && IsPlayerBesieger(settlement))
+            else if (JgumSettingsManager.EnableSiegeStarvationSallyOut && settlement.IsStarving &&
+                     IsPlayerBesieger(settlement))
             {
                 StartStarvationSallyOut(settlement);
             }
@@ -159,19 +194,18 @@ namespace JGUM.Behaviors
 
         private void StartSurrenderInquiry(Settlement settlement)
         {
-            
             string notificationKey = settlement.IsCastle
                 ? "jgum_siege_surrender_notification_castle"
                 : "jgum_siege_surrender_notification_town";
             string notificationFallback = settlement.IsCastle
                 ? "The castellan of {SETTLEMENT_NAME} wants to negotiate surrender with you."
                 : "The commander of {SETTLEMENT_NAME} wants to negotiate surrender with you.";
-            
+
             MBTextManager.SetTextVariable("SETTLEMENT_NAME", settlement.Name?.ToString() ?? settlement.StringId);
 
             InformationManager.ShowInquiry(new InquiryData(
                 StringCalculator.GetString("jgum_siege_inquiry_title", "Surrender Negotiation"),
-                StringCalculator.GetString(notificationKey, notificationFallback),                
+                StringCalculator.GetString(notificationKey, notificationFallback),
                 true,
                 true,
                 StringCalculator.GetString("jgum_siege_inquiry_accept", "Accept Meeting"),
@@ -185,10 +219,11 @@ namespace JGUM.Behaviors
         {
             var currentConvHero = Campaign.Current.ConversationManager.OneToOneConversationHero;
             if (currentConvHero != null)
-                Hero.MainHero.SetPersonalRelation(currentConvHero, (int)currentConvHero.GetRelationWithPlayer()+change);
+                Hero.MainHero.SetPersonalRelation(currentConvHero,
+                    (int)currentConvHero.GetRelationWithPlayer() + change);
             return null;
         }
-        
+
         private void OnInquiryAccepted(Settlement settlement)
         {
             CharacterObject? defenderCharacter = FindSettlementRepresentative(settlement);
@@ -199,7 +234,9 @@ namespace JGUM.Behaviors
                 SurrenderDialogContext.SurrenderingSettlement = settlement;
 
                 var playerData = new ConversationCharacterData(CharacterObject.PlayerCharacter);
-                var defenderData = new ConversationCharacterData(defenderCharacter, spawnAfterFight:true , noWeapon:true, noBodyguards:true, isCivilianEquipmentRequiredForLeader:true , isCivilianEquipmentRequiredForBodyGuardCharacters:true);
+                var defenderData = new ConversationCharacterData(defenderCharacter, spawnAfterFight: true,
+                    noWeapon: true, noBodyguards: true, isCivilianEquipmentRequiredForLeader: true,
+                    isCivilianEquipmentRequiredForBodyGuardCharacters: true);
 
                 try
                 {
@@ -219,53 +256,51 @@ namespace JGUM.Behaviors
 
         private static CharacterObject? FindSettlementRepresentative(Settlement settlement)
         {
+            if (settlement.Town?.Governor != null)
+                return settlement.Town.Governor.CharacterObject;
+
+            Hero? defenderLeader = settlement.SiegeEvent != null
+                ? Campaign.Current.Models.EncounterModel.GetLeaderOfSiegeEvent(settlement.SiegeEvent,
+                    BattleSideEnum.Defender)
+                : null;
+            if (defenderLeader != null && defenderLeader.CurrentSettlement == settlement)
+                return defenderLeader.CharacterObject;
+
+            var lordInSettlement = settlement.Parties.FirstOrDefault(p => p.LeaderHero != null && p.LeaderHero.IsLord)
+                                       ?.LeaderHero
+                                   ?? settlement.Town?.GetDefenderParties(MapEvent.BattleTypes.None)
+                                       .FirstOrDefault(p => p.LeaderHero != null && p.LeaderHero.IsLord)?.LeaderHero;
+            if (lordInSettlement != null)
+                return lordInSettlement.CharacterObject;
+
             var garrisonParty = settlement.Town?.GarrisonParty;
-            CharacterObject? garrisonLeader = garrisonParty?.LeaderHero?.CharacterObject;
+            if (garrisonParty?.LeaderHero != null)
+                return garrisonParty.LeaderHero.CharacterObject;
 
-            CharacterObject? garrisonHeroRepresentative = null;
-            CharacterObject? garrisonTroopRepresentative = null;
-            var garrisonRoster = garrisonParty?.MemberRoster;
-            if (garrisonRoster != null)
+            CharacterObject? troopRepresentative = GetTroopFromParty(garrisonParty)
+                                                   ?? GetTroopFromParty(settlement.MilitiaPartyComponent?.MobileParty);
+
+            if (troopRepresentative != null)
+                return troopRepresentative;
+
+            return settlement.Notables.FirstOrDefault()?.CharacterObject;
+        }
+
+        private static CharacterObject? GetTroopFromParty(MobileParty? party)
+        {
+            var roster = party?.MemberRoster;
+            if (roster == null) return null;
+
+            for (int i = 0; i < roster.Count; i++)
             {
-                for (int i = 0; i < garrisonRoster.Count; i++)
+                var element = roster.GetElementCopyAtIndex(i);
+                if (element.Number > 0 && element.Character != null && !element.Character.IsHero)
                 {
-                    var element = garrisonRoster.GetElementCopyAtIndex(i);
-                    if (element.Number <= 0 || element.Character == null)
-                        continue;
-
-                    if (garrisonTroopRepresentative == null)
-                        garrisonTroopRepresentative = element.Character;
-
-                    if (element.Character.IsHero)
-                    {
-                        garrisonHeroRepresentative = element.Character;
-                        break;
-                    }
+                    return element.Character;
                 }
             }
 
-            var siegeEvent = settlement.SiegeEvent;
-            Hero? defenderLeader = siegeEvent != null
-                ? Campaign.Current.Models.EncounterModel.GetLeaderOfSiegeEvent(siegeEvent, BattleSideEnum.Defender)
-                : null;
-
-            CharacterObject? heroRepresentative =
-                garrisonLeader
-                ?? garrisonHeroRepresentative
-                ?? garrisonTroopRepresentative
-                ?? defenderLeader?.CharacterObject
-                ?? settlement.Parties.FirstOrDefault(p => p.LeaderHero != null && p.LeaderHero.IsLord)?.LeaderHero?.CharacterObject
-                ?? settlement.Town?.Governor?.CharacterObject
-                ?? settlement.Town?.GetDefenderParties(MapEvent.BattleTypes.None).FirstOrDefault(p => p.LeaderHero != null)?.LeaderHero?.CharacterObject
-                ?? settlement.Town?.GarrisonPartyComponent?.Leader?.CharacterObject
-                ?? settlement.Town?.GarrisonPartyComponent?.PartyOwner?.CharacterObject
-                ?? (settlement.Owner?.IsPrisoner == false ? settlement.Owner.CharacterObject : null)
-                ?? (settlement.OwnerClan?.Leader?.IsPrisoner == false ? settlement.OwnerClan.Leader.CharacterObject : null)
-                ?? settlement.MapFaction?.Leader?.CharacterObject
-                ?? settlement.OwnerClan?.AliveLords?.FirstOrDefault(h => h != null && h.IsAlive && !h.IsChild)?.CharacterObject
-                ?? settlement.Notables.FirstOrDefault()?.CharacterObject;
-
-            return heroRepresentative;
+            return null;
         }
 
         private void OnInquiryRejected(Settlement settlement)
@@ -286,14 +321,14 @@ namespace JGUM.Behaviors
 
             OnConversationRelationshipChanges(2);
             ChangeOwnerOfSettlementAction.ApplyBySiege(besiegerLeader, besiegerLeader, settlement);
-            
+
             var currentMercy = Hero.MainHero.GetTraitLevel(DefaultTraits.Mercy);
             if (currentMercy < 2)
                 Hero.MainHero.SetTraitLevel(DefaultTraits.Mercy, currentMercy + 1);
-            if (PlayerEncounter.Current !=null)
+            if (PlayerEncounter.Current != null)
                 PlayerEncounter.Finish();
             siegeEvent.FinalizeSiegeEvent();
-            
+
             EncounterManager.StartSettlementEncounter(MobileParty.MainParty, settlement);
         }
 
@@ -310,7 +345,8 @@ namespace JGUM.Behaviors
                 Hero.MainHero.SetTraitLevel(DefaultTraits.Mercy, currentMercy - 1);
 
             var targetSettlement = settlement ?? SurrenderDialogContext.SurrenderingSettlement;
-            if (JgumSettingsManager.EnableSiegeStarvationSallyOut && targetSettlement != null && targetSettlement.IsStarving)
+            if (JgumSettingsManager.EnableSiegeStarvationSallyOut && targetSettlement != null &&
+                targetSettlement.IsStarving)
             {
                 StartStarvationSallyOut(targetSettlement);
             }
@@ -319,9 +355,9 @@ namespace JGUM.Behaviors
         private static bool IsPlayerBesieger(Settlement settlement)
         {
             var playerParty = MobileParty.MainParty?.Party;
-            return playerParty != null && settlement.SiegeEvent?.BesiegerCamp.HasInvolvedPartyForEventType(playerParty) == true;
+            return playerParty != null &&
+                   settlement.SiegeEvent?.BesiegerCamp.HasInvolvedPartyForEventType(playerParty) == true;
         }
-
 
 
         private static void StartStarvationSallyOut(Settlement settlement)
@@ -329,12 +365,36 @@ namespace JGUM.Behaviors
             if (!settlement.IsUnderSiege || !IsPlayerBesieger(settlement))
                 return;
 
+            var playerParty = MobileParty.MainParty;
+            var settlementFaction = settlement.MapFaction;
+            if (playerParty != null && settlementFaction != null)
+            {
+                var detectionRange = JgumSettingsManager.NearbyEnemyLordDetectionRange;
+                var settlementPosition = settlement.GatePosition;
+
+                var nearbyDefenders = MobileParty.All
+                    .Where(p => p?.Party != null && p.LeaderHero != null && p.LeaderHero.IsLord)
+                    .Where(p => p.MapFaction != null && p.MapFaction == settlementFaction)
+                    .Where(p => p.CurrentSettlement == null || p.CurrentSettlement == settlement)
+                    .Where(p => (p.Position - settlementPosition).Length <= detectionRange)
+                    .ToList();
+
+                foreach (var party in nearbyDefenders)
+                {
+                    if (party != playerParty && party.CurrentSettlement == null)
+                    {
+                        party.Position = playerParty.Position;
+                    }
+                }
+            }
+
             if (PlayerEncounter.Current == null)
             {
                 if (settlement.IsFortification)
-                    EncounterManager.StartPartyEncounter(settlement.Town?.GarrisonParty.Party, settlement.SiegeEvent.BesiegerCamp.LeaderParty.Party);
+                    EncounterManager.StartPartyEncounter(settlement.Town?.GarrisonParty.Party,
+                        settlement.SiegeEvent.BesiegerCamp.LeaderParty.Party);
             }
-            
+
 
             var encounter = PlayerEncounter.Current;
             if (encounter == null)
@@ -354,7 +414,8 @@ namespace JGUM.Behaviors
             }
 
             InformationManager.DisplayMessage(new InformationMessage(
-                StringCalculator.GetString("jgum_siege_starvation_sally_out", "The starving defenders have launched a desperate sally out!"),
+                StringCalculator.GetString("jgum_siege_starvation_sally_out",
+                    "The starving defenders have launched a desperate sally out!"),
                 Colors.Yellow));
         }
 
@@ -365,6 +426,7 @@ namespace JGUM.Behaviors
                 SurrenderDialogContext.IsInSurrenderConversation = false;
                 SurrenderDialogContext.SurrenderingSettlement = null;
             }
+            StringCalculator.ClearDialogVariables();
         }
 
         public override void SyncData(IDataStore dataStore)

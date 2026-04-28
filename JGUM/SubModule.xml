@@ -1,7 +1,21 @@
-﻿<Module>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Module>
   <Name value="Just Give Up Man!" />
   <Id value="JGUM" />
-  <Version value="b0.7.18.1" />
+  <Version value="b0.8.5.4" />
+  <DefaultModule value="false" />
+  <ModuleCategory value="Singleplayer" />
+  <ModuleType value="Community" />
+  <Author value="Ciaodar" />
+  <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/10709" />
+  <UpdateInfo value="NexusMods:10709" />
+  <ISKL>
+    <NexusId value="10709" />
+    <Author value="Ciaodar" />
+    <Description value="Adds Surrender mechanic for besieged keeps and lords." />
+    <Category value="Gameplay" />
+    <Tier value="Gameplay" />
+  </ISKL>
   <SingleplayerModule value="true" />
   <MultiplayerModule value="false" />
   <DependedModules>
@@ -15,6 +29,17 @@
     <DependedModule Id="Bannerlord.UIExtenderEx" Optional="true" />
     <DependedModule Id="Bannerlord.MBOptionScreen" Optional="true" />
   </DependedModules>
+  <DependedModuleMetadatas>
+    <DependedModuleMetadata id="Native" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="SandBoxCore" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="Sandbox" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="CustomBattle" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="StoryMode" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" optional="true" />
+    <DependedModuleMetadata id="Bannerlord.ButterLib" order="LoadBeforeThis" optional="true" />
+    <DependedModuleMetadata id="Bannerlord.UIExtenderEx" order="LoadBeforeThis" optional="true" />
+    <DependedModuleMetadata id="Bannerlord.MBOptionScreen" order="LoadBeforeThis" optional="true" />
+  </DependedModuleMetadatas>
   <SubModules>
     <SubModule>
       <Name value="JGUM" />
@@ -25,5 +50,5 @@
       </Tags>
     </SubModule>
   </SubModules>
-  <Xmls/>
+  <Xmls />
 </Module>

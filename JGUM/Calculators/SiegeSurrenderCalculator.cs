@@ -1,11 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using JGUM.Config;
-using TaleWorlds.CampaignSystem.Extensions;
-using TaleWorlds.Core;
 
 namespace JGUM.Calculators
 {
@@ -44,6 +42,7 @@ namespace JGUM.Calculators
             // Power calculation: Get current strength of parties as float using CalculateCurrentStrength().
             float attackerPower = attackers.Sum(p => p.CalculateCurrentStrength());
             float defenderPower = defenders.Sum(p => p.CalculateCurrentStrength()) + nearbyEnemyLordStrength;
+            float siegePressure = SiegePressureCalculator.GetSiegePressureModifier(settlement);
 
             // Defenders surrender if their total power is depleted (exhausted).
             if (defenderPower <= 0) 
@@ -77,12 +76,69 @@ namespace JGUM.Calculators
                 traitEffect -= (lord.GetTraitLevel(DefaultTraits.Honor) / 20f) * (JgumSettingsManager.LordHonorMultiplier / 100f); // Honor -
             }
 
-            // Formula: (Power Ratio + Morale Ratio) - (Lord Count * 0.1) + Trait Effect > Base Surrender Threshold * Config Tendency
-            // Note: Lords make defense more stubborn, so we subtract them.
-            float totalRatio = (powerRatio) - (lordCount * 0.1f) + traitEffect;
-            float threshold = JgumSettingsManager.BaseSurrenderThreshold * JgumSettingsManager.SurrenderTendencyMultiplier;
+            float totalRatio = powerRatio + siegePressure - (lordCount * 0.1f) + traitEffect;
+            float baseThreshold = JgumSettingsManager.BaseSurrenderThreshold / JgumSettingsManager.SurrenderTendencyMultiplier;
+            float guaranteedThreshold = JgumSettingsManager.GuaranteedSurrenderThreshold / JgumSettingsManager.SurrenderTendencyMultiplier;
+            
+            // Ensure guaranteed is always >= base to avoid math errors
+            if (guaranteedThreshold < baseThreshold)
+                guaranteedThreshold = baseThreshold;
 
-            return totalRatio > threshold;
+            int mode = JgumSettingsManager.SurrenderRandomnessMode;
+
+            // 0: Off, 1: Thresholded, 2: Unbound
+            if (mode == 0) // Off
+            {
+                return totalRatio >= baseThreshold;
+            }
+            else if (mode == 1) // Thresholded
+            {
+                if (totalRatio >= guaranteedThreshold)
+                    return true;
+                if (totalRatio < baseThreshold)
+                    return false;
+
+                // We are between base and guaranteed threshold.
+                float range = guaranteedThreshold - baseThreshold;
+                if (range <= 0.001f)
+                    return true;
+
+                float chance = (totalRatio - baseThreshold) / range;
+                return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+            }
+            else // Unbound
+            {
+                // In unbound, there's always a slight chance.
+                // We map totalRatio against guaranteedThreshold.
+                if (totalRatio >= guaranteedThreshold)
+                {
+                    // If above guaranteed, still 95% minimum chance, up to 100%
+                    float extra = totalRatio - guaranteedThreshold;
+                    float chance = 0.95f + (extra * 0.01f);
+                    if (chance > 1f) chance = 1f;
+                    return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+                }
+                else if (totalRatio < baseThreshold)
+                {
+                    // If below base, there is a tiny chance (max 5%) based on how close they are
+                    float deficit = baseThreshold - totalRatio;
+                    float chance = 0.05f - (deficit * 0.01f);
+                    if (chance < 0f) chance = 0f;
+                    return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+                }
+                else
+                {
+                    // Between thresholds
+                    float range = guaranteedThreshold - baseThreshold;
+                    if (range <= 0.001f)
+                        return TaleWorlds.Core.MBRandom.RandomFloat <= 0.5f;
+
+                    // Starts from 5% up to 95%
+                    float normalized = (totalRatio - baseThreshold) / range;
+                    float chance = 0.05f + (normalized * 0.90f);
+                    return TaleWorlds.Core.MBRandom.RandomFloat <= chance;
+                }
+            }
         }
 
         private float GetNearbyEnemiesStrength(Settlement? settlement)

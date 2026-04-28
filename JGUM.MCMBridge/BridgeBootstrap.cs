@@ -1,4 +1,4 @@
-﻿using JGUM.Config;
+using JGUM.Config;
 using JGUM.MCMBridge.Config;
 
 namespace JGUM.MCMBridge
@@ -17,20 +17,29 @@ namespace JGUM.MCMBridge
         private static JgumJsonModel BuildModelFromMcm()
         {
             JgumMcmSettings mcm = JgumMcmSettings.Instance ?? new JgumMcmSettings();
-            return new JgumJsonModel
+            JgumJsonModel json = new JgumJsonModel
             {
                 SurrenderTendencyMultiplier = mcm.SurrenderTendencyMultiplier,
                 BaseSurrenderThreshold = mcm.BaseSurrenderThreshold,
+                SurrenderRandomnessMode = mcm.SurrenderRandomnessMode.SelectedIndex,
+                GuaranteedSurrenderThreshold = mcm.GuaranteedSurrenderThreshold,
                 PlayerMercyMultiplier = mcm.PlayerMercyMultiplier,
                 RequiredSurrenderCount = mcm.RequiredSurrenderCount,
                 EnableSiegeSurrender = mcm.EnableSiegeSurrender,
                 EnableSiegeStarvationSallyOut = mcm.EnableSiegeStarvationSallyOut,
                 NearbyEnemyLordStrengthPercentage = mcm.NearbyEnemyLordStrengthPercentage,
                 NearbyEnemyLordDetectionRange = mcm.NearbyEnemyLordDetectionRange,
+                SiegeTowerEnginePressureMultiplier = mcm.SiegeTowerEnginePressureMultiplier,
+                SiegeRamEnginePressureMultiplier = mcm.SiegeRamEnginePressureMultiplier,
+                SiegeCatapultEnginePressureMultiplier = mcm.SiegeCatapultEnginePressureMultiplier,
+                SiegeTrebuchetEnginePressureMultiplier = mcm.SiegeTrebuchetEnginePressureMultiplier,
+                SiegeEnginePowerRatioMultiplier = mcm.SiegeEnginePowerRatioMultiplier,
+                SiegeWallDamagePressureMultiplier = mcm.SiegeWallDamagePressureMultiplier,
+                SiegeWallDestroyedBonus = mcm.SiegeWallDestroyedBonus,
+                SiegeWallDamageCurveExponent = mcm.SiegeWallDamageCurveExponent,
                 SiegeNegotiationEasyThreshold = mcm.SiegeNegotiationEasyThreshold,
                 SiegeNegotiationNormalThreshold = mcm.SiegeNegotiationNormalThreshold,
                 SiegeNegotiationHardThreshold = mcm.SiegeNegotiationHardThreshold,
-                SiegeNegotiationRngPreset = mcm.SiegeNegotiationRngPreset.SelectedIndex,
                 EnableLordSurrender = mcm.EnableLordSurrender,
                 LordDialogPriority = mcm.LordDialogPriority,
                 EnablePatrolSurrender = mcm.EnablePatrolSurrender,
@@ -40,6 +49,10 @@ namespace JGUM.MCMBridge
                 LordMercyMultiplier = mcm.LordMercyMultiplier,
                 LordHonorMultiplier = mcm.LordHonorMultiplier
             };
+#if !DEBUG
+            json.SiegeNegotiationDifficultyPreset = mcm.SiegeNegotiationDifficultyPreset.SelectedIndex;
+#endif
+            return json;
         }
     }
 }
