@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">  <tags>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
     <tag language="English" />
   </tags>
   <strings>
-    <!-- Config -->
     <string id="jgum_test_msg" text="Just Give Up Man Loaded Successfully.!" />
     <string id="jgum_siege_surrender_offer_count" text="3" />
     <string id="jgum_siege_surrender_accept_count" text="2" />
@@ -12,82 +12,76 @@
     <string id="jgum_field_surrender_accept_count" text="1" />
     <string id="jgum_field_surrender_reject_count" text="1" />
 
-    
-    <!-- {?CONVERSATION_NPC.GENDER}madame{?}sir{\?} -->
     <!-- Siege Surrender Dialogs -->
-    <string id="jgum_siege_defender_greeting" text="Thank you for coming, my {?PLAYER.GENDER}madame{?}sir{\?}." />
-    <string id="jgum_siege_player_siege_surrender_offer" text="I see your situation is dire. Do you want to surrender and spare your people from further suffering?" />
-    <string id="jgum_siege_surrender_offer_1" text="We are starving to death. The city is yours." />
-    <string id="jgum_siege_surrender_offer_2" text="We can't hold on any longer. Please have mercy, the castle is yours." />
-    <string id="jgum_siege_surrender_offer_3" text="The soldiers are on the verge of mutiny, there is no food left. We surrender." />
+    <string id="jgum_siege_defender_greeting" text="We thank you for agreeing to this parley, {?PLAYER.GENDER}madam{?}sir{\?}.[ib:normal][if:convo_calm_friendly]" />
+    <string id="jgum_siege_player_siege_surrender_offer" text="Your position is hopeless. Surrender now, and spare your people the horrors of a final assault." />
+    <string id="jgum_siege_surrender_offer_1" text="Our larders are empty and our men are ghosts. The city is yours.[ib:nervous][if:convo_sad]" />
+    <string id="jgum_siege_surrender_offer_2" text="We cannot hold these walls another day. We throw ourselves upon your mercy; the castle is yours.[ib:powerless][if:convo_pleading]" />
+    <string id="jgum_siege_surrender_offer_3" text="The men are on the brink of madness from hunger. We yield.[ib:weary][if:convo_exhausted]" />
 
     <!-- Accept -->
-    <string id="jgum_siege_defender_accepted" text="We are grateful for your mercy!" />
-    <string id="jgum_siege_surrender_accept_1" text="As your new lord who saves you from starvation, I grant you mercy." />
-    <string id="jgum_siege_surrender_accept_2" text="You made a wise choice. Lay down your arms, I spare your lives." />
+    <string id="jgum_siege_defender_accepted" text="Your name will be praised for this act of mercy![ib:rejoice][if:convo_joyful]" />
+    <string id="jgum_siege_surrender_accept_1" text="As the one who saves you from starvation's maw, I grant you this clemency." />
+    <string id="jgum_siege_surrender_accept_2" text="A wise choice. Lay down your arms, and you shall live to see another dawn." />
 
     <!-- Reject -->
-    <string id="jgum_siege_defender_rejected" text="Kalradia will remember this cruelty!" />
-    <string id="jgum_siege_surrender_reject_1" text="Let's see if you can fight on an empty stomach." />
-    <string id="jgum_siege_surrender_reject_2" text="It is too late to beg for mercy. I am coming to crush you." />
+    <string id="jgum_siege_defender_rejected" text="Then let the annals of history remember this barbarity![ib:aggressive][if:convo_furious]" />
+    <string id="jgum_siege_surrender_reject_1" text="Let's see how well you fight on an empty stomach and a prayer." />
+    <string id="jgum_siege_surrender_reject_2" text="It is far too late for begging. I am coming to grind your fortress to dust." />
 
     <!-- Field Surrender Dialogs -->
-    <string id="jgum_field_surrender_offer_1" text="STOP, We cannot fight you. We surrender!" />
-    <string id="jgum_field_surrender_accept_1" text="We accept your surrender. Lay down your arms!" />
-    <string id="jgum_field_surrender_reject_1" text="No, you all will be dead. Prepare!" />
-    <string id="jgum_field_surrender_end" text="A wise choice. You shall be spared." />
-    <string id="jgum_field_surrender_success" text="Enemy forces have surrendered!" />
-    <string id="jgum_field_surrender_rejected" text="The battle continues!" />
+    <string id="jgum_field_surrender_offer_1" text="Hold! We are outmatched! We surrender![ib:powerless][if:convo_pleading]" />
+    <string id="jgum_field_surrender_accept_1" text="We accept your surrender. Cast your weapons upon the ground!" />
+    <string id="jgum_field_surrender_reject_1" text="No quarter for cowards. Prepare to die!" />
+    <string id="jgum_field_surrender_end" text="A wise choice. You shall be spared this day.[if:convo_calm_friendly]" />
+    <string id="jgum_field_surrender_success" text="The enemy has lost the will to fight and surrenders!" />
+    <string id="jgum_field_surrender_rejected" text="The clash of steel shall continue!" />
 
     <!-- UI Strings -->
-    <string id="jgum_siege_surrender_notification" text="{SETTLEMENT_NAME} wants to negotiate surrender with you." />
-    <string id="jgum_siege_surrender_notification_town" text="The commander of {SETTLEMENT_NAME} wants to negotiate surrender with you." />
-    <string id="jgum_siege_surrender_notification_castle" text="The castellan of {SETTLEMENT_NAME} wants to negotiate surrender with you." />
-    <string id="jgum_siege_inquiry_title" text="Surrender Negotiation" />
-    <string id="jgum_siege_inquiry_accept" text="Accept Meeting" />
-    <string id="jgum_siege_inquiry_reject" text="Reject Offer" />
-    <string id="jgum_siege_assault_triggered" text="Starvation has broken the siege stalemate; battle begins!" />
-    <string id="jgum_siege_starvation_sally_out" text="The starving defenders have launched a desperate sally out!" />
+    <string id="jgum_siege_surrender_notification_town" text="The commander of {SETTLEMENT_NAME} sends a rider under a white flag. They wish to discuss terms of surrender." />
+    <string id="jgum_siege_surrender_notification_castle" text="The castellan of {SETTLEMENT_NAME} wishes to parley for surrender." />
+    <string id="jgum_siege_inquiry_title" text="A Call for Parley" />
+    <string id="jgum_siege_inquiry_accept" text="Grant them audience" />
+    <string id="jgum_siege_inquiry_reject" text="Send the rider back" />
+    <string id="jgum_siege_assault_triggered" text="The stalemate is broken by desperation! The defenders charge forth!" />
+    <string id="jgum_siege_starvation_sally_out" text="With bellies aching from hunger, the defenders launch a desperate sally out!" />
 
-    <string id="jgum_siege_negotiation_menu_option" text="Offer a Negotiation Meeting" />
-    <string id="jgum_siege_negotiation_menu_tooltip_pending" text="Your previous request is still awaiting a response." />
-    <string id="jgum_siege_negotiation_menu_tooltip_cooldown" text="You recently sent a negotiation request. Wait before sending another." />
-    <string id="jgum_siege_negotiation_menu_tooltip_retry" text="You need to wait before trying negotiation again after a failed persuasion." />
-    <string id="jgum_siege_negotiation_request_sent" text="Your messenger has been sent. You will receive a response soon." />
-    <string id="jgum_siege_negotiation_inquiry_title" text="Negotiation Response" />
-    <string id="jgum_siege_negotiation_inquiry_accepted" text="Your proposal was accepted. A representative is ready to meet you." />
-    <string id="jgum_siege_negotiation_inquiry_rejected" text="Your proposal was rejected. The defenders do not believe your position is strong enough." />
-    <string id="jgum_siege_negotiation_inquiry_go" text="Go to meeting" />
-    <string id="jgum_siege_negotiation_inquiry_ok" text="OK" />
+    <string id="jgum_siege_negotiation_menu_option" text="Propose a parley to avoid further bloodshed." />
+    <string id="jgum_siege_negotiation_menu_tooltip_pending" text="Your envoy has yet to return. Patience, {?PLAYER.GENDER}madam{?}sir{\?}." />
+    <string id="jgum_siege_negotiation_menu_tooltip_cooldown" text="Your messengers need rest, {?PLAYER.GENDER}madam{?}sir{\?}. Let some time pass." />
+    <string id="jgum_siege_negotiation_menu_tooltip_retry" text="They will not entertain another of your messengers so soon after the last failure." />
+    <string id="jgum_siege_negotiation_request_sent" text="Your rider carries the terms under a flag of truce. We await their reply." />
+    <string id="jgum_siege_negotiation_inquiry_title" text="A Raven Arrives" />
+    <string id="jgum_siege_negotiation_inquiry_accepted" text="A clean scroll arrives, bearing the defender's seal. They will meet with you." />
+    <string id="jgum_siege_negotiation_inquiry_rejected" text="A message returns, spattered with mud. The defenders scoff at your terms, believing their walls stronger than your will." />
+    <string id="jgum_siege_negotiation_inquiry_go" text="Attend the parley" />
+    <string id="jgum_siege_negotiation_inquiry_ok" text="So be it." />
 
-    <string id="jgum_proactive_intro" text="We are listening. Speak your terms.[ib:nervous][if:convo_grave]" />
-    <string id="jgum_proactive_player_open" text="There is no need for more bloodshed. Hear me out." />
-    <string id="jgum_proactive_task_line" text="The fate of these walls rests on your words." />
-    <string id="jgum_proactive_task_fail_immediate" text="That is not convincing." />
-    <string id="jgum_proactive_task_fail_final" text="Your words are not enough. We refuse." />
-    <string id="jgum_proactive_option_1" text="Your people do not need to die for a hopeless defense." />
-    <string id="jgum_proactive_option_2" text="Look at the balance of power. This siege is already decided." />
-    <string id="jgum_proactive_option_3" text="Choose surrender, and your people can live." />
-    <string id="jgum_proactive_option_t1_1" text="Your people should not die in a hopeless defense." />
-    <string id="jgum_proactive_option_t1_2" text="Look at the numbers. This siege is already decided." />
-    <string id="jgum_proactive_option_t1_3" text="Choose the honorable path and spare your people." />
-    <string id="jgum_proactive_option_t2_1" text="Your walls are breaking. Prolonging this only wastes lives." />
-    <string id="jgum_proactive_option_t2_2" text="If this turns into an assault, you lose all leverage." />
-    <string id="jgum_proactive_option_t2_3" text="Open the gates and I will keep order over your civilians." />
-    <string id="jgum_proactive_option_t3_1" text="Surrender by treaty protects your honor before all Calradia." />
-    <string id="jgum_proactive_option_t3_2" text="Your supplies and morale decline while my advantage grows." />
-    <string id="jgum_proactive_option_t3_3" text="Do not trade lives for pride. End this with mercy." />
-    <string id="jgum_proactive_option_t4_1" text="A city survives by preserving people, not ruins." />
-    <string id="jgum_proactive_option_t4_2" text="Yield now and the markets reopen instead of burning." />
-    <string id="jgum_proactive_option_t4_3" text="Choose surrender, and history will remember restraint over slaughter." />
-    <string id="jgum_proactive_option_locked_used" text="This argument is no longer available." />
-    <string id="jgum_proactive_option_locked_mercy" text="Your Mercy is too low to make this argument." />
-    <string id="jgum_proactive_option_locked_honor" text="Your Honor is too low to make this argument." />
-    <string id="jgum_proactive_option_locked_calculating" text="You need a more calculating approach to make this argument." />
-    <string id="jgum_proactive_option_locked_walls" text="At least one wall section must be at half health or lower to use this argument." />
-    <string id="jgum_proactive_success" text="You are right, there's no need for blood to spill." />
-    <string id="jgum_proactive_fail" text="No. We will not yield." />
-    <string id="jgum_proactive_continue" text="I need to hear more." />
+    <string id="jgum_proactive_intro" text="We are listening. State your purpose.[ib:nervous][if:convo_grave]" />
+    <string id="jgum_proactive_player_open" text="This bloodshed is needless. Let us speak reason." />
+    <string id="jgum_proactive_task_line" text="The fate of these walls, and the lives within, hang on your next words.[if:convo_calm_hostile]" />
+    <string id="jgum_proactive_task_fail_immediate" text="A feeble argument.[if:convo_unimpressed]" />
+    <string id="jgum_proactive_task_fail_final" text="Your words are but wind. We shall not yield.[if:convo_furious]" />
+    <string id="jgum_proactive_option_t1_1" text="Do not send your people to die in a defense that is already lost." />
+    <string id="jgum_proactive_option_t1_2" text="A fool can see the numbers. This siege has but one conclusion." />
+    <string id="jgum_proactive_option_t1_3" text="Choose the path of honor. Spare your people this grim fate." />
+    <string id="jgum_proactive_option_t2_1" text="Your walls are crumbling. Every moment you delay costs more lives." />
+    <string id="jgum_proactive_option_t2_2" text="Once my soldiers breach these walls, you will have no terms to bargain with." />
+    <string id="jgum_proactive_option_t2_3" text="Open the gates, and I shall see that order is kept among the civilians." />
+    <string id="jgum_proactive_option_t3_1" text="A surrender by treaty is an act of honor, remembered by all Calradia." />
+    <string id="jgum_proactive_option_t3_2" text="With every passing hour, your supplies dwindle as my host grows." />
+    <string id="jgum_proactive_option_t3_3" text="Do not let pride be the tombstone of your people. End this with mercy." />
+    <string id="jgum_proactive_option_t4_1" text="A city is its people, not its stones. Preserve them." />
+    <string id="jgum_proactive_option_t4_2" text="Yield now, and the markets will trade goods tomorrow. Resist, and they will trade only ashes." />
+    <string id="jgum_proactive_option_t4_3" text="Choose surrender, and let history remember your restraint, not your ruin." />
+    <string id="jgum_proactive_option_locked_used" text="You have already made this appeal. It will not work again." />
+    <string id="jgum_proactive_option_locked_mercy" text="Your past deeds make any appeal to mercy sound hollow." />
+    <string id="jgum_proactive_option_locked_honor" text="A person of your... reputation... cannot speak of honor." />
+    <string id="jgum_proactive_option_locked_calculating" text="You lack the reputation for cunning to make this argument." />
+    <string id="jgum_proactive_option_locked_walls" text="Their walls are yet unbroken. Such an argument holds no weight." />
+    <string id="jgum_proactive_success" text="You speak sense. There is no need for more death today.[if:convo_calm_friendly]" />
+    <string id="jgum_proactive_fail" text="Enough of this! We will not yield.[if:convo_furious]" />
+    <string id="jgum_proactive_continue" text="Your point is... noted. Continue.[if:convo_thinking]" />
 
     <!-- Settings -->
     <string id="JGUM.Settings.DisplayName" text="Just Give Up Man" />

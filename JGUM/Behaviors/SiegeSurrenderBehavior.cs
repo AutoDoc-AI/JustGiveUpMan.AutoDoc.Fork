@@ -55,7 +55,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_SIEGE_DEFENDER_GREETING}",
                 () => {
                     if (!SurrenderCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_siege_defender_greeting");
+                    StringCalculator.SetDialogVariable("jgum_siege_defender_greeting", "Your siege has broken us, my {?PLAYER.GENDER}Lady{?}Lord{\\?}. We are ready to yield.");
                     return true;
                 },
                 OnConversationRelationshipChanges(2),
@@ -68,7 +68,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_SIEGE_PLAYER_SIEGE_SURRENDER_OFFER}",
                 () => {
                     if (!SurrenderCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_siege_player_siege_surrender_offer");
+                    StringCalculator.SetDialogVariable("jgum_siege_player_siege_surrender_offer", "State your purpose for seeking this audience.");
                     return true;
                 },
                 null
@@ -80,7 +80,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_SIEGE_SURRENDER_OFFER}",
                 () => {
                     if (!SurrenderCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_siege_surrender_offer");
+                    StringCalculator.SetDialogVariable("jgum_siege_surrender_offer", "We beg for clemency. Grant us our lives, and this holding is yours to command.");
                     return true;
                 },
                 null
@@ -93,7 +93,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_SIEGE_SURRENDER_ACCEPT}",
                 () => {
                     if (!PlayerResponseCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_siege_surrender_accept");
+                    StringCalculator.SetDialogVariable("jgum_siege_surrender_accept", "You better know how to thank me for listening your cry for mercy!");
                     return true;
                 },
                 AcceptSurrender
@@ -105,7 +105,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_SIEGE_SURRENDER_REJECT}",
                 () => {
                     if (!PlayerResponseCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_siege_surrender_reject");
+                    StringCalculator.SetDialogVariable("jgum_siege_surrender_reject", "Your pleas fall on deaf ears. There will be no quarter.");
                     return true;
                 },
                 RejectSurrender
@@ -116,7 +116,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_SIEGE_DEFENDER_ACCEPTED}",
                 () => {
                     if (!PlayerResponseCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_siege_defender_accepted");
+                    StringCalculator.SetDialogVariable("jgum_siege_defender_accepted", "Your name will be praised, my {?PLAYER.GENDER}Lady{?}Lord{\\?}. We are forever in your debt.");
                     return true;
                 },
                 null
@@ -127,7 +127,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_SIEGE_DEFENDER_REJECTED}",
                 () => {
                     if (!PlayerResponseCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_siege_defender_rejected");
+                    StringCalculator.SetDialogVariable("jgum_siege_defender_rejected", "Then may the gods judge us by our steel!");
                     return true;
                 },
                 null
@@ -419,6 +419,8 @@ namespace JGUM.Behaviors
                 Colors.Yellow));
         }
 
+
+
         private void OnConversationEnded(IEnumerable<CharacterObject> involvedCharacters)
         {
             if (SurrenderDialogContext.IsInSurrenderConversation)
@@ -434,4 +436,3 @@ namespace JGUM.Behaviors
         }
     }
 }
-

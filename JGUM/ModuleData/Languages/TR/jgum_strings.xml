@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">  <tags>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
     <tag language="Türkçe" />
   </tags>
   <strings>
-    <!-- Config -->
     <string id="jgum_test_msg" text="Just Give Up Man başarıyla yüklendi." />
     <string id="jgum_siege_surrender_offer_count" text="3" />
     <string id="jgum_siege_surrender_accept_count" text="2" />
@@ -13,81 +13,75 @@
     <string id="jgum_field_surrender_reject_count" text="1" />
 
     <!-- Siege Surrender Dialogs -->
-    <string id="jgum_siege_defender_greeting" text="Geldiğiniz için teşekkür ederim, {?PLAYER.GENDER}Leydim{?}Lordum{\?}." />
-    <string id="jgum_siege_player_siege_surrender_offer" text="Durumunuzun umutsuz olduğunu görüyorum. Teslim olup halkınızı daha fazla acıdan kurtarmak ister misiniz?" />
-    <string id="jgum_siege_surrender_offer_1" text="Haklısınız, {?PLAYER.GENDER}Leydim{?}Lordum{\?}. Açlıktan kırılıyoruz. Kale sizindir; ne olur bize merhamet edin." />
-    <string id="jgum_siege_surrender_offer_2" text="Daha fazla dayanamayacağız. Lütfen merhamet edin; kale sizindir. Yeter ki bizi bağışlayın." />
-    <string id="jgum_siege_surrender_offer_3" text="Askerler isyanın eşiğinde, erzakımız tükendi. Teslim oluyoruz; bırakın çekip gidelim, kale de sizin olsun." />
+    <string id="jgum_siege_defender_greeting" text="Bu görüşmeyi kabul ettiğiniz için teşekkür ederiz, {?PLAYER.GENDER}leydim{?}lordum{\?}.[ib:normal][if:convo_calm_friendly]" />
+    <string id="jgum_siege_player_siege_surrender_offer" text="Durumunuz umutsuz. Şimdi teslim olun ve halkınızı nihai bir saldırının dehşetinden kurtarın." />
+    <string id="jgum_siege_surrender_offer_1" text="Kilerlerimiz boş ve adamlarımız birer hayalet gibi. Şehir sizindir.[ib:nervous][if:convo_sad]" />
+    <string id="jgum_siege_surrender_offer_2" text="Bu duvarları bir gün daha tutamayız. Merhametinize sığınıyoruz; kale sizindir.[ib:powerless][if:convo_pleading]" />
+    <string id="jgum_siege_surrender_offer_3" text="Askerler açlıktan deliliğin eşiğinde. Teslim oluyoruz.[ib:weary][if:convo_exhausted]" />
 
     <!-- Accept -->
-    <string id="jgum_siege_defender_accepted" text="Merhametinize minnettarız, {?PLAYER.GENDER}Leydim{?}Lordum{\?}." />
-    <string id="jgum_siege_surrender_accept_1" text="Sizi açlıktan kurtaran yeni hâkiminiz olarak size merhamet göstereceğim." />
-    <string id="jgum_siege_surrender_accept_2" text="Akıllıca bir karar verdiniz. Silahlarınızı bırakın; canınızı bağışlıyorum." />
+    <string id="jgum_siege_defender_accepted" text="Bu merhametinizden dolayı adınız övgüyle anılacak![ib:rejoice][if:convo_joyful]" />
+    <string id="jgum_siege_surrender_accept_1" text="Sizi açlığın pençesinden kurtaran kişi olarak, bu lütfu size bahşediyorum." />
+    <string id="jgum_siege_surrender_accept_2" text="Akıllıca bir seçim. Silahlarınızı bırakın, bir şafak daha göreceksiniz." />
 
     <!-- Reject -->
-    <string id="jgum_siege_defender_rejected" text="Kalradya bu zulmü unutmayacak!" />
-    <string id="jgum_siege_surrender_reject_1" text="Bakalım aç karna ne kadar dayanabileceksiniz." />
-    <string id="jgum_siege_surrender_reject_2" text="Merhamet dilenmek için çok geç. Sizi ezip geçeceğim." />
+    <string id="jgum_siege_defender_rejected" text="Öyleyse tarih bu barbarlığı da yazsın![ib:aggressive][if:convo_furious]" />
+    <string id="jgum_siege_surrender_reject_1" text="Bakalım aç karınla ve bir duayla ne kadar iyi dövüşeceksiniz." />
+    <string id="jgum_siege_surrender_reject_2" text="Yalvarmak için çok geç. Kalenizi toza çevirmeye geliyorum." />
 
     <!-- Field Surrender Dialogs -->
-    <string id="jgum_field_surrender_offer_1" text="Durun! Sizinle savaşamayız. Teslim oluyoruz!" />
-    <string id="jgum_field_surrender_accept_1" text="Tesliminizi kabul ediyoruz. Silahlarınızı bırakın!" />
-    <string id="jgum_field_surrender_reject_1" text="Hayır, asla! Sonuna kadar savaşacağız!" />
-    <string id="jgum_field_surrender_end" text="Akıllıca bir seçim. Canınız bağışlandı." />
-    <string id="jgum_field_surrender_success" text="Düşman kuvvetleri teslim oldu!" />
-    <string id="jgum_field_surrender_rejected" text="Savaş devam ediyor!" />
+    <string id="jgum_field_surrender_offer_1" text="Dur! Sana karşı koyamayız! Teslim oluyoruz![ib:powerless][if:convo_pleading]" />
+    <string id="jgum_field_surrender_accept_1" text="Teslimiyetinizi kabul ediyoruz. Silahlarınızı yere atın!" />
+    <string id="jgum_field_surrender_reject_1" text="Korkaklara merhamet yok. Ölüme hazırlanın!" />
+    <string id="jgum_field_surrender_end" text="Akıllıca bir seçim. Bu gün canınız bağışlandı.[if:convo_calm_friendly]" />
+    <string id="jgum_field_surrender_success" text="Düşman savaşma iradesini kaybetti ve teslim oldu!" />
+    <string id="jgum_field_surrender_rejected" text="Kılıçların şakırtısı devam edecek!" />
 
     <!-- UI Strings -->
-    <string id="jgum_siege_surrender_notification" text="{SETTLEMENT_NAME} teslim şartlarını görüşmek istiyor." />
-    <string id="jgum_siege_surrender_notification_town" text="{SETTLEMENT_NAME} komutanı sizinle teslim şartlarını görüşmek istiyor." />
-    <string id="jgum_siege_surrender_notification_castle" text="{SETTLEMENT_NAME} komutanı sizinle teslim şartlarını görüşmek istiyor." />
-    <string id="jgum_siege_inquiry_title" text="Teslimiyet Görüşmesi" />
+    <string id="jgum_siege_surrender_notification_town" text="{SETTLEMENT_NAME} komutanı beyaz bayrak altında bir atlı gönderdi. Teslimiyet şartlarını görüşmek istiyorlar." />
+    <string id="jgum_siege_surrender_notification_castle" text="{SETTLEMENT_NAME} kalesinin kastellanı teslimiyet için görüşmek istiyor." />
+    <string id="jgum_siege_inquiry_title" text="Görüşme Çağrısı" />
     <string id="jgum_siege_inquiry_accept" text="Görüşmeyi kabul et" />
-    <string id="jgum_siege_inquiry_reject" text="Teklifi reddet" />
-    <string id="jgum_siege_assault_triggered" text="Açlık savunmayı çökertti; kuşatma artık açık savaşa dönüştü!" />
-    <string id="jgum_siege_starvation_sally_out" text="Açlıktan kırılan savunmacılar çaresiz bir huruç harekâtı başlattı!" />
+    <string id="jgum_siege_inquiry_reject" text="Atlıyı geri gönder" />
+    <string id="jgum_siege_assault_triggered" text="Pazarlık bitti, çaresizlik kazandı! Savunmacılar saldırıya geçti!" />
+    <string id="jgum_siege_starvation_sally_out" text="Karınları açlıktan guruldayan savunmacılar, umutsuz bir huruç harekâtı başlattı!" />
 
-    <string id="jgum_siege_negotiation_menu_option" text="Müzakere Toplantısı Teklif Et" />
-    <string id="jgum_siege_negotiation_menu_tooltip_pending" text="Önceki talebin için hâlâ cevap bekleniyor." />
-    <string id="jgum_siege_negotiation_menu_tooltip_cooldown" text="Kısa süre önce müzakere talebi gönderdin. Tekrar göndermek için beklemelisin." />
-    <string id="jgum_siege_negotiation_menu_tooltip_retry" text="Başarısız iknadan sonra yeniden denemek için biraz beklemelisin." />
-    <string id="jgum_siege_negotiation_request_sent" text="Habercin gönderildi. Yakında bir yanıt alacaksın." />
-    <string id="jgum_siege_negotiation_inquiry_title" text="Müzakere Yanıtı" />
-    <string id="jgum_siege_negotiation_inquiry_accepted" text="Teklifin kabul edildi. Görüşmek için bir temsilci hazır." />
-    <string id="jgum_siege_negotiation_inquiry_rejected" text="Teklifin reddedildi. Savunmacılar konumunun yeterince güçlü olmadığını düşünüyor." />
-    <string id="jgum_siege_negotiation_inquiry_go" text="Buluşmaya git" />
-    <string id="jgum_siege_negotiation_inquiry_ok" text="Tamam" />
+    <string id="jgum_siege_negotiation_menu_option" text="Daha fazla kan dökülmesini önlemek için bir görüşme öner." />
+    <string id="jgum_siege_negotiation_menu_tooltip_pending" text="Elçin henüz dönmedi. Sabır, {?PLAYER.GENDER}leydim{?}lordum{\?}." />
+    <string id="jgum_siege_negotiation_menu_tooltip_cooldown" text="Habercilerinin dinlenmeye ihtiyacı var, {?PLAYER.GENDER}leydim{?}lordum{\?}. Biraz zaman geçsin." />
+    <string id="jgum_siege_negotiation_menu_tooltip_retry" text="Son başarısızlıktan sonra habercilerinden birini daha kabul etmeyeceklerdir." />
+    <string id="jgum_siege_negotiation_request_sent" text="Atlı, ateşkes bayrağı altında şartları taşıyor. Cevaplarını bekliyoruz." />
+    <string id="jgum_siege_negotiation_inquiry_title" text="Bir Kuzgun Geldi" />
+    <string id="jgum_siege_negotiation_inquiry_accepted" text="Savunmacının mührünü taşıyan temiz bir parşömen geldi. Seninle görüşecekler." />
+    <string id="jgum_siege_negotiation_inquiry_rejected" text="Çamura bulanmış bir mesaj geri geldi. Savunmacılar, duvarlarının senin iradenden daha güçlü olduğuna inanarak şartlarınla alay ediyor." />
+    <string id="jgum_siege_negotiation_inquiry_go" text="Görüşmeye katıl" />
+    <string id="jgum_siege_negotiation_inquiry_ok" text="Öyle olsun." />
 
-
-    <!-- Siege Persuasion -->
-    <string id="jgum_proactive_intro" text="Seni dinliyoruz. Şartlarını söyle.[ib:nervous][if:convo_grave]" />
-    <string id="jgum_proactive_player_open" text="Daha fazla kan dökülmesine gerek yok. Beni dinle." />
-    <string id="jgum_proactive_task_line" text="Bu surların kaderi, sözlerinin ağırlığına bağlı." />
-    <string id="jgum_proactive_task_fail_immediate" text="Bu pek ikna edici değil." />
-    <string id="jgum_proactive_task_fail_final" text="Sözlerin yeterli değil. Reddediyoruz." />
-    <string id="jgum_proactive_option_1" text="Halkının umutsuz bir savunma için ölmesi gerekmiyor." />
-    <string id="jgum_proactive_option_2" text="Güç dengesine bak. Bu kuşatma zaten karara bağlandı." />
-    <string id="jgum_proactive_option_3" text="Teslim olursan halkın yaşayacak." />
-    <string id="jgum_proactive_option_t1_1" text="Umutsuz bir savunma uğruna halkının ölmesine gerek yok." />
-    <string id="jgum_proactive_option_t1_2" text="Sayılara bak. Bu kuşatmanın sonucu zaten belli." />
-    <string id="jgum_proactive_option_t1_3" text="Onurlu olanı seç; halkını korumak için teslim ol." />
-    <string id="jgum_proactive_option_t2_1" text="Surların kırılıyor; uzatmak sadece daha çok can yakar." />
-    <string id="jgum_proactive_option_t2_2" text="Bu hücuma dönerse elindeki son pazarlık gücünü de kaybedersin." />
-    <string id="jgum_proactive_option_t2_3" text="Kapıları açarsan sivillerinin düzenini ve güvenliğini korurum." />
-    <string id="jgum_proactive_option_t3_1" text="Antlaşmayla teslim olmak, tüm Kalradya önünde onurunu korur." />
-    <string id="jgum_proactive_option_t3_2" text="Erzakın ve moralin düşüyor; benim üstünlüğüm ise büyüyor." />
-    <string id="jgum_proactive_option_t3_3" text="Gurur uğruna can verme; bunu merhametle burada bitirelim." />
-    <string id="jgum_proactive_option_t4_1" text="Bir şehir, harabelerle değil insanlarıyla ayakta kalır." />
-    <string id="jgum_proactive_option_t4_2" text="Şimdi teslim olursan pazarlar yanmaz, hayat yeniden başlar." />
-    <string id="jgum_proactive_option_t4_3" text="Teslim ol; tarih seni katliamla değil itidalle hatırlasın." />
-    <string id="jgum_proactive_option_locked_used" text="Bu argüman artık kullanılamaz." />
-    <string id="jgum_proactive_option_locked_mercy" text="Bu argümanı kurmak için Merhamet özelliğin çok düşük." />
-    <string id="jgum_proactive_option_locked_honor" text="Bu argümanı kurmak için Onur özelliğin çok düşük." />
-    <string id="jgum_proactive_option_locked_calculating" text="Bu argüman için daha hesapçı bir yaklaşım gerekir." />
-    <string id="jgum_proactive_option_locked_walls" text="Bu argümanı kullanmak için surlardan en az birinin yarı canın altına inmiş olması gerekir." />
-    <string id="jgum_proactive_success" text="Haklısın, daha fazla kan dökülmesine gerek yok." />
-    <string id="jgum_proactive_fail" text="Hayır. Teslim olmayacağız." />
-    <string id="jgum_proactive_continue" text="Daha fazlasını duymam gerekiyor." />
+    <string id="jgum_proactive_intro" text="Dinliyoruz. Maksadını belirt.[ib:nervous][if:convo_grave]" />
+    <string id="jgum_proactive_player_open" text="Bu kan dökülmesi gereksiz. Mantıklı konuşalım." />
+    <string id="jgum_proactive_task_line" text="Bu duvarların ve içindeki canların kaderi, bir sonraki sözlerine bağlı.[if:convo_calm_hostile]" />
+    <string id="jgum_proactive_task_fail_immediate" text="Zayıf bir argüman.[if:convo_unimpressed]" />
+    <string id="jgum_proactive_task_fail_final" text="Sözlerin rüzgardan ibaret. Teslim olmayacağız.[if:convo_furious]" />
+    <string id="jgum_proactive_option_t1_1" text="Halkını zaten kaybedilmiş bir savunmada ölüme gönderme." />
+    <string id="jgum_proactive_option_t1_2" text="Bir aptal bile sayıları görebilir. Bu kuşatmanın tek bir sonucu var." />
+    <string id="jgum_proactive_option_t1_3" text="Onur yolunu seç. Halkını bu acı kaderden kurtar." />
+    <string id="jgum_proactive_option_t2_1" text="Duvarların çöküyor. Geciktirdiğin her an daha fazla cana mal oluyor." />
+    <string id="jgum_proactive_option_t2_2" text="Askerlerim bu duvarları aştığında, pazarlık yapacak bir kozun kalmayacak." />
+    <string id="jgum_proactive_option_t2_3" text="Kapıları aç, siviller arasında düzeni sağlayacağım." />
+    <string id="jgum_proactive_option_t3_1" text="Anlaşmayla teslim olmak, tüm Kalradya'nın önünde bir onur eylemidir." />
+    <string id="jgum_proactive_option_t3_2" text="Her geçen saat, benim ordum büyürken senin erzakların azalıyor." />
+    <string id="jgum_proactive_option_t3_3" text="Gururun, halkının mezar taşı olmasına izin verme. Bu işi merhametle bitir." />
+    <string id="jgum_proactive_option_t4_1" text="Bir şehir taşlarıyla değil, insanlarıyla yaşar. Onları koru." />
+    <string id="jgum_proactive_option_t4_2" text="Şimdi teslim ol, yarın pazarlar mal satsın. Direnirsen, sadece kül satarlar." />
+    <string id="jgum_proactive_option_t4_3" text="Teslim olmayı seç ve tarihin yıkımını değil, itidalini hatırlamasını sağla." />
+    <string id="jgum_proactive_option_locked_used" text="Bu minvalde bir ricada zaten bulundun. Bir daha işe yaramayacaktır." />
+    <string id="jgum_proactive_option_locked_mercy" text="Geçmişteki eylemlerin, merhamet çağrını boş kılıyor." />
+    <string id="jgum_proactive_option_locked_honor" text="Senin gibi... şöhretli... biri onurdan bahsedemez." />
+    <string id="jgum_proactive_option_locked_calculating" text="Bu argümanı sunmak için kurnazlık konusunda bir üne sahip değilsin." />
+    <string id="jgum_proactive_option_locked_walls" text="Duvarları henüz kırılmadı. Böyle bir argümanın bir ağırlığı yok." />
+    <string id="jgum_proactive_success" text="Mantıklı konuşuyorsun. Bugün daha fazla ölüme gerek yok.[if:convo_calm_friendly]" />
+    <string id="jgum_proactive_fail" text="Yeter bu kadar! Teslim olmayacağız.[if:convo_furious]" />
+    <string id="jgum_proactive_continue" text="Dediğin... dikkate değer. Devam et.[if:convo_thinking]" />
 
     <!-- Settings -->
     <string id="JGUM.Settings.DisplayName" text="Just Give Up Man" />

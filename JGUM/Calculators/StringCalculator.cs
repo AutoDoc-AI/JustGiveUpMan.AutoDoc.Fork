@@ -24,7 +24,7 @@ namespace JGUM.Calculators
             return new TextObject(id + fallbackString).ToString();
         }
 
-        public static void SetDialogVariable(string baseId)
+        public static void SetDialogVariable(string baseId, string fallbackString)
         {
             if (!_rolledVariants.TryGetValue(baseId, out string id))
             {
@@ -35,7 +35,7 @@ namespace JGUM.Calculators
                 _rolledVariants[baseId] = id;
             }
 
-            MBTextManager.SetTextVariable(baseId.ToUpper(), new TextObject(id));
+            MBTextManager.SetTextVariable(baseId.ToUpper(), new TextObject(id + fallbackString));
         }
 
         public static void ClearDialogVariables()

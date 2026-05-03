@@ -49,7 +49,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
                 () => {
                     if (!CheckPatrolEncounterSurrender()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer", "Wait! We yield, {?PLAYER.GENDER}madam{?}sir{\\?}! Don't cut us down!");
                     return true;
                 },
                 null,
@@ -62,7 +62,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
                 () => {
                     if (!CheckPatrolEncounterSurrender()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer", "Wait! We yield, {?PLAYER.GENDER}madam{?}sir{\\?}! Don't cut us down!");
                     return true;
                 },
                 null,
@@ -75,7 +75,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_ACCEPT}",
                 () => {
                     if (!PatrolSurrenderCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_accept");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_accept", "Drop your weapons and you may yet live.");
                     return true;
                 },
                 AcceptPatrolSurrenderConsequence);
@@ -87,7 +87,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_REJECT}",
                 () => {
                     if (!PatrolSurrenderCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_reject");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_reject", "You should have fled when you had the chance. No mercy!");
                     return true;
                 },
                 RejectPatrolSurrender);
@@ -151,7 +151,7 @@ namespace JGUM.Behaviors
                 Hero.MainHero.SetTraitLevel(DefaultTraits.Mercy, currentMercy - 1);
 
             InformationManager.DisplayMessage(new InformationMessage(
-                StringCalculator.GetString("jgum_field_surrender_rejected", "The battle continues!"),
+                StringCalculator.GetString("jgum_field_surrender_rejected", "The dogs will get their scraps after all!"),
                 Colors.Yellow));
         }
 

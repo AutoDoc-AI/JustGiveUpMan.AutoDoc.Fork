@@ -19,7 +19,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             starter.AddGameMenuOption(
                 SiegeStrategiesMenuId,
                 OptionId,
-                "{=jgum_siege_negotiation_menu_option}Offer a Negotiation Meeting",
+                StringCalculator.GetString("jgum_siege_negotiation_menu_option", "Propose a parley to avoid further bloodshed."),
                 OfferNegotiationOptionCondition,
                 OfferNegotiationOptionConsequence,
                 false,
@@ -38,11 +38,11 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 args.optionLeaveType = GameMenuOption.LeaveType.Submenu;
                 args.Tooltip = new TextObject(StringCalculator.GetString(
                     "jgum_siege_negotiation_menu_tooltip_no_context",
-                    "Negotiation is not available in the current siege context."));
+                    "The chaos of the siege prevents any meaningful talk."));
                 return true;
             }
 
-            args.optionLeaveType = GameMenuOption.LeaveType.Submenu;
+            args.optionLeaveType = GameMenuOption.LeaveType.ShowMercy;
 
             string key = settlement.StringId;
             if (TryGetPendingRequest(settlement, out _))
@@ -50,7 +50,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 args.IsEnabled = false;
                 args.Tooltip = new TextObject(StringCalculator.GetString(
                     "jgum_siege_negotiation_menu_tooltip_pending",
-                    "Your previous request is still awaiting a response."));
+                    "Your envoy has yet to return. Patience, {?PLAYER.GENDER}madam{?}sir{\\?}"));
                 return true;
             }
 
@@ -60,7 +60,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 args.IsEnabled = false;
                 args.Tooltip = new TextObject(StringCalculator.GetString(
                     "jgum_siege_negotiation_menu_tooltip_retry",
-                    "You need to wait before trying negotiation again after a failed persuasion."));
+                    "They will not entertain another of your messengers so soon after the last failure."));
                 return true;
             }
 
@@ -96,7 +96,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
 
             InformationManager.DisplayMessage(new InformationMessage(
                 StringCalculator.GetString("jgum_siege_negotiation_request_sent",
-                    "Your messenger has been sent. You will receive a response soon."),
+                    "Your rider carries the terms under a flag of truce. We await their reply."),
                 Colors.White));
 
             GameMenu.SwitchToMenu(SiegeStrategiesMenuId);
@@ -129,20 +129,20 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             float powerRatio = NegotiationCalculator.GetPowerRatio(settlement);
             bool approved = powerRatio >= 1f;
 
-            string title = StringCalculator.GetString("jgum_siege_negotiation_inquiry_title", "Negotiation Response");
+            string title = StringCalculator.GetString("jgum_siege_negotiation_inquiry_title", "A Raven Arrives");
 
             if (!approved)
             {
                 string rejectedBody = StringCalculator.GetString(
                     "jgum_siege_negotiation_inquiry_rejected",
-                    "Your proposal was rejected. The defenders do not believe your position is strong enough.");
+                    "A message returns, spattered with mud. The defenders scoff at your terms, believing their walls stronger than your will.");
 
                 InformationManager.ShowInquiry(new InquiryData(
                         title,
                         rejectedBody,
                         true,
                         false,
-                        StringCalculator.GetString("jgum_siege_negotiation_inquiry_ok", "OK"),
+                        StringCalculator.GetString("jgum_siege_negotiation_inquiry_ok", "So be it."),
                         string.Empty,
                         () => { },
                         null),
@@ -153,14 +153,14 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
 
             string acceptedBody = StringCalculator.GetString(
                 "jgum_siege_negotiation_inquiry_accepted",
-                "Your proposal was accepted. A representative is ready to meet you.");
+                "A clean scroll arrives, bearing the defender's seal. They will meet with you.");
 
             InformationManager.ShowInquiry(new InquiryData(
                     title,
                     acceptedBody,
                     true,
                     false,
-                    StringCalculator.GetString("jgum_siege_negotiation_inquiry_go", "Go to meeting"),
+                    StringCalculator.GetString("jgum_siege_negotiation_inquiry_go", "Attend the parley."),
                     string.Empty,
                     () => StartNegotiationConversation(settlement, powerRatio),
                     null),
@@ -217,4 +217,3 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
         }
     }
 }
-

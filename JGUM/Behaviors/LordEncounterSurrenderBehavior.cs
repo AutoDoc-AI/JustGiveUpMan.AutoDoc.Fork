@@ -55,7 +55,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
                 () => {
                     if (!CheckLordEncounterSurrender()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer", "Enough! We yield, {?PLAYER.GENDER}madam{?}sir{\\?}! Call off your dogs!");
                     return true;
                 },
                 null,
@@ -67,7 +67,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
                 () => {
                     if (!CheckLordEncounterSurrender()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer", "Enough! We yield, {?PLAYER.GENDER}madam{?}sir{\\?}! Call off your dogs!");
                     return true;
                 },
                 null,
@@ -79,7 +79,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_OFFER}",
                 () => {
                     if (!CheckLordEncounterSurrender()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_offer", "Enough! We yield, {?PLAYER.GENDER}madam{?}sir{\\?}! Call off your dogs!");
                     return true;
                 },
                 null,
@@ -91,7 +91,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_ACCEPT}",
                 () => {
                     if (!LordSurrenderCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_accept");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_accept", "Consider this your lucky day. I shall grant you a swift end to this folly.");
                     return true;
                 },
                 AcceptSurrenderConsequence
@@ -102,7 +102,7 @@ namespace JGUM.Behaviors
                 "{=!}{JGUM_FIELD_SURRENDER_REJECT}",
                 () => {
                     if (!LordSurrenderCondition()) return false;
-                    StringCalculator.SetDialogVariable("jgum_field_surrender_reject");
+                    StringCalculator.SetDialogVariable("jgum_field_surrender_reject", "Surrender? After your insults? I think not. To arms!");
                     return true;
                 },
                 RejectLordSurrender
@@ -243,7 +243,7 @@ namespace JGUM.Behaviors
 
             // Show message about continuing fight
             var message = new InformationMessage(
-                StringCalculator.GetString("jgum_field_surrender_rejected", "The battle continues!"),
+                StringCalculator.GetString("jgum_field_surrender_rejected", "The time for talk is over!"),
                 Colors.Yellow
             );
             InformationManager.DisplayMessage(message);
@@ -337,4 +337,3 @@ namespace JGUM.Behaviors
         }
     }
 }
-

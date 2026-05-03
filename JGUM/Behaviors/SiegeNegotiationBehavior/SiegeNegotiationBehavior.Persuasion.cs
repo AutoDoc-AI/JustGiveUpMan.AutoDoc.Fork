@@ -56,15 +56,15 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 "{=!}{JGUM_PERSUASION_REACTION}", ProactiveReactionCondition, ProactiveReactionConsequence, 10001);
 
             starter.AddDialogLine("jgum_proactive_result_success", "jgum_proactive_result", "close_window",
-                StringCalculator.GetString("jgum_proactive_success", "You are right, there's no need for blood to spill."),
+                StringCalculator.GetString("jgum_proactive_success", "A wise decision. The bloodshed ends now."),
                 ProactiveSuccessCondition, OnProactivePersuasionSuccess, 10001);
 
             starter.AddDialogLine("jgum_proactive_result_fail", "jgum_proactive_result", "close_window",
-                StringCalculator.GetString("jgum_proactive_fail", "No. We will not yield."),
+                StringCalculator.GetString("jgum_proactive_fail", "You waste my time. We will hold to the last man."),
                 ProactiveFailCondition, OnProactivePersuasionFailure, 10001);
 
             starter.AddDialogLine("jgum_proactive_result_continue", "jgum_proactive_result", "jgum_proactive_persuasion_options",
-                StringCalculator.GetString("jgum_proactive_continue", "I need to hear more."),
+                StringCalculator.GetString("jgum_proactive_continue", "Your point is... noted. Continue."),
                 ProactiveContinueCondition, null, 10001);
         }
 
@@ -129,7 +129,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 {
                     hintText = new TextObject(StringCalculator.GetString(
                         "jgum_proactive_option_locked_used",
-                        "This argument is no longer available."));
+                        "You have already made this appeal. It will not work again."));
                     return false;
                 }
 
@@ -140,7 +140,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 return true;
             }
 
-            hintText = new TextObject("{=9ACJsI6S}Blocked");
+            hintText = new TextObject(StringCalculator.GetString("jgum_blocked", "{=9ACJsI6S}Blocked"));
             return false;
         }
 
@@ -265,8 +265,8 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             PersuasionTask task = new PersuasionTask(reservationIndex)
             {
                 SpokenLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_line", "The fate of these walls rests on your words.")),
-                ImmediateFailLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_fail_immediate", "That is not convincing.")),
-                FinalFailLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_fail_final", "Your words are not enough. We refuse."))
+                ImmediateFailLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_fail_immediate", "That is not a convincing argument.")),
+                FinalFailLine = new TextObject(StringCalculator.GetString("jgum_proactive_task_fail_final", "Your words are wind. We will not surrender."))
             };
 
             List<int> roundRandomBiases = NegotiationCalculator.BuildRoundRandomBiases(lineTemplates.Count);
@@ -431,19 +431,19 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             {
                 hintText = new TextObject(StringCalculator.GetString(
                     "jgum_proactive_option_locked_honor",
-                    "Your Honor is too low to make this argument."));
+                    "A person of your... reputation... cannot speak of honor."));
             }
             else if (optionTemplate.Trait == NegotiationTrait.Mercy)
             {
                 hintText = new TextObject(StringCalculator.GetString(
                     "jgum_proactive_option_locked_mercy",
-                    "Your Mercy is too low to make this argument."));
+                    "Your past deeds make any appeal to mercy sound hollow."));
             }
             else
             {
                 hintText = new TextObject(StringCalculator.GetString(
                     "jgum_proactive_option_locked_calculating",
-                    "You need a more calculating approach to make this argument."));
+                    "You lack the reputation for cunning to make this argument."));
             }
 
             return true;
@@ -465,7 +465,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
 
             hintText = new TextObject(StringCalculator.GetString(
                 optionTemplate.LockedHintId ?? "jgum_proactive_option_locked_walls",
-                "At least one wall section must be at half health or lower to use this argument."));
+                "Their walls are yet unbroken. Such an argument holds no weight."));
             return true;
         }
 
@@ -476,4 +476,3 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
         }
     }
 }
-
