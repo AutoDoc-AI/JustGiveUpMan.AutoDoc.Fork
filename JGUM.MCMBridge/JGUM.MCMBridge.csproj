@@ -38,10 +38,6 @@
     </Reference>
   </ItemGroup>
 
-  <Target Name="UpdateVersion" BeforeTargets="PostBuildEvent">
-    <!-- Versiyon numarasını güncelle -->
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)..\JGUM\Build\UpdateVersion.ps1&quot; -SubModulePath &quot;$(SubModuleTemplatePath)&quot; -Configuration &quot;$(Configuration)&quot;" />
-  </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <PropertyGroup>

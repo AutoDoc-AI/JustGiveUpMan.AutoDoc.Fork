@@ -213,5 +213,3 @@ namespace JGUM.MCMBridge.Config
         public int PatrolDialogPriority { get; set; } = 10000;
     }
 }
-
-

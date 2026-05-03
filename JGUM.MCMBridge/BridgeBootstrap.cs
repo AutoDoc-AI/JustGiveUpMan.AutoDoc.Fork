@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using JGUM.Config;
 using JGUM.MCMBridge.Config;
 
@@ -7,11 +8,18 @@ namespace JGUM.MCMBridge
     {
         public static void TryRegister()
         {
-            // Force MCM settings type initialization so the settings page is discovered by MCM.
-            _ = JgumMcmSettings.Instance;
+            var mcmSettings = JgumMcmSettings.Instance;
+            if (mcmSettings != null)
+            {
+                mcmSettings.PropertyChanged += OnMcmSettingsChanged;
+            }
 
-            // If this assembly can load, MCM chain is present enough for typed settings access.
             JgumSettingsManager.RegisterExternalSettingsProvider(BuildModelFromMcm);
+        }
+
+        private static void OnMcmSettingsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            JgumSettingsManager.Reload();
         }
 
         private static JgumJsonModel BuildModelFromMcm()
@@ -56,5 +64,3 @@ namespace JGUM.MCMBridge
         }
     }
 }
-
-
