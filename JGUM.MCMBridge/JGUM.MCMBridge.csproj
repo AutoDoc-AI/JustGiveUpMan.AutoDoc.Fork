@@ -47,6 +47,8 @@
       <BridgeBin Include="$(TargetDir)$(ProjectName).dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BridgeBin)" DestinationFolder="$(ModuleFolder)\bin\Win64_Shipping_Client" />
+    <Copy SourceFiles="@(BridgeBin)" DestinationFolder="$(ModuleFolder)\bin\Gaming.Desktop.x64_Shipping_Client" />
+
     <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;$DesktopPath = [Environment]::GetFolderPath('Desktop'); Compress-Archive -Path '$(ModuleFolder)' -DestinationPath ($DesktopPath + '\JGUM.zip') -Force&quot;" />
   </Target>
 

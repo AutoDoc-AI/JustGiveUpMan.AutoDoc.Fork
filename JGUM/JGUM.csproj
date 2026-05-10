@@ -69,6 +69,8 @@
       <ModuleData Include="$(ProjectDir)ModuleData\**\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(ModuleBin)" DestinationFolder="$(ModuleFolder)\bin\Win64_Shipping_Client" />
+    <Copy SourceFiles="@(ModuleBin)" DestinationFolder="$(ModuleFolder)\bin\Gaming.Desktop.x64_Shipping_Client" />
+
     <Copy SourceFiles="$(SubModuleTemplatePath)" DestinationFiles="$(ModuleFolder)\SubModule.xml" />
     <Copy SourceFiles="@(ModuleData)" DestinationFolder="$(ModuleFolder)\ModuleData\%(RecursiveDir)" />
   </Target>

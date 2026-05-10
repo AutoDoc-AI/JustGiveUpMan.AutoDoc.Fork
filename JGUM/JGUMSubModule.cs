@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -56,13 +56,16 @@ namespace JGUM
                 if (string.IsNullOrWhiteSpace(gameRoot))
                     return;
 
-                string bridgePath = Path.Combine(
-                    gameRoot,
-                    "Modules",
-                    "JGUM",
-                    "bin",
-                    "Win64_Shipping_Client",
-                    "JGUM.MCMBridge.dll");
+                string? assemblyLocation = typeof(JGUMSubModule).Assembly.Location;
+                if (string.IsNullOrWhiteSpace(assemblyLocation))
+                    return;
+
+                string? binDir = Path.GetDirectoryName(assemblyLocation);
+                if (string.IsNullOrWhiteSpace(binDir))
+                    return;
+
+                string bridgePath = Path.Combine(binDir, "JGUM.MCMBridge.dll");
+
 
                 if (!File.Exists(bridgePath))
                     return;
