@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using JGUM.Config;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
-using JGUM.Config;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 

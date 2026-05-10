@@ -8,7 +8,7 @@
     <GameFolder>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</GameFolder>
     <ModuleName>JGUM</ModuleName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Configurations>Debug;Release</Configurations>
+    <Configurations>Debug;Update;Hotfix</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>

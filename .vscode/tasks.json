@@ -4,17 +4,18 @@
         {
             "id": "buildConfiguration",
             "type": "pickString",
-            "description": "Hangi konfigürasyon ile build almak istersiniz?",
+            "description": "Which configuration would you like to build?",
             "options": [
                 "Debug",
-                "Release"
+                "Update",
+                "Hotfix"
             ],
             "default": "Debug"
         }
     ],
     "tasks": [
         {
-            "label": "Build Projesi",
+            "label": "Build Project",
             "command": "dotnet",
             "type": "process",
             "args": [

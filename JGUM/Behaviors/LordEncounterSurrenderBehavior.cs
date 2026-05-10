@@ -29,7 +29,7 @@ namespace JGUM.Behaviors
     public class LordEncounterSurrenderBehavior : CampaignBehaviorBase
     {
         private readonly LordSurrenderCalculator _calculator = new();
-        private Dictionary<Hero, int> _lordSurrenderCounts = new Dictionary<Hero, int>();
+        private Dictionary<Hero, int> _lordSurrenderCounts = new();
 
         public override void RegisterEvents()
         {
@@ -125,7 +125,6 @@ namespace JGUM.Behaviors
             if (enemyParty == null || mainParty == null)
                 return false;
 
-            bool shouldSurrender;
             var encounter = PlayerEncounter.Current;
             var battle = PlayerEncounter.Battle;
 
@@ -183,7 +182,7 @@ namespace JGUM.Behaviors
             if (!enemyLeaders.Any())
                 enemyLeaders.Add(conversationHero);
 
-            shouldSurrender = _calculator.ShouldEnemySurrenderInEncounter(enemyLeaders, playerStrength, enemyStrength);
+            var shouldSurrender = _calculator.ShouldEnemySurrenderInEncounter(enemyLeaders, playerStrength, enemyStrength);
             // Check if enemy lord should surrender based on current encounter state
             if (!shouldSurrender)
                 return false;
@@ -227,7 +226,7 @@ namespace JGUM.Behaviors
 
         private void AcceptSurrenderConsequence()
         {
-            // 1. Sadece lordu kaydet, işlemi ŞİMDİ yapma.
+            // 1. Just save the lord, do not perform the action NOW.
             LordEncounterSurrenderContext.EnemyLord = Hero.OneToOneConversationHero?.CharacterObject;
             
        
@@ -264,15 +263,15 @@ namespace JGUM.Behaviors
 
             if (PlayerEncounter.Current != null)
             {
-                // 1. Eğer savaş nesnesi yoksa başlat
+                // 1. Start battle if map event doesn't exist
                 if (PlayerEncounter.Battle == null)
                 {
                     PlayerEncounter.StartBattle();
                 }
 
-                // 2. SADECE BAYRAKLARI KALDIRIYORUZ
-                // Update()'i zorla çağırmıyoruz! Diyalog kapandığında oyunun kendi 
-                // ana döngüsü (GameLoop) bu bayrakları görecek ve menüleri kendi kendine açacak.
+                // 2. ONLY SETTING THE FLAGS
+                // We don't force call Update()! When the dialog closes, the game's own 
+                // main loop (GameLoop) will see these flags and open the menus automatically.
                 PlayerEncounter.EnemySurrender = true;
                 PlayerEncounter.SetPlayerVictorious();
                 var mainParty = Hero.MainHero.PartyBelongedTo?.Party;
@@ -320,12 +319,12 @@ namespace JGUM.Behaviors
                 var enemySide = encounter.PlayerSide.GetOppositeSide();
                 lords = GetEncounterPartiesForSide(battle, enemySide)
                     .Select(p => p.LeaderHero)
-                    .Where(h => h != null && h.IsLord && h != Hero.MainHero && !h.IsPrisoner && !h.IsDead)
+                    .Where(h => h is { IsLord: true } && h != Hero.MainHero && h is { IsPrisoner: false, IsDead: false })
                     .Distinct()
                     .ToList();
             }
 
-            if (!lords.Contains(fallbackLord) && !fallbackLord.IsPrisoner && !fallbackLord.IsDead)
+            if (!lords.Contains(fallbackLord) && fallbackLord is { IsPrisoner: false, IsDead: false })
                 lords.Add(fallbackLord);
 
             return lords;

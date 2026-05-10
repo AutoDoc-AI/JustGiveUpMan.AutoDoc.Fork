@@ -1,49 +1,56 @@
-﻿# Otomatik Versiyon Yönetimi
+# Automatic Version Management
 
-## Özet
-Versiyon numarası artık her build'de otomatik olarak güncellenecek:
+## Summary
+The version number is now automatically updated with every build:
 
-- **Debug Build**: Son sayı artırılır
-  - Örnek: `b0.7.18.1` → `b0.7.18.2`
+- **Debug Build**: The patch number is incremented.
+  - Example: `v1.0.0.1` → `v1.0.0.2`
 
-- **Release Build**: Sondan ikinci sayı artırılır, son sayı 0 yapılır
-  - Örnek: `b0.7.18.1` → `b0.7.19.0`
+- **Hotfix Build**: The hotfix number is incremented, and the patch number is reset to 0.
+  - Example: `v1.0.0.5` → `v1.0.1.0`
 
-## Nasıl Çalışır?
+- **Update Build**: The update number is incremented, and the hotfix and patch numbers are reset to 0.
+  - Example: `v1.0.1.5` → `v1.1.0.0`
 
-1. **UpdateVersion.ps1** scripti (`JGUM/Build/UpdateVersion.ps1`):
-   - `SubModule.xml` dosyasını okur
-   - Mevcut versiyonu parse eder
-   - Configuration'a göre versiyonu günceller (Debug veya Release)
-   - Güncellenmiş versiyonla `SubModule.xml`'i yazıp kapatır
+## How It Works
 
-2. **JGUM.csproj** ve **JGUM.MCMBridge.csproj**:
-   - `UpdateVersion` target'ı `PostBuildEvent`'ten önce çalışır
-   - Script, `$(Configuration)` ve `$(SubModuleTemplatePath)` parametreleriyle çalıştırılır
-   - Script başarıyla tamamlandıktan sonra normal post-build işlemi devam eder
+1. **UpdateVersion.ps1** script (`JGUM/Build/UpdateVersion.ps1`):
+   - Reads the `SubModule.xml` file.
+   - Parses the current version.
+   - Updates the version based on the configuration (Debug, Hotfix, or Update).
+   - Writes the updated version back to `SubModule.xml`.
 
-## Manuel Test
+2. **JGUM.csproj** and **JGUM.MCMBridge.csproj**:
+   - The `UpdateVersion` target runs before the `PostBuildEvent`.
+   - The script is executed with `$(Configuration)` and `$(SubModuleTemplatePath)` parameters.
+   - After the script completes successfully, the normal post-build process continues.
 
-Debug konfigürasyonuyla test etmek:
+## Manual Testing
+
+To test with the Debug configuration:
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File "JGUM\Build\UpdateVersion.ps1" -SubModulePath "JGUM\SubModule.xml" -Configuration "Debug"
 ```
 
-Release konfigürasyonuyla test etmek:
+To test with the Hotfix configuration:
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File "JGUM\Build\UpdateVersion.ps1" -SubModulePath "JGUM\SubModule.xml" -Configuration "Release"
+powershell -NoProfile -ExecutionPolicy Bypass -File "JGUM\Build\UpdateVersion.ps1" -SubModulePath "JGUM\SubModule.xml" -Configuration "Hotfix"
 ```
 
-## Dosyalar
+To test with the Update configuration:
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File "JGUM\Build\UpdateVersion.ps1" -SubModulePath "JGUM\SubModule.xml" -Configuration "Update"
+```
 
-- **JGUM/Build/UpdateVersion.ps1**: PowerShell scripti (yeni oluşturuldu)
-- **JGUM/JGUM.csproj**: `UpdateVersion` target'ı eklendi
-- **JGUM.MCMBridge/JGUM.MCMBridge.csproj**: `UpdateVersion` target'ı eklendi
+## Files
 
-## Notlar
+- **JGUM/Build/UpdateVersion.ps1**: PowerShell script (newly created).
+- **JGUM/JGUM.csproj**: `UpdateVersion` target added.
+- **JGUM.MCMBridge/JGUM.MCMBridge.csproj**: `UpdateVersion` target added.
 
-- Versiyon formatı: `bMAJOR.MINOR.PATCH.BUILD` (örn: `b0.7.18.1`)
-- İlk segment (`b0`) değişmez
-- Script hata durumunda exit code 1 döner ve build devam etmez
-- XML formatting korunur (indentation, encoding)
+## Notes
 
+- Version format: `vMAJOR.UPDATE.HOTFIX.DEBUG` (e.g., `v1.0.1.5`).
+- The first segment (`v1`) remains constant for the current release.
+- The script returns exit code 1 on failure, which prevents the build from continuing.
+- XML formatting is preserved (indentation, encoding).

@@ -1,9 +1,9 @@
 using System.Linq;
+using JGUM.Config;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
-using JGUM.Config;
 
 namespace JGUM.Calculators
 {

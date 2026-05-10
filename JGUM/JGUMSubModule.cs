@@ -2,12 +2,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using JGUM.Calculators;
+using JGUM.Config;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-using JGUM.Config;
 using SiegeNegotiation = JGUM.Behaviors.SiegeNegotiationBehavior;
 
 namespace JGUM
@@ -56,7 +55,7 @@ namespace JGUM
                 if (string.IsNullOrWhiteSpace(gameRoot))
                     return;
 
-                string? assemblyLocation = typeof(JGUMSubModule).Assembly.Location;
+                string assemblyLocation = typeof(JGUMSubModule).Assembly.Location;
                 if (string.IsNullOrWhiteSpace(assemblyLocation))
                     return;
 

@@ -11,10 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dfa2d14-b35b-43c4-8e0e-59bbcb7f9154" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustGiveUpMan/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustGiveUpMan/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.JustGiveUpMan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustGiveUpMan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/BridgeBootstrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/BridgeBootstrap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/Config/JgumMcmSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/Config/JgumMcmSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/tasks.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/JGUM.MCMBridge.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/JGUM.MCMBridge.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Debug/net472/JGUM.MCMBridge.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Debug/net472/JGUM.MCMBridge.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Debug/net472/JGUM.MCMBridge.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Debug/net472/JGUM.MCMBridge.pdb" afterDir="false" />
@@ -24,41 +22,54 @@
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Release/net472/JGUM.MCMBridge.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Release/net472/JGUM.MCMBridge.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Release/net472/JGUM.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Release/net472/JGUM.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Release/net472/JGUM.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/bin/x64/Release/net472/JGUM.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/JGUM.MCMBridge.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/JGUM.MCMBridge.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Debug/net472/JGUM.MCMBridge.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM.MCMBridge/obj/x64/Release/net472/JGUM.MCMBridge.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/Behaviors/LordEncounterSurrenderBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/Behaviors/LordEncounterSurrenderBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/Behaviors/PatrolEncounterSurrenderBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/Behaviors/PatrolEncounterSurrenderBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/Behaviors/SiegeNegotiationBehavior/SiegeNegotiationBehavior.MenuAndRequests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/Behaviors/SiegeNegotiationBehavior/SiegeNegotiationBehavior.MenuAndRequests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/Behaviors/SiegeNegotiationBehavior/SiegeNegotiationBehavior.Persuasion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/Behaviors/SiegeNegotiationBehavior/SiegeNegotiationBehavior.Persuasion.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/Behaviors/SiegeSurrenderBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/Behaviors/SiegeSurrenderBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/Calculators/StringCalculator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/Calculators/StringCalculator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/ModuleData/Languages/EN/jgum_strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/ModuleData/Languages/EN/jgum_strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/ModuleData/Languages/TR/jgum_strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/ModuleData/Languages/TR/jgum_strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/Build/UpdateVersion.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/Build/UpdateVersion.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/JGUM.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/JGUM.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/SubModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/SubModule.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/bin/x64/Debug/net472/JGUM.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/bin/x64/Debug/net472/JGUM.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/bin/x64/Debug/net472/JGUM.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/bin/x64/Debug/net472/JGUM.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/bin/x64/Release/net472/JGUM.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/bin/x64/Release/net472/JGUM.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/bin/x64/Release/net472/JGUM.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/bin/x64/Release/net472/JGUM.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/JGUM.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/JGUM.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Debug/net472/JGUM.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.dll" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/JGUM/obj/x64/Release/net472/JGUM.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JustGiveUpMan.sln" beforeDir="false" afterPath="$PROJECT_DIR$/JustGiveUpMan.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERSION_MANAGEMENT.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION_MANAGEMENT.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,13 +81,26 @@
       <entry key="_C:/Users/meteh/RiderProjects/JustGiveUpMan" value="3Cdy4u3Wle1t82hQj06zjM6dhaS" />
     </persistenceIdMap>
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="4" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4b87d2d089dd4989adb469b0cca711365265c0/5c/40af140a/CampaignBehaviorBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/JGUM.MCMBridge/BridgeBootstrap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/JGUM.MCMBridge/Config/JgumMcmSettings.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -93,6 +117,7 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -102,14 +127,17 @@
     "ShowUsagesActions.previewPropertyKey": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -128,6 +156,8 @@
       <workItem from="1777753943433" duration="182000" />
       <workItem from="1777826778951" duration="1643000" />
       <workItem from="1777828483233" duration="5587000" />
+      <workItem from="1778447059999" duration="60000" />
+      <workItem from="1778447144806" duration="1641000" />
     </task>
     <servers />
   </component>
