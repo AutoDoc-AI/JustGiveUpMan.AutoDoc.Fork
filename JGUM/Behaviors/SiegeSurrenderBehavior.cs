@@ -183,6 +183,19 @@ namespace JGUM.Behaviors
                     if (besiegerLeader != null)
                     {
                         ChangeOwnerOfSettlementAction.ApplyBySiege(besiegerLeader, besiegerLeader, settlement);
+                        
+                        JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+                        {
+                            Kind = JgumSurrenderKind.SiegeAutoSurrender,
+                            SettlementId = settlement.StringId,
+                            SurrenderingHeroId = settlement.OwnerClan?.Leader?.StringId,
+                            SurrenderingPartyName = settlement.Name?.ToString(),
+                            WinnerHeroId = besiegerLeader.StringId,
+                            WinnerClanId = besiegerLeader.Clan?.StringId,
+                            LoserFactionId = settlement.MapFaction?.StringId,
+                            CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                            AcceptedByPlayer = false
+                        });
                     }
                 }
             }
