@@ -100,7 +100,7 @@ namespace JGUM.AIBehaviors
 
             if (strongerLeaders.Any())
             {
-                float avgStrongerMercy = (float)strongerLeaders.Average(h => h.GetTraitLevel(DefaultTraits.Mercy));
+                float avgStrongerMercy = (float)strongerLeaders.Average(h => h!.GetTraitLevel(DefaultTraits.Mercy));
                 traitEffect += (avgStrongerMercy / 10f) * (JgumSettingsManager.PlayerMercyMultiplier / 100f);
             }
 
@@ -162,8 +162,8 @@ namespace JGUM.AIBehaviors
 
             if (shouldSurrender)
             {
-                Hero winnerHero = siegeEvent.BesiegerCamp.LeaderParty?.LeaderHero;
-                Hero loserHero = settlement.OwnerClan?.Leader;
+                Hero? winnerHero = siegeEvent.BesiegerCamp.LeaderParty?.LeaderHero;
+                Hero? loserHero = settlement.OwnerClan?.Leader;
 
                 if (winnerHero != null && loserHero != null)
                 {
