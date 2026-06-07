@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM.MCMBridge\\JGUM.MCMBridge.csproj",
+      "projectUniqueName": "C:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM.MCMBridge\\JGUM.MCMBridge.csproj",
       "projectName": "JGUM.MCMBridge",
-      "projectPath": "c:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM.MCMBridge\\JGUM.MCMBridge.csproj",
+      "projectPath": "C:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM.MCMBridge\\JGUM.MCMBridge.csproj",
       "packagesPath": "C:\\Users\\meteh\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM.MCMBridge\\obj\\",
+      "outputPath": "C:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM.MCMBridge\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\meteh\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -51,8 +51,8 @@
         "net472": {
           "targetAlias": "net472",
           "projectReferences": {
-            "c:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM\\JGUM.csproj": {
-              "projectPath": "c:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM\\JGUM.csproj"
+            "C:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM\\JGUM.csproj": {
+              "projectPath": "C:\\Users\\meteh\\RiderProjects\\JustGiveUpMan\\JGUM\\JGUM.csproj"
             }
           }
         }
@@ -66,13 +66,12 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "10.0.200"
+      }
     },
     "frameworks": {
       "net472": {
         "targetAlias": "net472",
-        "runtimeIdentifierGraphPath": "C:\\Users\\meteh\\.dotnet\\sdk\\10.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.420\\RuntimeIdentifierGraph.json"
       }
     }
   }

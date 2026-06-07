@@ -9,6 +9,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Update;Hotfix</Configurations>
     <SubModuleTemplatePath>$(ProjectDir)..\JGUM\SubModule.xml</SubModuleTemplatePath>
+    <MSBuildEnableWorkloadResolver>false</MSBuildEnableWorkloadResolver>
   </PropertyGroup>
 
   <ItemGroup>

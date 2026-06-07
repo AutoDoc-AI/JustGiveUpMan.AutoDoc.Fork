@@ -44,9 +44,38 @@ namespace JGUM.Config
         public static int LordDialogPriority => SettingsOrDefault().LordDialogPriority;
         public static int PatrolDialogPriority => SettingsOrDefault().PatrolDialogPriority;
 
+        public static bool EnableFiefPurchaseOffer => SettingsOrDefault().EnableFiefPurchaseOffer;
+        public static float FiefPriceOfferMultiplier => SettingsOrDefault().FiefPriceOfferMultiplier;
+        public static int MinTradeSkillForFiefOffer => SettingsOrDefault().MinTradeSkillForFiefOffer;
+        public static float FiefPurchaseOfferDailyChance => SettingsOrDefault().FiefPurchaseOfferDailyChance;
+        public static int FiefPurchaseOfferCooldownDays => SettingsOrDefault().FiefPurchaseOfferCooldownDays;
+
+        public static bool EnableAiVsAiFieldSurrender => SettingsOrDefault().EnableAiVsAiFieldSurrender;
+        public static bool EnableAiVsAiSiegeSurrender => SettingsOrDefault().EnableAiVsAiSiegeSurrender;
+        public static int AiVsAiRandomnessMode => SettingsOrDefault().AiVsAiRandomnessMode;
+        public static float AiVsAiFieldBaseSurrenderThreshold => SettingsOrDefault().AiVsAiFieldBaseSurrenderThreshold;
+        public static float AiVsAiFieldGuaranteedSurrenderThreshold => SettingsOrDefault().AiVsAiFieldGuaranteedSurrenderThreshold;
+        public static float AiVsAiSiegeBaseSurrenderThreshold => SettingsOrDefault().AiVsAiSiegeBaseSurrenderThreshold;
+        public static float AiVsAiSiegeGuaranteedSurrenderThreshold => SettingsOrDefault().AiVsAiSiegeGuaranteedSurrenderThreshold;
+        public static int AiVsAiSiegeDailySurrenderLimit => SettingsOrDefault().AiVsAiSiegeDailySurrenderLimit;
         public static void Initialize()
         {
             Reload();
+        }
+
+        public static void TriggerClearDataEvent()
+        {
+            if (TaleWorlds.CampaignSystem.Campaign.Current != null)
+            {
+                TaleWorlds.CampaignSystem.Campaign.Current.GetCampaignBehavior<JGUM.Behaviors.LordEncounterSurrenderBehavior>()?.ClearAllData();
+                TaleWorlds.CampaignSystem.Campaign.Current.GetCampaignBehavior<JGUM.Behaviors.SiegeNegotiationBehavior.SiegeNegotiationBehavior>()?.ClearAllData();
+                TaleWorlds.CampaignSystem.Campaign.Current.GetCampaignBehavior<JGUM.Behaviors.VoluntarySurrenderBehavior>()?.ClearAllData();
+                TaleWorlds.CampaignSystem.Campaign.Current.GetCampaignBehavior<JGUM.Behaviors.FiefPurchaseOfferBehavior>()?.ClearAllData();
+                TaleWorlds.CampaignSystem.Campaign.Current.GetCampaignBehavior<JGUM.AIBehaviors.AISiegeSurrenderBehavior>()?.ClearAllData();
+
+                TaleWorlds.Library.InformationManager.DisplayMessage(
+                    new TaleWorlds.Library.InformationMessage("JGUM Data Cleared!", TaleWorlds.Library.Colors.Green));
+            }
         }
 
         public static void RegisterExternalSettingsProvider(Func<JgumJsonModel> provider)

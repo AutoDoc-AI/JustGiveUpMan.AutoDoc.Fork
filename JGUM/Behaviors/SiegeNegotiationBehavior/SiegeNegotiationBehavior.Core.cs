@@ -80,6 +80,11 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             AddNegotiationDialogs(starter);
         }
 
+        public void ClearAllData()
+        {
+            _savedSuccessfulRoundsBySettlement?.Clear();
+        }
+
         public override void SyncData(IDataStore dataStore)
         {
             dataStore.SyncData("JGUM_SavedSuccessfulRoundsBySettlement", ref _savedSuccessfulRoundsBySettlement);

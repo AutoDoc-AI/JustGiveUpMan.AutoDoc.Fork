@@ -187,5 +187,56 @@
 
     <string id="JGUM.Settings.PatrolDialogPriority.Name" text="Patrol Dialog Priority" />
     <string id="JGUM.Settings.PatrolDialogPriority.Hint" text="Technical: dialog priority for patrol surrender lines. Higher values ensure JGUM takes precedence over other mods. Only change if you have mod conflicts. Default: 10000" />
+
+    <!-- Fief Purchase Offer -->
+    <string id="jgum_fief_purchase_inquiry_title" text="A Merchant's Proposition" />
+    <string id="jgum_fief_purchase_inquiry_body" text="{BESIEGER_NAME} offers {OFFER_GOLD}{GOLD_ICON} gold for the peaceful surrender of {SETTLEMENT_NAME}. The offer comes with guarantees: no looting, no reprisals against the garrison." />
+    <string id="jgum_fief_purchase_accept" text="Accept the offer" />
+    <string id="jgum_fief_purchase_reject" text="Reject the offer" />
+    <string id="jgum_fief_purchase_accepted_msg" text="The settlement has been handed over. Gold changes hands, and the siege ends without further bloodshed." />
+    <string id="jgum_fief_purchase_rejected_msg" text="You have rejected the offer. The siege continues." />
+    <!-- Fief Purchase Offer MCM Settings -->
+    <string id="JGUM.Settings.Group.FiefPurchase" text="Fief Purchase Offer" />
+    <string id="JGUM.Settings.EnableFiefPurchaseOffer.Name" text="Enable Fief Purchase Offer" />
+    <string id="JGUM.Settings.EnableFiefPurchaseOffer.Hint" text="When enabled, enemy besiegers with high Trade skill may offer gold to buy your settlement during a siege." />
+    <string id="JGUM.Settings.FiefPriceOfferMultiplier.Name" text="Price Offer Multiplier" />
+    <string id="JGUM.Settings.FiefPriceOfferMultiplier.Hint" text="Multiplier for the gold amount offered by besiegers. Higher values mean more generous offers." />
+    <string id="JGUM.Settings.MinTradeSkillForFiefOffer.Name" text="Minimum Trade Skill" />
+    <string id="JGUM.Settings.MinTradeSkillForFiefOffer.Hint" text="Enemy leaders need at least this much Trade skill to make a purchase offer for your settlement." />
+    <string id="JGUM.Settings.FiefPurchaseOfferDailyChance.Name" text="Daily Offer Chance" />
+    <string id="JGUM.Settings.FiefPurchaseOfferDailyChance.Hint" text="Daily probability of receiving a purchase offer while your settlement is under siege." />
+    <string id="JGUM.Settings.FiefPurchaseOfferCooldownDays.Name" text="Offer Cooldown (Days)" />
+    <!-- Voluntary Surrender -->
+    <string id="jgum_voluntary_surrender_menu_option" text="Offer to surrender the settlement" />
+    <string id="jgum_voluntary_surrender_menu_tooltip_cooldown" text="You have recently sent a surrender offer. The enemy will not entertain another messenger so soon." />
+    <string id="jgum_voluntary_surrender_inquiry_title" text="Surrender Response" />
+    <string id="jgum_voluntary_surrender_accepted_body" text="{BESIEGER_NAME} has accepted your terms of surrender. The garrison will be spared and the settlement changes hands peacefully." />
+    <string id="jgum_voluntary_surrender_rejected_body" text="{BESIEGER_NAME} refuses your offer. They intend to take {SETTLEMENT_NAME} by force and show no mercy to its defenders." />
+    <string id="jgum_voluntary_surrender_ok" text="So be it." />
+
+    <!-- AI vs AI Surrender -->
+    <string id="JGUM.Settings.Group.AiVsAi" text="AI vs AI Surrender" />
+    <string id="JGUM.Settings.EnableAiVsAiFieldSurrender.Name" text="Enable Field Surrender (AI vs AI)" />
+    <string id="JGUM.Settings.EnableAiVsAiFieldSurrender.Hint" text="Allow AI parties to surrender to other AI parties in field battles." />
+    <string id="JGUM.Settings.EnableAiVsAiSiegeSurrender.Name" text="Enable Siege Surrender (AI vs AI)" />
+    <string id="JGUM.Settings.EnableAiVsAiSiegeSurrender.Hint" text="Allow AI settlements to surrender to AI besiegers without fighting." />
+    <string id="JGUM.Settings.AiVsAiRandomnessMode.Name" text="AI vs AI Randomness Mode" />
+    <string id="JGUM.Settings.AiVsAiRandomnessMode.Hint" text="Determines how RNG is applied to AI vs AI surrender calculations." />
+    <string id="JGUM.Settings.AiVsAiFieldBaseSurrenderThreshold.Name" text="Field Base Threshold (AI)" />
+    <string id="JGUM.Settings.AiVsAiFieldBaseSurrenderThreshold.Hint" text="The minimum power advantage needed for AI field surrender." />
+    <string id="JGUM.Settings.AiVsAiFieldGuaranteedSurrenderThreshold.Name" text="Field Guaranteed Threshold (AI)" />
+    <string id="JGUM.Settings.AiVsAiFieldGuaranteedSurrenderThreshold.Hint" text="Power advantage required for guaranteed AI field surrender without RNG." />
+    <string id="JGUM.Settings.AiVsAiSiegeBaseSurrenderThreshold.Name" text="Siege Base Threshold (AI)" />
+    <string id="JGUM.Settings.AiVsAiSiegeBaseSurrenderThreshold.Hint" text="The minimum power advantage needed for AI siege surrender." />
+    <string id="JGUM.Settings.AiVsAiSiegeGuaranteedSurrenderThreshold.Name" text="Siege Guaranteed Threshold (AI)" />
+    <string id="JGUM.Settings.AiVsAiSiegeGuaranteedSurrenderThreshold.Hint" text="Power advantage required for guaranteed AI siege surrender without RNG." />
+    <string id="JGUM.Settings.AiVsAiSiegeDailySurrenderLimit.Name" text="Siege Daily Surrender Limit (AI)" />
+    <string id="JGUM.Settings.AiVsAiSiegeDailySurrenderLimit.Hint" text="Maximum number of AI siege surrenders per day to prevent snowballing." />
+    <string id="jgum_ai_surrender_log" text="{LOSER_NAME} surrendered to the overwhelming forces of {WINNER_NAME} without a fight." />
+
+    <!-- Mod Data Management -->
+    <string id="jgum_mcm_clear_data" text="Clear All JGUM Data" />
+    <string id="jgum_mcm_clear_btn" text="Clear Data" />
+    <string id="jgum_mcm_clear_data_hint" text="Enable this and load a save to clear all mod data. Disable after use." />
   </strings>
 </base>

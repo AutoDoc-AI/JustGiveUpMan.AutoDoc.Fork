@@ -42,6 +42,10 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 return true;
             }
 
+            // Only show negotiation option when the player is the besieger, not the defender.
+            if (!IsPlayerBesieger(settlement))
+                return false;
+
             args.optionLeaveType = GameMenuOption.LeaveType.ShowMercy;
 
             string key = settlement.StringId;

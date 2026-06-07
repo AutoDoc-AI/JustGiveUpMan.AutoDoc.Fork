@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JGUM.Calculators;
 using JGUM.Config;
+using JGUM.Interop;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
@@ -328,6 +329,19 @@ namespace JGUM.Behaviors
             if (PlayerEncounter.Current != null)
                 PlayerEncounter.Finish();
             siegeEvent.FinalizeSiegeEvent();
+            
+            JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+            {
+                Kind = JgumSurrenderKind.SiegeAutoSurrender,
+                SettlementId = settlement.StringId,
+                SurrenderingHeroId = settlement.OwnerClan?.Leader?.StringId,
+                SurrenderingPartyName = settlement.Name?.ToString(),
+                WinnerHeroId = besiegerLeader.StringId,
+                WinnerClanId = besiegerLeader.Clan?.StringId,
+                LoserFactionId = settlement.MapFaction?.StringId,
+                CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                AcceptedByPlayer = true
+            });
 
             EncounterManager.StartSettlementEncounter(MobileParty.MainParty, settlement);
         }
@@ -349,6 +363,25 @@ namespace JGUM.Behaviors
                 targetSettlement.IsStarving)
             {
                 StartStarvationSallyOut(targetSettlement);
+            }
+
+            var sEvent = targetSettlement?.SiegeEvent;
+            var bLeader = sEvent?.BesiegerCamp?.LeaderParty?.LeaderHero;
+            
+            if (targetSettlement != null && bLeader != null)
+            {
+                JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+                {
+                    Kind = JgumSurrenderKind.SiegeAutoSurrender,
+                    SettlementId = targetSettlement.StringId,
+                    SurrenderingHeroId = targetSettlement.OwnerClan?.Leader?.StringId,
+                    SurrenderingPartyName = targetSettlement.Name?.ToString(),
+                    WinnerHeroId = bLeader.StringId,
+                    WinnerClanId = bLeader.Clan?.StringId,
+                    LoserFactionId = targetSettlement.MapFaction?.StringId,
+                    CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                    AcceptedByPlayer = false
+                });
             }
         }
 
@@ -436,3 +469,4 @@ namespace JGUM.Behaviors
         }
     }
 }
+

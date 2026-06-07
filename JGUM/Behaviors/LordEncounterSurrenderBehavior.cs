@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JGUM.Calculators;
 using JGUM.Config;
+using JGUM.Interop;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
@@ -246,6 +247,22 @@ namespace JGUM.Behaviors
                 Colors.Yellow
             );
             InformationManager.DisplayMessage(message);
+
+            Hero? enemyHero = LordEncounterSurrenderContext.EnemyLord?.HeroObject;
+            if (enemyHero != null)
+            {
+                JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+                {
+                    Kind = JgumSurrenderKind.LordEncounter,
+                    SurrenderingHeroId = enemyHero.StringId,
+                    SurrenderingPartyName = enemyHero.PartyBelongedTo?.Name?.ToString(),
+                    WinnerHeroId = Hero.MainHero.StringId,
+                    WinnerClanId = Hero.MainHero.Clan?.StringId,
+                    LoserFactionId = enemyHero.MapFaction?.StringId,
+                    CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                    AcceptedByPlayer = false
+                });
+            }
         }
 
         private void OnConversationEnded(IEnumerable<CharacterObject> involvedCharacters)
@@ -303,6 +320,18 @@ namespace JGUM.Behaviors
                 }
             }
 
+            JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+            {
+                Kind = JgumSurrenderKind.LordEncounter,
+                SurrenderingHeroId = surrenderedHero.StringId,
+                SurrenderingPartyName = surrenderedHero.PartyBelongedTo?.Name?.ToString(),
+                WinnerHeroId = Hero.MainHero.StringId,
+                WinnerClanId = Hero.MainHero.Clan?.StringId,
+                LoserFactionId = surrenderedHero.MapFaction?.StringId,
+                CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                AcceptedByPlayer = true
+            });
+
             TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Mercy, 20); 
 
             LordEncounterSurrenderContext.Clear();    
@@ -330,9 +359,15 @@ namespace JGUM.Behaviors
             return lords;
         }
 
+        public void ClearAllData()
+        {
+            _lordSurrenderCounts?.Clear();
+        }
+
         public override void SyncData(IDataStore dataStore)
         {
             dataStore.SyncData("jgum_lord_surrender_counts", ref _lordSurrenderCounts);
         }
     }
 }
+

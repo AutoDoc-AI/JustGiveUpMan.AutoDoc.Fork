@@ -55,7 +55,20 @@ namespace JGUM.MCMBridge
                 LordCalculatingMultiplier = mcm.LordCalculatingMultiplier,
                 LordValorMultiplier = mcm.LordValorMultiplier,
                 LordMercyMultiplier = mcm.LordMercyMultiplier,
-                LordHonorMultiplier = mcm.LordHonorMultiplier
+                LordHonorMultiplier = mcm.LordHonorMultiplier,
+                EnableFiefPurchaseOffer = mcm.EnableFiefPurchaseOffer,
+                FiefPriceOfferMultiplier = mcm.FiefPriceOfferMultiplier,
+                MinTradeSkillForFiefOffer = mcm.MinTradeSkillForFiefOffer,
+                FiefPurchaseOfferDailyChance = mcm.FiefPurchaseOfferDailyChance,
+                FiefPurchaseOfferCooldownDays = mcm.FiefPurchaseOfferCooldownDays,
+                EnableAiVsAiFieldSurrender = mcm.EnableAiVsAiFieldSurrender,
+                EnableAiVsAiSiegeSurrender = mcm.EnableAiVsAiSiegeSurrender,
+                AiVsAiRandomnessMode = mcm.AiVsAiRandomnessMode.SelectedIndex,
+                AiVsAiFieldBaseSurrenderThreshold = mcm.AiVsAiFieldBaseSurrenderThreshold,
+                AiVsAiFieldGuaranteedSurrenderThreshold = mcm.AiVsAiFieldGuaranteedSurrenderThreshold,
+                AiVsAiSiegeBaseSurrenderThreshold = mcm.AiVsAiSiegeBaseSurrenderThreshold,
+                AiVsAiSiegeGuaranteedSurrenderThreshold = mcm.AiVsAiSiegeGuaranteedSurrenderThreshold,
+                AiVsAiSiegeDailySurrenderLimit = mcm.AiVsAiSiegeDailySurrenderLimit
             };
 #if !DEBUG
             json.SiegeNegotiationDifficultyPreset = mcm.SiegeNegotiationDifficultyPreset.SelectedIndex;

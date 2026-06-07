@@ -187,5 +187,56 @@
 
     <string id="JGUM.Settings.PatrolDialogPriority.Name" text="Devriye Diyalog Önceliği" />
     <string id="JGUM.Settings.PatrolDialogPriority.Hint" text="Teknik: Devriye teslimiyet diyalogları için öncelik değeri. Yüksek değerler JGUM'un diğer modlardan önce gelmesini sağlar. Sadece mod çakışması varsa değiştirin. Varsayılan: 10000" />
+
+    <!-- Fief Purchase Offer -->
+    <string id="jgum_fief_purchase_inquiry_title" text="Bir Tüccarın Teklifi" />
+    <string id="jgum_fief_purchase_inquiry_body" text="{BESIEGER_NAME}, {SETTLEMENT_NAME} yerleşiminin barışçıl teslimi için {OFFER_GOLD}{GOLD_ICON} altın teklif ediyor. Teklif garantiler içeriyor: yağma yok, garnizona karşı misilleme yok." />
+    <string id="jgum_fief_purchase_accept" text="Teklifi kabul et" />
+    <string id="jgum_fief_purchase_reject" text="Teklifi reddet" />
+    <string id="jgum_fief_purchase_accepted_msg" text="Yerleşim teslim edildi. Altınlar el değiştirdi ve kuşatma daha fazla kan dökülmeden sona erdi." />
+    <string id="jgum_fief_purchase_rejected_msg" text="Teklifi reddettiniz. Kuşatma devam ediyor." />
+    <!-- Fief Purchase Offer MCM Settings -->
+    <string id="JGUM.Settings.Group.FiefPurchase" text="Kale Satın Alma Teklifi" />
+    <string id="JGUM.Settings.EnableFiefPurchaseOffer.Name" text="Kale Satın Alma Teklifini Etkinleştir" />
+    <string id="JGUM.Settings.EnableFiefPurchaseOffer.Hint" text="Etkinleştirildiğinde, yüksek Ticaret yeteneğine sahip düşman kuşatmacılar kalenizi satın almak için altın teklif edebilir." />
+    <string id="JGUM.Settings.FiefPriceOfferMultiplier.Name" text="Fiyat Teklifi Çarpanı" />
+    <string id="JGUM.Settings.FiefPriceOfferMultiplier.Hint" text="Kuşatmacıların teklif ettiği altın miktarı için çarpan. Yüksek değerler daha cömert teklifler anlamına gelir." />
+    <string id="JGUM.Settings.MinTradeSkillForFiefOffer.Name" text="Minimum Ticaret Yeteneği" />
+    <string id="JGUM.Settings.MinTradeSkillForFiefOffer.Hint" text="Düşman liderlerin yerleşiminiz için satın alma teklifi yapabilmesi için gereken minimum Ticaret yeteneği." />
+    <string id="JGUM.Settings.FiefPurchaseOfferDailyChance.Name" text="Günlük Teklif Şansı" />
+    <string id="JGUM.Settings.FiefPurchaseOfferDailyChance.Hint" text="Yerleşiminiz kuşatma altındayken günlük satın alma teklifi alma olasılığı." />
+    <string id="JGUM.Settings.FiefPurchaseOfferCooldownDays.Name" text="Teklif Bekleme Süresi (Gün)" />
+    <!-- Voluntary Surrender -->
+    <string id="jgum_voluntary_surrender_menu_option" text="Yerleşimi teslim etmeyi teklif et" />
+    <string id="jgum_voluntary_surrender_menu_tooltip_cooldown" text="Kısa süre önce bir teslimiyet teklifi gönderdiniz. Düşman bu kadar çabuk başka bir haberciyi kabul etmeyecektir." />
+    <string id="jgum_voluntary_surrender_inquiry_title" text="Teslimiyet Yanıtı" />
+    <string id="jgum_voluntary_surrender_accepted_body" text="{BESIEGER_NAME} teslim olma şartlarınızı kabul etti. Garnizon bağışlanacak ve yerleşim barışçıl bir şekilde el değiştirecek." />
+    <string id="jgum_voluntary_surrender_rejected_body" text="{BESIEGER_NAME} teklifinizi reddediyor. {SETTLEMENT_NAME} yerleşimini zorla almak ve savunucularına merhamet göstermemek niyetindeler." />
+    <string id="jgum_voluntary_surrender_ok" text="Öyle olsun." />
+
+    <!-- AI vs AI Surrender -->
+    <string id="JGUM.Settings.Group.AiVsAi" text="Yapay Zeka Teslimiyeti (AI vs AI)" />
+    <string id="JGUM.Settings.EnableAiVsAiFieldSurrender.Name" text="Saha Teslimiyetini Etkinleştir (AI)" />
+    <string id="JGUM.Settings.EnableAiVsAiFieldSurrender.Hint" text="Yapay zeka ordularının saha savaşlarında birbirlerine teslim olmalarına izin verir." />
+    <string id="JGUM.Settings.EnableAiVsAiSiegeSurrender.Name" text="Kuşatma Teslimiyetini Etkinleştir (AI)" />
+    <string id="JGUM.Settings.EnableAiVsAiSiegeSurrender.Hint" text="Yapay zeka yerleşimlerinin kuşatmalarda savaşmadan teslim olmalarına izin verir." />
+    <string id="JGUM.Settings.AiVsAiRandomnessMode.Name" text="Yapay Zeka Teslimiyet Rastgelelik Modu" />
+    <string id="JGUM.Settings.AiVsAiRandomnessMode.Hint" text="Yapay zekanın birbirine teslimiyet hesaplamalarında şansın (RNG) nasıl uygulanacağını belirler." />
+    <string id="JGUM.Settings.AiVsAiFieldBaseSurrenderThreshold.Name" text="Saha Teslimiyet Eşiği (AI)" />
+    <string id="JGUM.Settings.AiVsAiFieldBaseSurrenderThreshold.Hint" text="Yapay zeka ordularının saha savaşlarında teslim olmayı düşünmesi için gereken minimum güç üstünlüğü." />
+    <string id="JGUM.Settings.AiVsAiFieldGuaranteedSurrenderThreshold.Name" text="Saha Kesin Teslim Eşiği (AI)" />
+    <string id="JGUM.Settings.AiVsAiFieldGuaranteedSurrenderThreshold.Hint" text="Yapay zeka ordularının saha savaşlarında şans faktörü olmaksızın kesin olarak teslim olacağı güç üstünlüğü." />
+    <string id="JGUM.Settings.AiVsAiSiegeBaseSurrenderThreshold.Name" text="Kuşatma Teslimiyet Eşiği (AI)" />
+    <string id="JGUM.Settings.AiVsAiSiegeBaseSurrenderThreshold.Hint" text="Yapay zeka garnizonlarının kuşatmalarda teslim olmayı düşünmesi için gereken minimum güç üstünlüğü." />
+    <string id="JGUM.Settings.AiVsAiSiegeGuaranteedSurrenderThreshold.Name" text="Kuşatma Kesin Teslim Eşiği (AI)" />
+    <string id="JGUM.Settings.AiVsAiSiegeGuaranteedSurrenderThreshold.Hint" text="Yapay zeka garnizonlarının kuşatmalarda şans faktörü olmaksızın kesin olarak teslim olacağı güç üstünlüğü." />
+    <string id="JGUM.Settings.AiVsAiSiegeDailySurrenderLimit.Name" text="Günlük Kuşatma Teslim Limiti (AI)" />
+    <string id="JGUM.Settings.AiVsAiSiegeDailySurrenderLimit.Hint" text="Harita dengesinin hızla bozulmaması için yapay zekanın günde en fazla kaç kez kuşatma teslimiyeti yapabileceğini belirler." />
+    <string id="jgum_ai_surrender_log" text="{LOSER_NAME}, ezici gücü karşısında {WINNER_NAME} lorduna savaşmadan teslim oldu." />
+
+    <!-- Mod Data Management -->
+    <string id="jgum_mcm_clear_data" text="Tüm JGUM Verilerini Temizle" />
+    <string id="jgum_mcm_clear_btn" text="Verileri Temizle" />
+    <string id="jgum_mcm_clear_data_hint" text="Bunu etkinleştirip bir kayıt dosyasını yükleyerek tüm mod verilerini temizleyebilirsiniz. Kullandıktan sonra devre dışı bırakın." />
   </strings>
 </base>

@@ -87,6 +87,68 @@ namespace JGUM.MCMBridge.Config
         [SettingPropertyGroup("{=JGUM.Settings.Group.Patrol}Patrol")]
         public bool EnablePatrolSurrender { get; set; } = true;
 
+        [SettingPropertyBool("{=JGUM.Settings.EnableFiefPurchaseOffer.Name}Enable Fief Purchase Offer", Order = 0, RequireRestart = false, HintText = "{=JGUM.Settings.EnableFiefPurchaseOffer.Hint}When enabled, enemy besiegers with high Trade skill may offer gold to buy your settlement.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.FiefPurchase}Fief Purchase Offer")]
+        public bool EnableFiefPurchaseOffer { get; set; } = true;
+
+        [SettingPropertyFloatingInteger("{=JGUM.Settings.FiefPriceOfferMultiplier.Name}Price Offer Multiplier", 0.1f, 5f, Order = 1, RequireRestart = false, HintText = "{=JGUM.Settings.FiefPriceOfferMultiplier.Hint}Multiplier for the gold amount offered by besiegers.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.FiefPurchase}Fief Purchase Offer")]
+        public float FiefPriceOfferMultiplier { get; set; } = 1f;
+
+        [SettingPropertyInteger("{=JGUM.Settings.MinTradeSkillForFiefOffer.Name}Minimum Trade Skill", 0, 300, Order = 2, RequireRestart = false, HintText = "{=JGUM.Settings.MinTradeSkillForFiefOffer.Hint}Enemy leaders need at least this much Trade skill to make a purchase offer.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.FiefPurchase}Fief Purchase Offer")]
+        public int MinTradeSkillForFiefOffer { get; set; } = 100;
+
+        [SettingPropertyFloatingInteger("{=JGUM.Settings.FiefPurchaseOfferDailyChance.Name}Daily Offer Chance", 0f, 1f, "#0%", Order = 3, RequireRestart = false, HintText = "{=JGUM.Settings.FiefPurchaseOfferDailyChance.Hint}Daily probability of receiving a purchase offer during a siege.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.FiefPurchase}Fief Purchase Offer")]
+        public float FiefPurchaseOfferDailyChance { get; set; } = 0.30f;
+
+        [SettingPropertyInteger("{=JGUM.Settings.FiefPurchaseOfferCooldownDays.Name}Offer Cooldown (Days)", 0, 30, Order = 4, RequireRestart = false, HintText = "{=JGUM.Settings.FiefPurchaseOfferCooldownDays.Hint}Number of days before a new offer can be made after rejection.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.FiefPurchase}Fief Purchase Offer")]
+        public int FiefPurchaseOfferCooldownDays { get; set; } = 3;
+
+        // ──────────────────────────────────────────────
+        // AI vs AI settings
+        // ──────────────────────────────────────────────
+
+        [SettingPropertyBool("{=JGUM.Settings.EnableAiVsAiFieldSurrender.Name}Enable Field Surrender (AI vs AI)", Order = 0, RequireRestart = false, HintText = "{=JGUM.Settings.EnableAiVsAiFieldSurrender.Hint}Allow AI parties to surrender to other AI parties in field battles.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public bool EnableAiVsAiFieldSurrender { get; set; } = true;
+
+        [SettingPropertyBool("{=JGUM.Settings.EnableAiVsAiSiegeSurrender.Name}Enable Siege Surrender (AI vs AI)", Order = 1, RequireRestart = false, HintText = "{=JGUM.Settings.EnableAiVsAiSiegeSurrender.Hint}Allow AI settlements to surrender to AI besiegers without fighting.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public bool EnableAiVsAiSiegeSurrender { get; set; } = true;
+
+        [SettingPropertyDropdown("{=JGUM.Settings.AiVsAiRandomnessMode.Name}AI vs AI Randomness Mode", Order = 2, RequireRestart = false, HintText = "{=JGUM.Settings.AiVsAiRandomnessMode.Hint}Determines how RNG is applied to AI vs AI surrender calculations.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public Dropdown<SurrenderRandomnessModeOption> AiVsAiRandomnessMode { get; set; } =
+            new Dropdown<SurrenderRandomnessModeOption>(new[]
+            {
+                SurrenderRandomnessModeOption.Off,
+                SurrenderRandomnessModeOption.Thresholded,
+                SurrenderRandomnessModeOption.Unbound
+            }, 1);
+
+        [SettingPropertyFloatingInteger("{=JGUM.Settings.AiVsAiFieldBaseSurrenderThreshold.Name}Field Base Threshold (AI)", 0f, 10f, Order = 3, RequireRestart = false, HintText = "{=JGUM.Settings.AiVsAiFieldBaseSurrenderThreshold.Hint}The minimum power advantage needed for AI field surrender.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public float AiVsAiFieldBaseSurrenderThreshold { get; set; } = 3.5f;
+
+        [SettingPropertyFloatingInteger("{=JGUM.Settings.AiVsAiFieldGuaranteedSurrenderThreshold.Name}Field Guaranteed Threshold (AI)", 0f, 15f, Order = 4, RequireRestart = false, HintText = "{=JGUM.Settings.AiVsAiFieldGuaranteedSurrenderThreshold.Hint}Power advantage required for guaranteed AI field surrender without RNG.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public float AiVsAiFieldGuaranteedSurrenderThreshold { get; set; } = 5.5f;
+
+        [SettingPropertyFloatingInteger("{=JGUM.Settings.AiVsAiSiegeBaseSurrenderThreshold.Name}Siege Base Threshold (AI)", 0f, 15f, Order = 5, RequireRestart = false, HintText = "{=JGUM.Settings.AiVsAiSiegeBaseSurrenderThreshold.Hint}The minimum power advantage needed for AI siege surrender.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public float AiVsAiSiegeBaseSurrenderThreshold { get; set; } = 6.0f;
+
+        [SettingPropertyFloatingInteger("{=JGUM.Settings.AiVsAiSiegeGuaranteedSurrenderThreshold.Name}Siege Guaranteed Threshold (AI)", 0f, 20f, Order = 6, RequireRestart = false, HintText = "{=JGUM.Settings.AiVsAiSiegeGuaranteedSurrenderThreshold.Hint}Power advantage required for guaranteed AI siege surrender without RNG.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public float AiVsAiSiegeGuaranteedSurrenderThreshold { get; set; } = 8.0f;
+
+        [SettingPropertyInteger("{=JGUM.Settings.AiVsAiSiegeDailySurrenderLimit.Name}Siege Daily Surrender Limit (AI)", 0, 10, Order = 7, RequireRestart = false, HintText = "{=JGUM.Settings.AiVsAiSiegeDailySurrenderLimit.Hint}Maximum number of AI siege surrenders per day to prevent snowballing.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.AiVsAi}AI vs AI")]
+        public int AiVsAiSiegeDailySurrenderLimit { get; set; } = 2;
+
         // ──────────────────────────────────────────────
         // Advanced settings (only visible in MCM in Debug builds)
         // Properties always exist for BridgeBootstrap compatibility.
@@ -211,5 +273,12 @@ namespace JGUM.MCMBridge.Config
         [SettingPropertyGroup("{=JGUM.Settings.Group.Advanced}Advanced")]
 #endif
         public int PatrolDialogPriority { get; set; } = 10000;
+
+        [SettingPropertyButton("{=jgum_mcm_clear_data}Clear All JGUM Data", Content = "{=jgum_mcm_clear_btn}Clear Data", Order = 100, RequireRestart = false, HintText = "{=jgum_mcm_clear_data_hint}Click to instantly clear all mod data (cooldowns, counts, etc).")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.Advanced}Advanced")]
+        public System.Action ClearDataAction { get; set; } = () =>
+        {
+            JGUM.Config.JgumSettingsManager.TriggerClearDataEvent();
+        };
     }
 }

@@ -41,5 +41,22 @@ namespace JGUM.Config
         public float LordValorMultiplier { get; set; } = 100f;
         public float LordMercyMultiplier { get; set; } = 100f;
         public float LordHonorMultiplier { get; set; } = 100f;
+
+        // Fief Purchase Offer
+        public bool EnableFiefPurchaseOffer { get; set; } = true;
+        public float FiefPriceOfferMultiplier { get; set; } = 1f;
+        public int MinTradeSkillForFiefOffer { get; set; } = 100;
+        public float FiefPurchaseOfferDailyChance { get; set; } = 0.30f;
+        public int FiefPurchaseOfferCooldownDays { get; set; } = 3;
+
+        // AI vs AI Surrender
+        public bool EnableAiVsAiFieldSurrender { get; set; } = true;
+        public bool EnableAiVsAiSiegeSurrender { get; set; } = true;
+        public int AiVsAiRandomnessMode { get; set; } = 1; // 0=Off, 1=Thresholded, 2=Unbound
+        public float AiVsAiFieldBaseSurrenderThreshold { get; set; } = 3.5f;
+        public float AiVsAiFieldGuaranteedSurrenderThreshold { get; set; } = 5.5f;
+        public float AiVsAiSiegeBaseSurrenderThreshold { get; set; } = 6.0f;
+        public float AiVsAiSiegeGuaranteedSurrenderThreshold { get; set; } = 8.0f;
+        public int AiVsAiSiegeDailySurrenderLimit { get; set; } = 2;
     }
 }

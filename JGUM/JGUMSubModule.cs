@@ -41,6 +41,10 @@ namespace JGUM
                 campaignStarter.AddBehavior(new Behaviors.LordEncounterSurrenderBehavior());
                 campaignStarter.AddBehavior(new Behaviors.PatrolEncounterSurrenderBehavior());
                 campaignStarter.AddBehavior(new SiegeNegotiation.SiegeNegotiationBehavior());
+                campaignStarter.AddBehavior(new Behaviors.FiefPurchaseOfferBehavior());
+                campaignStarter.AddBehavior(new Behaviors.VoluntarySurrenderBehavior());
+                campaignStarter.AddBehavior(new AIBehaviors.AILordEncounterSurrenderBehavior());
+                campaignStarter.AddBehavior(new AIBehaviors.AISiegeSurrenderBehavior());
             }
         }
 

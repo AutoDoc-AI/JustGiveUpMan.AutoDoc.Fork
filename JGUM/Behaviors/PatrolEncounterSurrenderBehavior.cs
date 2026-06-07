@@ -1,4 +1,5 @@
 using JGUM.Calculators;
+using JGUM.Interop;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
@@ -153,6 +154,22 @@ namespace JGUM.Behaviors
             InformationManager.DisplayMessage(new InformationMessage(
                 StringCalculator.GetString("jgum_field_surrender_rejected", "The dogs will get their scraps after all!"),
                 Colors.Yellow));
+
+            var enemyParty = PatrolEncounterSurrenderContext.EnemyParty;
+            if (enemyParty != null)
+            {
+                JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+                {
+                    Kind = JgumSurrenderKind.PatrolEncounter,
+                    SurrenderingHeroId = enemyParty.LeaderHero?.StringId,
+                    SurrenderingPartyName = enemyParty.Name?.ToString(),
+                    WinnerHeroId = Hero.MainHero.StringId,
+                    WinnerClanId = Hero.MainHero.Clan?.StringId,
+                    LoserFactionId = enemyParty.MapFaction?.StringId,
+                    CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                    AcceptedByPlayer = false
+                });
+            }
         }
 
         private void OnConversationEnded(System.Collections.Generic.IEnumerable<CharacterObject> involvedCharacters)
@@ -173,6 +190,22 @@ namespace JGUM.Behaviors
                     TakePrisonerAction.Apply(mainParty, enemyHero);
             }
 
+            var surrenderedParty = PatrolEncounterSurrenderContext.EnemyParty;
+            if (surrenderedParty != null)
+            {
+                JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+                {
+                    Kind = JgumSurrenderKind.PatrolEncounter,
+                    SurrenderingHeroId = surrenderedParty.LeaderHero?.StringId,
+                    SurrenderingPartyName = surrenderedParty.Name?.ToString(),
+                    WinnerHeroId = Hero.MainHero.StringId,
+                    WinnerClanId = Hero.MainHero.Clan?.StringId,
+                    LoserFactionId = surrenderedParty.MapFaction?.StringId,
+                    CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                    AcceptedByPlayer = true
+                });
+            }
+
             TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Mercy, 20);
             PatrolEncounterSurrenderContext.Clear();
         }
@@ -182,3 +215,4 @@ namespace JGUM.Behaviors
         }
     }
 }
+

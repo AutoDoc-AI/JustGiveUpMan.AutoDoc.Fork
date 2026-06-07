@@ -4,6 +4,7 @@ using System.Linq;
 using Helpers;
 using JGUM.Actions;
 using JGUM.Calculators;
+using JGUM.Interop;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Conversation.Persuasion;
@@ -121,27 +122,82 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             PersuasionTask task = GetCurrentPersuasionTask();
             if (task.Options.Count > optionIndex)
             {
-                PersuasionOptionArgs option = task.Options[optionIndex];
-                if (TryGetTraitLockHint(task, optionIndex, option, out hintText))
-                    return false;
-
-                if (option.IsBlocked)
-                {
-                    hintText = new TextObject(StringCalculator.GetString(
-                        "jgum_proactive_option_locked_used",
-                        "You have already made this appeal. It will not work again."));
-                    return false;
-                }
-
-                if (TryGetAvailabilityLockHint(option, out hintText))
-                    return false;
-
-                hintText = TextObject.GetEmpty();
-                return true;
+                EvaluateLocks(task, out bool[] isLocked, out TextObject[] hints);
+                hintText = hints[optionIndex];
+                return !isLocked[optionIndex];
             }
 
             hintText = new TextObject(StringCalculator.GetString("jgum_blocked", "{=9ACJsI6S}Blocked"));
             return false;
+        }
+
+        private void EvaluateLocks(PersuasionTask task, out bool[] isLocked, out TextObject[] hints)
+        {
+            int count = task.Options.Count;
+            isLocked = new bool[count];
+            hints = new TextObject[count];
+            int unlockedCount = count;
+
+            for (int i = 0; i < count; i++)
+            {
+                PersuasionOptionArgs option = task.Options[i];
+                isLocked[i] = false;
+                hints[i] = TextObject.GetEmpty();
+
+                if (option.IsBlocked)
+                {
+                    isLocked[i] = true;
+                    hints[i] = new TextObject(StringCalculator.GetString(
+                        "jgum_proactive_option_locked_used",
+                        "You have already made this appeal. It will not work again."));
+                    unlockedCount--;
+                    continue;
+                }
+
+                if (TryGetAvailabilityLockHint(option, out TextObject availHint))
+                {
+                    isLocked[i] = true;
+                    hints[i] = availHint;
+                    unlockedCount--;
+                    continue;
+                }
+
+                if (TryGetNaturalTraitLockHint(option, out TextObject traitHint))
+                {
+                    isLocked[i] = true;
+                    hints[i] = traitHint;
+                    unlockedCount--;
+                    continue;
+                }
+            }
+
+            if (unlockedCount == 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (!task.Options[i].IsBlocked && TryGetNaturalTraitLockHint(task.Options[i], out _))
+                    {
+                        isLocked[i] = false;
+                        hints[i] = TextObject.GetEmpty();
+                        unlockedCount++;
+                        break;
+                    }
+                }
+            }
+
+            if (unlockedCount == 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (!task.Options[i].IsBlocked && TryGetAvailabilityLockHint(task.Options[i], out _))
+                    {
+                        isLocked[i] = false;
+                        hints[i] = TextObject.GetEmpty();
+                        unlockedCount++;
+                        break;
+                    }
+                }
+            }
         }
 
         private bool ProactiveReactionCondition()
@@ -201,6 +257,24 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
                 return;
 
             CaptureSettlementByNegotiationAction.Apply(settlement);
+
+            var sEvent = settlement.SiegeEvent;
+            var bLeader = sEvent?.BesiegerCamp?.LeaderParty?.LeaderHero;
+            if (bLeader != null)
+            {
+                JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+                {
+                    Kind = JgumSurrenderKind.SiegeNegotiatedSurrender,
+                    SettlementId = settlement.StringId,
+                    SurrenderingHeroId = settlement.OwnerClan?.Leader?.StringId,
+                    SurrenderingPartyName = settlement.Name?.ToString(),
+                    WinnerHeroId = bLeader.StringId,
+                    WinnerClanId = bLeader.Clan?.StringId,
+                    LoserFactionId = settlement.MapFaction?.StringId,
+                    CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                    AcceptedByPlayer = true
+                });
+            }
         }
 
         private void OnProactivePersuasionFailure()
@@ -212,7 +286,27 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             ResetActiveNegotiationState();
 
             if (settlement != null)
+            {
                 FailedRetryCooldownBySettlement[settlement.StringId] = CampaignTime.HoursFromNow(FailedRetryCooldownHours);
+
+                var sEvent = settlement.SiegeEvent;
+                var bLeader = sEvent?.BesiegerCamp?.LeaderParty?.LeaderHero;
+                if (bLeader != null)
+                {
+                    JgumInteropEvents.RaiseSurrenderResolved(new JgumSurrenderRecord
+                    {
+                        Kind = JgumSurrenderKind.SiegeNegotiatedSurrender,
+                        SettlementId = settlement.StringId,
+                        SurrenderingHeroId = settlement.OwnerClan?.Leader?.StringId,
+                        SurrenderingPartyName = settlement.Name?.ToString(),
+                        WinnerHeroId = bLeader.StringId,
+                        WinnerClanId = bLeader.Clan?.StringId,
+                        LoserFactionId = settlement.MapFaction?.StringId,
+                        CampaignTimeDays = (float)CampaignTime.Now.ToDays,
+                        AcceptedByPlayer = false
+                    });
+                }
+            }
 
             if (!string.IsNullOrEmpty(settlementKey))
             {
@@ -396,7 +490,7 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             return !ConversationManager.GetPersuasionProgressSatisfied() && task.Options.All(x => x.IsBlocked);
         }
 
-        private bool TryGetTraitLockHint(PersuasionTask task, int optionIndex, PersuasionOptionArgs option, out TextObject hintText)
+        private bool TryGetNaturalTraitLockHint(PersuasionOptionArgs option, out TextObject hintText)
         {
             if (!_templateByResolvedText.TryGetValue(option.Line.ToString(), out PersuasionLineTemplate optionTemplate))
             {
@@ -405,23 +499,6 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
             }
 
             if (Hero.MainHero.GetTraitLevel(ResolveTrait(optionTemplate.Trait)) >= 0)
-            {
-                hintText = TextObject.GetEmpty();
-                return false;
-            }
-
-            int lockableBeforeCurrent = 0;
-            for (int i = 0; i < task.Options.Count; i++)
-            {
-                PersuasionOptionArgs candidate = task.Options[i];
-                if (!_templateByResolvedText.TryGetValue(candidate.Line.ToString(), out PersuasionLineTemplate candidateTemplate))
-                    continue;
-
-                if (Hero.MainHero.GetTraitLevel(ResolveTrait(candidateTemplate.Trait)) < 0 && i < optionIndex)
-                    lockableBeforeCurrent++;
-            }
-
-            if (lockableBeforeCurrent >= 2)
             {
                 hintText = TextObject.GetEmpty();
                 return false;
@@ -476,3 +553,4 @@ namespace JGUM.Behaviors.SiegeNegotiationBehavior
         }
     }
 }
+
