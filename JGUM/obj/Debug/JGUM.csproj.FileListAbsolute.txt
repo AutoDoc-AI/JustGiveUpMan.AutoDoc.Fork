@@ -1,2 +1,0 @@
-C:\Users\meteh\RiderProjects\JustGiveUpMan\JGUM\obj\Debug\JGUM.csproj.AssemblyReference.cache
-C:\Users\meteh\RiderProjects\JustGiveUpMan\JGUM\obj\Debug\JGUM.csproj.CoreCompileInputs.cache
