@@ -260,7 +260,8 @@ namespace JGUM.Behaviors
                     WinnerClanId = Hero.MainHero.Clan?.StringId,
                     LoserFactionId = enemyHero.MapFaction?.StringId,
                     CampaignTimeDays = (float)CampaignTime.Now.ToDays,
-                    AcceptedByPlayer = false
+                    AcceptedByPlayer = false,
+                    Outcome = JgumSurrenderOutcome.Rejected
                 });
             }
         }
@@ -329,7 +330,8 @@ namespace JGUM.Behaviors
                 WinnerClanId = Hero.MainHero.Clan?.StringId,
                 LoserFactionId = surrenderedHero.MapFaction?.StringId,
                 CampaignTimeDays = (float)CampaignTime.Now.ToDays,
-                AcceptedByPlayer = true
+                AcceptedByPlayer = true,
+                Outcome = JgumSurrenderOutcome.Accepted
             });
 
             TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Mercy, 20); 

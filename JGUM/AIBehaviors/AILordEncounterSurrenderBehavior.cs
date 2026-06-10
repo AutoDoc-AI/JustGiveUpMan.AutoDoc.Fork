@@ -178,7 +178,8 @@ namespace JGUM.AIBehaviors
                         WinnerClanId = winnerHero.Clan?.StringId,
                         LoserFactionId = loserHero.MapFaction?.StringId,
                         CampaignTimeDays = (float)CampaignTime.Now.ToDays,
-                        AcceptedByPlayer = false
+                        AcceptedByPlayer = false,
+                        Outcome = JgumSurrenderOutcome.Accepted
                     });
                 }
 

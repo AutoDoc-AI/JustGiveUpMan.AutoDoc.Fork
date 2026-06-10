@@ -10,6 +10,12 @@ namespace JGUM.Interop
         SiegeNegotiatedSurrender
     }
 
+    public enum JgumSurrenderOutcome
+    {
+        Accepted,
+        Rejected
+    }
+
     public sealed class JgumSurrenderRecord
     {
         public JgumSurrenderKind Kind { get; set; }
@@ -21,6 +27,7 @@ namespace JGUM.Interop
         public string? LoserFactionId { get; set; }
         public float CampaignTimeDays { get; set; }
         public bool AcceptedByPlayer { get; set; }
+        public JgumSurrenderOutcome Outcome { get; set; }
     }
 
     public static class JgumInteropEvents

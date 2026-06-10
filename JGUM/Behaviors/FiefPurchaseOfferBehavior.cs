@@ -182,7 +182,8 @@ namespace JGUM.Behaviors
                 WinnerClanId = besiegerLeader.Clan?.StringId,
                 LoserFactionId = settlement.MapFaction?.StringId,
                 CampaignTimeDays = (float)CampaignTime.Now.ToDays,
-                AcceptedByPlayer = true
+                AcceptedByPlayer = true,
+                Outcome = JgumSurrenderOutcome.Accepted
             });
 
             // Notify player
@@ -216,7 +217,8 @@ namespace JGUM.Behaviors
                     WinnerClanId = bLeader.Clan?.StringId,
                     LoserFactionId = settlement.MapFaction?.StringId,
                     CampaignTimeDays = (float)CampaignTime.Now.ToDays,
-                    AcceptedByPlayer = false
+                    AcceptedByPlayer = false,
+                    Outcome = JgumSurrenderOutcome.Rejected
                 });
             }
         }
