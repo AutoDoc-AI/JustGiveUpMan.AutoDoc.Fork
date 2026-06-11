@@ -58,6 +58,12 @@ namespace JGUM.Config
         public static float AiVsAiSiegeBaseSurrenderThreshold => SettingsOrDefault().AiVsAiSiegeBaseSurrenderThreshold;
         public static float AiVsAiSiegeGuaranteedSurrenderThreshold => SettingsOrDefault().AiVsAiSiegeGuaranteedSurrenderThreshold;
         public static int AiVsAiSiegeDailySurrenderLimit => SettingsOrDefault().AiVsAiSiegeDailySurrenderLimit;
+
+        public static bool EnableVoluntarySurrender => SettingsOrDefault().EnableVoluntarySurrender;
+        public static int VoluntarySurrenderBaseChance => SettingsOrDefault().VoluntarySurrenderBaseChance;
+        public static int VoluntarySurrenderHonorPenalty => SettingsOrDefault().VoluntarySurrenderHonorPenalty;
+        public static int VoluntarySurrenderValorPenalty => SettingsOrDefault().VoluntarySurrenderValorPenalty;
+
         public static void Initialize()
         {
             Reload();

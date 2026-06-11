@@ -68,7 +68,11 @@ namespace JGUM.MCMBridge
                 AiVsAiFieldGuaranteedSurrenderThreshold = mcm.AiVsAiFieldGuaranteedSurrenderThreshold,
                 AiVsAiSiegeBaseSurrenderThreshold = mcm.AiVsAiSiegeBaseSurrenderThreshold,
                 AiVsAiSiegeGuaranteedSurrenderThreshold = mcm.AiVsAiSiegeGuaranteedSurrenderThreshold,
-                AiVsAiSiegeDailySurrenderLimit = mcm.AiVsAiSiegeDailySurrenderLimit
+                AiVsAiSiegeDailySurrenderLimit = mcm.AiVsAiSiegeDailySurrenderLimit,
+                EnableVoluntarySurrender = mcm.EnableVoluntarySurrender,
+                VoluntarySurrenderBaseChance = mcm.VoluntarySurrenderBaseChance,
+                VoluntarySurrenderHonorPenalty = mcm.VoluntarySurrenderHonorPenalty,
+                VoluntarySurrenderValorPenalty = mcm.VoluntarySurrenderValorPenalty
             };
 #if !DEBUG
             json.SiegeNegotiationDifficultyPreset = mcm.SiegeNegotiationDifficultyPreset.SelectedIndex;

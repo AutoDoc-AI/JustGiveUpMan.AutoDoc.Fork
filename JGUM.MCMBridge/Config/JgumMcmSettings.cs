@@ -108,6 +108,26 @@ namespace JGUM.MCMBridge.Config
         public int FiefPurchaseOfferCooldownDays { get; set; } = 3;
 
         // ──────────────────────────────────────────────
+        // Abandon Settlement (Voluntary Surrender)
+        // ──────────────────────────────────────────────
+
+        [SettingPropertyBool("{=JGUM.Settings.EnableVoluntarySurrender.Name}Enable Abandon Settlement", Order = 0, RequireRestart = false, HintText = "{=JGUM.Settings.EnableVoluntarySurrender.Hint}Allows you to peacefully surrender a settlement under siege to avoid pillaging.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.VoluntarySurrender}Abandon Settlement")]
+        public bool EnableVoluntarySurrender { get; set; } = true;
+
+        [SettingPropertyInteger("{=JGUM.Settings.VoluntarySurrenderBaseChance.Name}Base Acceptance Chance", 0, 100, Order = 1, RequireRestart = false, HintText = "{=JGUM.Settings.VoluntarySurrenderBaseChance.Hint}The base probability (0-100) that the besieger will accept your surrender offer.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.VoluntarySurrender}Abandon Settlement")]
+        public int VoluntarySurrenderBaseChance { get; set; } = 50;
+
+        [SettingPropertyInteger("{=JGUM.Settings.VoluntarySurrenderHonorPenalty.Name}Honor Penalty", -100, 0, Order = 2, RequireRestart = false, HintText = "{=JGUM.Settings.VoluntarySurrenderHonorPenalty.Hint}Honor penalty applied when you abandon a settlement.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.VoluntarySurrender}Abandon Settlement")]
+        public int VoluntarySurrenderHonorPenalty { get; set; } = -10;
+
+        [SettingPropertyInteger("{=JGUM.Settings.VoluntarySurrenderValorPenalty.Name}Valor Penalty", -100, 0, Order = 3, RequireRestart = false, HintText = "{=JGUM.Settings.VoluntarySurrenderValorPenalty.Hint}Valor penalty applied when you abandon a settlement.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.VoluntarySurrender}Abandon Settlement")]
+        public int VoluntarySurrenderValorPenalty { get; set; } = -100;
+
+        // ──────────────────────────────────────────────
         // AI vs AI settings
         // ──────────────────────────────────────────────
 

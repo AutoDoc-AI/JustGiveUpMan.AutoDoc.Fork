@@ -59,6 +59,9 @@ namespace JGUM.Behaviors
 
         private bool OfferVoluntarySurrenderCondition(MenuCallbackArgs args)
         {
+            if (!Config.JgumSettingsManager.EnableVoluntarySurrender)
+                return false;
+
             Settlement? settlement = GetCurrentPlayerSiegeSettlement();
             if (settlement?.SiegeEvent == null)
             {
@@ -101,9 +104,9 @@ namespace JGUM.Behaviors
             if (besiegerLeader == null)
                 return;
 
-            // Acceptance probability: clamp(100 + besiegerLeader.Mercy * 30, 0, 100)
+            // Acceptance probability: clamp(baseChance + besiegerLeader.Mercy * 30, 0, 100)
             int mercyLevel = besiegerLeader.GetTraitLevel(DefaultTraits.Mercy);
-            int acceptanceChance = MBMath.ClampInt(100 + (mercyLevel * 30), 0, 100);
+            int acceptanceChance = MBMath.ClampInt(Config.JgumSettingsManager.VoluntarySurrenderBaseChance + (mercyLevel * 30), 0, 100);
 
             bool isAccepted = MBRandom.RandomInt(100) < acceptanceChance;
 
@@ -141,14 +144,27 @@ namespace JGUM.Behaviors
 
         private void ExecuteSurrender(Settlement settlement, Hero besiegerLeader)
         {
-            // Player's Honor trait decreases via TraitLevelingHelper
-            TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Honor, -20);
+            // Player's traits decrease via config values
+            int honorPenalty = Config.JgumSettingsManager.VoluntarySurrenderHonorPenalty;
+            if (honorPenalty < 0)
+                TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Honor, honorPenalty);
+                
+            int valorPenalty = Config.JgumSettingsManager.VoluntarySurrenderValorPenalty;
+            if (valorPenalty < 0)
+                TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Valor, valorPenalty);
 
             // Relationship bonus for peaceful resolution
             Hero.MainHero.SetPersonalRelation(besiegerLeader, (int)besiegerLeader.GetRelationWithPlayer() + 5);
 
-            // Transfer settlement ownership
-            ChangeOwnerOfSettlementAction.ApplyBySiege(besiegerLeader, besiegerLeader, settlement);
+            // Dismiss the garrison so they aren't taken prisoner or absorbed
+            if (settlement.Town?.GarrisonParty != null)
+            {
+                settlement.Town.GarrisonParty.MemberRoster?.Clear();
+                settlement.Town.GarrisonParty.PrisonRoster?.Clear();
+            }
+
+            // Transfer settlement ownership without pillaging
+            ChangeOwnerOfSettlementAction.ApplyByDefault(besiegerLeader, settlement);
 
             // Finalize siege
             if (PlayerEncounter.Current != null)

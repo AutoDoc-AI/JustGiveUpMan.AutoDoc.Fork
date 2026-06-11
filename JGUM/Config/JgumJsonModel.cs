@@ -58,5 +58,11 @@ namespace JGUM.Config
         public float AiVsAiSiegeBaseSurrenderThreshold { get; set; } = 6.0f;
         public float AiVsAiSiegeGuaranteedSurrenderThreshold { get; set; } = 8.0f;
         public int AiVsAiSiegeDailySurrenderLimit { get; set; } = 2;
+
+        // Abandon Settlement (Voluntary Surrender)
+        public bool EnableVoluntarySurrender { get; set; } = true;
+        public int VoluntarySurrenderBaseChance { get; set; } = 50;
+        public int VoluntarySurrenderHonorPenalty { get; set; } = -10;
+        public int VoluntarySurrenderValorPenalty { get; set; } = -100;
     }
 }
