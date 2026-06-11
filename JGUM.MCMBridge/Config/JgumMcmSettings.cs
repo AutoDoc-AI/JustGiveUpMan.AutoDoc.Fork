@@ -127,6 +127,14 @@ namespace JGUM.MCMBridge.Config
         [SettingPropertyGroup("{=JGUM.Settings.Group.VoluntarySurrender}Abandon Settlement")]
         public int VoluntarySurrenderValorPenalty { get; set; } = -100;
 
+        [SettingPropertyInteger("{=JGUM.Settings.VoluntarySurrenderMercyReward.Name}Mercy Reward", 0, 100, Order = 4, RequireRestart = false, HintText = "{=JGUM.Settings.VoluntarySurrenderMercyReward.Hint}Mercy reward applied when you abandon a settlement.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.VoluntarySurrender}Abandon Settlement")]
+        public int VoluntarySurrenderMercyReward { get; set; } = 50;
+
+        [SettingPropertyInteger("{=JGUM.Settings.VoluntarySurrenderCalculatingReward.Name}Calculating Reward", 0, 100, Order = 5, RequireRestart = false, HintText = "{=JGUM.Settings.VoluntarySurrenderCalculatingReward.Hint}Calculating reward applied when you abandon a settlement.")]
+        [SettingPropertyGroup("{=JGUM.Settings.Group.VoluntarySurrender}Abandon Settlement")]
+        public int VoluntarySurrenderCalculatingReward { get; set; } = 30;
+
         // ──────────────────────────────────────────────
         // AI vs AI settings
         // ──────────────────────────────────────────────

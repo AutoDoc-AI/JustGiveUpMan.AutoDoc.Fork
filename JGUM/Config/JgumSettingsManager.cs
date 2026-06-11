@@ -63,6 +63,8 @@ namespace JGUM.Config
         public static int VoluntarySurrenderBaseChance => SettingsOrDefault().VoluntarySurrenderBaseChance;
         public static int VoluntarySurrenderHonorPenalty => SettingsOrDefault().VoluntarySurrenderHonorPenalty;
         public static int VoluntarySurrenderValorPenalty => SettingsOrDefault().VoluntarySurrenderValorPenalty;
+        public static int VoluntarySurrenderMercyReward => SettingsOrDefault().VoluntarySurrenderMercyReward;
+        public static int VoluntarySurrenderCalculatingReward => SettingsOrDefault().VoluntarySurrenderCalculatingReward;
 
         public static void Initialize()
         {

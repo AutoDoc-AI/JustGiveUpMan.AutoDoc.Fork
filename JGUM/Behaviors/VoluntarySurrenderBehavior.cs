@@ -153,6 +153,14 @@ namespace JGUM.Behaviors
             if (valorPenalty < 0)
                 TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Valor, valorPenalty);
 
+            int mercyReward = Config.JgumSettingsManager.VoluntarySurrenderMercyReward;
+            if (mercyReward > 0)
+                TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Mercy, mercyReward);
+
+            int calculatingReward = Config.JgumSettingsManager.VoluntarySurrenderCalculatingReward;
+            if (calculatingReward > 0)
+                TraitLevelingHelper.OnIncidentResolved(DefaultTraits.Calculating, calculatingReward);
+
             // Relationship bonus for peaceful resolution
             Hero.MainHero.SetPersonalRelation(besiegerLeader, (int)besiegerLeader.GetRelationWithPlayer() + 5);
 
@@ -261,15 +269,18 @@ namespace JGUM.Behaviors
 
         private static bool IsPlayerDefender(Settlement settlement)
         {
+            // Only allow abandoning the settlement if it actually belongs to the player's clan
             if (settlement.OwnerClan == Hero.MainHero?.Clan)
-                return true;
+            {
+                var playerParty = MobileParty.MainParty?.Party;
+                if (playerParty != null)
+                {
+                    var defenderSide = settlement.SiegeEvent?.GetSiegeEventSide(BattleSideEnum.Defender);
+                    return defenderSide?.HasInvolvedPartyForEventType(playerParty) == true;
+                }
+            }
 
-            var playerParty = MobileParty.MainParty?.Party;
-            if (playerParty == null)
-                return false;
-
-            var defenderSide = settlement.SiegeEvent?.GetSiegeEventSide(BattleSideEnum.Defender);
-            return defenderSide?.HasInvolvedPartyForEventType(playerParty) == true;
+            return false;
         }
     }
 }

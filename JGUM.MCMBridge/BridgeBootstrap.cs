@@ -72,7 +72,9 @@ namespace JGUM.MCMBridge
                 EnableVoluntarySurrender = mcm.EnableVoluntarySurrender,
                 VoluntarySurrenderBaseChance = mcm.VoluntarySurrenderBaseChance,
                 VoluntarySurrenderHonorPenalty = mcm.VoluntarySurrenderHonorPenalty,
-                VoluntarySurrenderValorPenalty = mcm.VoluntarySurrenderValorPenalty
+                VoluntarySurrenderValorPenalty = mcm.VoluntarySurrenderValorPenalty,
+                VoluntarySurrenderMercyReward = mcm.VoluntarySurrenderMercyReward,
+                VoluntarySurrenderCalculatingReward = mcm.VoluntarySurrenderCalculatingReward
             };
 #if !DEBUG
             json.SiegeNegotiationDifficultyPreset = mcm.SiegeNegotiationDifficultyPreset.SelectedIndex;

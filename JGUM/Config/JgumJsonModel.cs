@@ -64,5 +64,7 @@ namespace JGUM.Config
         public int VoluntarySurrenderBaseChance { get; set; } = 50;
         public int VoluntarySurrenderHonorPenalty { get; set; } = -10;
         public int VoluntarySurrenderValorPenalty { get; set; } = -100;
+        public int VoluntarySurrenderMercyReward { get; set; } = 50;
+        public int VoluntarySurrenderCalculatingReward { get; set; } = 30;
     }
 }
