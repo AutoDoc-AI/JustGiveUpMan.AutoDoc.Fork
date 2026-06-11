@@ -36,10 +36,10 @@ Davranışlar (Behaviors) için gereken matematiksel formülleri ve oranları he
 * **[SiegeSurrenderCalculator.cs](JGUM/Calculators/SiegeSurrenderCalculator.cs)**: Kuşatma sırasındaki teslimiyet olasılıklarını (garnizon oranı, yiyecek, hasar vb. birleştirerek) hesaplar.
 * **[SiegePressureCalculator.cs](JGUM/Calculators/SiegePressureCalculator.cs)**: Kuşatan ordunun, savunan şehir/kale üzerindeki baskı puanını kümülatif olarak ölçer.
 * **[LordSurrenderCalculator.cs](JGUM/Calculators/LordSurrenderCalculator.cs)**: Meydan savaşlarında lordların kişilik özellikleri üzerinden ne kadar kolay/zor teslim olacaklarını belirler.
-* **[NegotiationCalculator.cs](JGUM/Calculators/NegotiationCalculator.cs)**: İkna denemeleri ve müzakere sırasında şans/zorluk seviyesini (Kolay, Normal, Zor) belirler.
+* **[NegotiationCalculator.cs](JGUM/Calculators/NegotiationCalculator.cs)**: İkna denemeleri ve müzakereler sırasında şans/zorluk seviyesini (Kolay, Normal, Zor) belirler.
 * **[StringCalculator.cs](JGUM/Calculators/StringCalculator.cs)**: Yerelleştirme ve metin varyantları (örneğin `{=id_count}`) için kullanılır; diyalogların dinamik varyasyonlarla tekrar etmeden gösterilmesini sağlar.
 
 ## 🛠️ Eylemler (Actions) & Diğer Sistemler
 * **[CaptureSettlementByNegotiationAction.cs](JGUM/Actions/CaptureSettlementByNegotiationAction.cs)**: Müzakere başarıyla sonuçlandığında yerleşkenin el değiştirmesi işlemini, oyunun mantığına uygun bir `Action` olarak yürütür.
-* **[AiSurrenderLogEntry.cs](JGUM/Data/AiSurrenderLogEntry.cs)**: Yapay zekanın kendi arasındaki teslimiyet durumlarını oyun içi kayıt ve bildirim defterine (Log) işler ve artık teslimiyetin sonucunu da detaylandırır.
-* **[JgumInteropEvents.cs](JGUM/Interop/JgumInteropEvents.cs)**: Diğer modların (Third-party) JGUM içerisindeki olaylara (teslimiyet olması, müzakere sonucunda şehrin el değiştirmesi vb.) dışarıdan "Event" dinleyerek bağlanabilmesini sağlar. `JgumSurrenderRecord` sınıfı artık teslimiyetin sonucunu (kabul edildi/reddedildi) da içerir.
+* **[AiSurrenderLogEntry.cs](JGUM/Data/AiSurrenderLogEntry.cs)**: Yapay zekanın kendi arasındaki teslimiyet durumlarını oyun içi kayıt ve bildirim defterine (Log) işler.
+* **[JgumInteropEvents.cs](JGUM/Interop/JgumInteropEvents.cs)**: Diğer modların (Third-party) JGUM içerisindeki olaylara (teslimiyet olması, müzakere sonucunda şehrin el değiştirmesi vb.) dışarıdan "Event" dinleyerek bağlanabilmesini sağlar.
