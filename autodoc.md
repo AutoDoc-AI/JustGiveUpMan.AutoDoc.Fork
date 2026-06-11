@@ -1,46 +1,100 @@
-# Just Give Up Man! (JGUM) Documentation
+# Just Give Up Man! (JGUM) - Documentation
 
-## Version `v2.1.1.26`
+This document provides an overview of the "Just Give Up Man!" (JGUM) module, detailing its features, API, and recent changes. JGUM enhances the surrender mechanics in Mount & Blade II: Bannerlord, allowing for more dynamic and varied surrender scenarios in various encounters.
 
-This update primarily focuses on enhancing the `JgumSurrenderRecord` for improved data tracking and interoperability, and includes a module version bump.
+## Version History
 
-### Key Changes:
+### v2.1.1.26
 
-#### 1. Enhanced Surrender Event Tracking with `JgumSurrenderOutcome`
+*   **New Feature:** Introduced a `JgumSurrenderOutcome` enum and integrated it into `JgumSurrenderRecord` to explicitly track whether a surrender attempt was `Accepted` or `Rejected`.
+*   **Internal Improvements:** All relevant surrender behaviors (`AILordEncounterSurrenderBehavior`, `AISiegeSurrenderBehavior`, `FiefPurchaseOfferBehavior`, `LordEncounterSurrenderBehavior`, `PatrolEncounterSurrenderBehavior`, `SiegeNegotiationBehavior.Persuasion`, `SiegeSurrenderBehavior`, `VoluntarySurrenderBehavior`) now correctly set the `Outcome` field when recording surrender events.
 
-To provide more granular detail about surrender events, a new enum and a corresponding field have been introduced to the `JgumSurrenderRecord`.
+## Interop API (`JGUM/Interop/JgumInteropEvents.cs`)
 
-##### `JgumSurrenderOutcome` Enum
+The `JGUM/Interop/JgumInteropEvents.cs` file defines the public API for other modules to interact with and query surrender events handled by JGUM.
 
-A new enum, `JgumSurrenderOutcome`, has been added to explicitly define the result of a surrender attempt. This enum is defined in `JGUM/Interop/JgumInteropEvents.cs` and has two possible values:
+### `JgumSurrenderKind` Enum
 
-*   `Accepted`: Indicates that the surrender offer was accepted.
-*   `Rejected`: Indicates that the surrender offer was rejected.
-
-##### `Outcome` Property in `JgumSurrenderRecord`
-
-The `JgumSurrenderRecord` class, used for logging and external consumption of surrender event data, now includes a new property:
+This enum specifies the type of surrender event that occurred.
 
 ```csharp
-public JgumSurrenderOutcome Outcome { get; set; }
+public enum JgumSurrenderKind
+{
+    LordEncounterSurrender,
+    PatrolEncounterSurrender,
+    SiegeSurrender,
+    AISiegeSurrender,
+    AILordEncounterSurrender,
+    FiefPurchaseOfferSurrender,
+    VoluntarySurrender,
+    SiegeNegotiatedSurrender
+}
 ```
 
-This property captures the result of the surrender event using the `JgumSurrenderOutcome` enum. This provides a more semantically clear description of the outcome compared to relying solely on `AcceptedByPlayer`.
+### `JgumSurrenderOutcome` Enum
 
-##### Impact on Behaviors
+**New in v2.1.1.26**
+This enum specifies the outcome of a surrender attempt.
 
-Numerous AI and player-facing surrender behaviors across the module have been updated to correctly set the `Outcome` property when a `JgumSurrenderRecord` is created. This ensures that all recorded surrender events accurately reflect whether the surrender was accepted or rejected, regardless of whether the player was involved in the decision.
+```csharp
+public enum JgumSurrenderOutcome
+{
+    Accepted,
+    Rejected
+}
+```
 
-Affected behaviors include:
-*   `AILordEncounterSurrenderBehavior.cs`
-*   `AISiegeSurrenderBehavior.cs`
-*   `FiefPurchaseOfferBehavior.cs`
-*   `LordEncounterSurrenderBehavior.cs`
-*   `PatrolEncounterSurrenderBehavior.cs`
-*   `SiegeNegotiationBehavior.Persuasion.cs`
-*   `SiegeSurrenderBehavior.cs`
-*   `VoluntarySurrenderBehavior.cs`
+### `JgumSurrenderRecord` Class
 
-#### 2. Module Version Update
+This class holds the details of a specific surrender event. Instances of this class are passed when surrender events occur.
 
-The module version has been updated in `JGUM/SubModule.xml` from `v2.1.0.24` to `v2.1.1.26`.
+```csharp
+public sealed class JgumSurrenderRecord
+{
+    public JgumSurrenderKind Kind { get; set; }
+    public string? WinnerHeroId { get; set; }
+    public string? WinnerClanId { get; set; }
+    public string? LoserHeroId { get; set; }
+    public string? LoserFactionId { get; set; }
+    public float CampaignTimeDays { get; set; }
+    public bool AcceptedByPlayer { get; set; }
+    public JgumSurrenderOutcome Outcome { get; set; } // New in v2.1.1.26
+}
+```
+
+*   `Kind`: The type of surrender event.
+*   `WinnerHeroId`: The `StringId` of the hero who emerged victorious (or accepted the surrender).
+*   `WinnerClanId`: The `StringId` of the clan associated with the winner.
+*   `LoserHeroId`: The `StringId` of the hero who surrendered (if applicable).
+*   `LoserFactionId`: The `StringId` of the faction that surrendered.
+*   `CampaignTimeDays`: The in-game time (in days) when the event occurred.
+*   `AcceptedByPlayer`: A boolean indicating if the surrender was accepted by the player.
+*   `Outcome`: The explicit outcome of the surrender attempt (`Accepted` or `Rejected`).
+
+### `JgumInteropEvents` Static Class
+
+This class provides static events that can be subscribed to by other modules.
+
+```csharp
+public static class JgumInteropEvents
+{
+    public static event Action<JgumSurrenderRecord>? OnSurrenderEvent;
+}
+```
+
+*   `OnSurrenderEvent`: This event is triggered whenever a surrender event is processed by JGUM. Subscribers will receive a `JgumSurrenderRecord` instance detailing the event.
+
+## Core Behaviors
+
+JGUM implements various behaviors to handle different surrender scenarios:
+
+*   **AI Lord Encounter Surrender:** AI lords deciding to surrender or not during encounters.
+*   **AI Siege Surrender:** AI factions surrendering settlements during sieges.
+*   **Fief Purchase Offer Behavior:** Handling offers to purchase fiefs, which can result in a 'surrender' of the fief.
+*   **Lord Encounter Surrender:** Player encounters with enemy lords where surrender is an option.
+*   **Patrol Encounter Surrender:** Player encounters with enemy patrols where surrender is an option.
+*   **Siege Negotiation Behavior:** Player-initiated negotiations during sieges.
+*   **Siege Surrender Behavior:** Handling surrender events during player-led sieges.
+*   **Voluntary Surrender Behavior:** When a settlement voluntarily surrenders to a besieger.
+
+In all these behaviors, when a surrender event is concluded (either accepted or rejected), a `JgumSurrenderRecord` is created and the `OnSurrenderEvent` is invoked, now including the explicit `Outcome`.
