@@ -138,7 +138,7 @@ $$\text{Total Wall Pressure} = \text{Softened Damage Pressure} + \text{Destroyed
 
 ### 3.3 Kalelerin Teslimiyet Algoritması (`SiegeSurrenderCalculator`)
 
-Bir kalenin yapay zeka tarafından teslim edilip edilmeyeceği aşağıdaki şartlar zincirine bağlıdır:
+Bir kalenin yapay zeka tarafından teslim edilip edilmeyceği aşağıdaki şartlar zincirine bağlıdır:
 
 1. **Gıda Kontrolü:** Kale gıda stoğuna sahip olmamalı (`FoodStocks <= 0`) ve kıtlık çekiyor olmalıdır (`IsStarving`). Gıdası olan kaleler asla teslim olmaz.
 2. **Güç Hesaplama:** Kaleyi kuşatanların toplam gücü (`Attacker Power`) ile garnizon, milis ve kaledeki müttefik lordların toplam gücü (`Defender Power`) hesaplanır. Ayrıca kaleye yakın mesafede bulunan dost ve düşman lordların askeri güçleri de tespit edilerek algoritmaya dahil edilir.
@@ -147,7 +147,7 @@ Bir kalenin yapay zeka tarafından teslim edilip edilmeyeceği aşağıdaki şar
 4. **Formül Birleşimi:**
    $$\text{Total Siege Ratio} = \frac{\text{Attacker Power}}{\text{Effective Defender Power}} + \text{Total Wall Pressure} + \text{Engine Pressure Effect} - (\text{Kaledeki Lord Sayısı} \times 0.1) + \text{Trait Effect}$$
 
-Elde edilen `Total Siege Ratio`, seçilen RNG moduna göre `Base Threshold` ve `Guaranteed Threshold` değerlerine tabi tutularak nihai teslimiyet kararını üretir.
+Elde edilen `Total Siege Ratio`, seçilen RNG moduna göre `Base Threshold` and `Guaranteed Threshold` değerlerine tabi tutularak nihai teslimiyet kararını üretir.
 
 ---
 
@@ -196,10 +196,20 @@ Eğer oyuncu teklifi kabul ederse, altın oyuncunun envanterine geçer, kalenin 
 ### 4.3 Gönüllü Teslimiyet Teklifi (`VoluntarySurrenderBehavior`)
 
 Oyuncu, kuşatılan kalesini daha fazla askeri kayıp vermeden düşmana gönüllü olarak teslim etmeyi teklif edebilir. 
+
+#### Koşullar ve Kısıtlamalar
+Gönüllü teslimiyet (yerleşimi terk etme) teklifinin yapılabilmesi için aşağıdaki koşulların her ikisinin de sağlanması gerekir:
+1. Kuşatılan yerleşim doğrudan oyuncunun klanına ait olmalıdır (`settlement.OwnerClan == Hero.MainHero.Clan`).
+2. Oyuncunun ana birliği, o esnada yerleşimdeki aktif savunma tarafında yer almalıdır.
+
+#### Teklif Mekaniği ve Karakter Özellikleri Etkisi
 - Kuşatmacı liderin **Mercy (Merhamet)** özelliğine bağlı olarak teklif kabul edilir veya reddedilir:
   $$\text{Acceptance Chance} = \text{Clamp}(100 + (\text{Kuşatmacı Merhamet Seviyesi} \times 30), 0, 100)$$
-- Kabul edilirse kaledeki garnizonun canı bağışlanır, mülkiyet teslim edilir, ancak teslimiyeti başlatan oyuncunun **Onur (Honor)** özelliği ciddi oranda düşer.
-- Reddedilirse kuşatma devam eder. Her 3 reddetmede bir kuşatmacı liderin Onur ve Merhamet seviyeleri düşer (kuşatmacı gaddarlaşır).
+- **Teklif Kabul Edilirse:** Kaledeki garnizonun canı bağışlanır, mülkiyet teslim edilir. Ancak, bu kansız ama onur kırıcı teslimiyet oyuncunun karakter özelliklerini dinamik olarak etkiler:
+  - **Onur (Honor) ve Cesaret (Valor) Azalması:** Oyuncunun Onur ve Cesaret özellikleri yapılandırılan değerlere göre ciddi oranda düşer (`VoluntarySurrenderHonorPenalty` ve `VoluntarySurrenderValorPenalty`).
+  - **Merhamet (Mercy) Artışı:** Garnizonun canını kurtardığı için oyuncu Merhamet ödülü alır (`VoluntarySurrenderMercyReward`, Varsayılan: 50).
+  - **Hesapçılık (Calculating) Artışı:** Ezici bir kuşatma karşısında mantıklı ve rasyonel bir karar verdiği için oyuncu Hesapçılık ödülü alır (`VoluntarySurrenderCalculatingReward`, Varsayılan: 30).
+- **Teklif Reddedilirse:** Kuşatma devam eder. Her 3 reddetmede bir kuşatmacı liderin Onur ve Merhamet seviyeleri düşer (kuşatmacı gaddarlaşır).
 
 ---
 
