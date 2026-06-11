@@ -1,4 +1,4 @@
-# Just Give Up Man! (JGUM) - Proje Dokümantasyonu
+# Just Give Up Man! (JGUM) - Proje Dokümantasyonu (v2.1.1.27)
 
 Bu dosya projede yer alan tüm temel dizinlerin ve dosyaların kısa açıklamalarını, aralarındaki bağlantıları ve önemli işlevlerini içerir. Mod, Bannerlord için dinamik teslim olma ve müzakere mekanikleri ekler.
 
@@ -17,7 +17,7 @@ Modun kalbini oluşturan, oyun içi olayları dinleyen dinleyicilerdir (Campaign
 * **[SiegeSurrenderBehavior.cs](JGUM/Behaviors/SiegeSurrenderBehavior.cs)**: Kuşatmaları takip eder. Açlık, duvar hasarı, kuşatma aletleri ve moral durumuna göre garnizonun teslim olma şansını hesaplar.
 * **[LordEncounterSurrenderBehavior.cs](JGUM/Behaviors/LordEncounterSurrenderBehavior.cs)**: Haritadaki düşman lord karşılaşmalarını yakalar. Güç oranları ve lord özellikleri (Merhamet, Cesaret vb.) baz alınarak teslim olma durumu belirlenir.
 * **[PatrolEncounterSurrenderBehavior.cs](JGUM/Behaviors/PatrolEncounterSurrenderBehavior.cs)**: Devriye ve daha küçük birlik karşılaşmalarındaki teslim olma durumlarını yönetir.
-* **[VoluntarySurrenderBehavior.cs](JGUM/Behaviors/VoluntarySurrenderBehavior.cs)**: Aktif bir savaş olmadan gerçekleşen gönüllü teslimiyet mekaniklerini ele alır.
+* **[VoluntarySurrenderBehavior.cs](JGUM/Behaviors/VoluntarySurrenderBehavior.cs)**: Kuşatma altındaki bir yerleşkenin yağmalanmasını önlemek amacıyla, aktif bir savaş başlatmadan oyuncunun yerleşkeyi barışçıl yollarla düşmana teslim etme mekaniğini yönetir. Bu özellik artık ayarlar üzerinden etkinleştirilebilir/devre dışı bırakılabilir; kabul şansı ve uygulanan itibar/cesaret cezaları da yapılandırılabilir durumdadır.
 * **[FiefPurchaseOfferBehavior.cs](JGUM/Behaviors/FiefPurchaseOfferBehavior.cs)**: Tımar (Fief) satın alma veya devretme teklifi mekaniklerini oyuna ekler.
 
 ### 🗣️ Kuşatma Müzakereleri (Siege Negotiation Behavior)
